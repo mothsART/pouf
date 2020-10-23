@@ -1,0 +1,8 @@
+[package]
+name    = "givefaker"
+version = "0.1.0"
+authors = ["Ferry Jérémie <ferryjeremie@free.fr>"]
+
+[dependencies]
+clap = "2.33"
+fake = { path = "../fake-rs/fake" }
