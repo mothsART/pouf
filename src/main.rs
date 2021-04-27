@@ -61,13 +61,14 @@ fn main() {
             (@arg lang: -l --lang +takes_value "Lang")
         )
         (@subcommand bic => (about: "get bic"))
-        (@subcommand semver => (about: "get semver"))
         (@subcommand mimetype => (about: "get mimetype"))
-        (@subcommand http => (about: "get http"))
-        (@subcommand iban => (about: "get iban"))
+        (@subcommand http => (about: "get http error code"))
         (@subcommand time => (about: "get time"))
         (@subcommand date => (about: "get date"))
         (@subcommand numsecu => (about: "get numéro sécu"))
+        //(@subcommand iban => (about: "get iban"))
+        //(@subcommand semver => (about: "get semver"))
+        
     ).get_matches();
 
     if let Some(mail) = matches.subcommand_matches("mail") {
