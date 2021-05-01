@@ -17,36 +17,36 @@ cargo install
 ## Examples
 
 ```bash
-$ pouf mail -l en
+$ pouf internet.mail -l en
 >>> adriel_quia@hotmail.com
 ```
 
 ```bash
-$ pouf mail // if locales is "fr_FR.UTF-8"
+$ pouf internet.mail // if locales is "fr_FR.UTF-8"
 >>> karim_qui@orange.fr
 ```
 
 ```bash
-$ pouf bic
+$ pouf finance.bic
 >>> RSJECUA1x0hf8NV2FDvN5m8MFV
 ```
 
 ```bash
-$ pouf time
+$ pouf time.time
 >>> 21:45:53
 ```
 
 ```bash
-$ pouf mimetype
+$ pouf filesystem.mimetype
 >>> application/vnd.xacml+json
 ```
 
 ```bash
-$ pouf http
+$ pouf http.code
 >>> 412 Precondition Failed
 ```
 
 ```bash
-$ pouf numsecu
+$ pouf administrative.healthinsurrancecode
 >>> 1 85 02 974 777 624 88
 ```
