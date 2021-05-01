@@ -2,7 +2,17 @@
 
 ## Intro
 
-Pouf is a cli program for produce fake data
+Pouf is a cli program for produce fake datas.
+
+## Install on your system
+
+Latest with source :
+
+clone the projet and install it with :
+
+```bash
+cargo install
+```
 
 ## Examples
 

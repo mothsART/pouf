@@ -10,3 +10,7 @@ fake = { version="2.4", features=['chrono', 'http'] }
 chrono = { version = "0.4" }
 http = { version = "0.2" }
 semver = { version = "0.11" }
+
+[build-dependencies]
+clap = "3.0.0-beta.2"
+clap_generate = "3.0.0-beta.2"
