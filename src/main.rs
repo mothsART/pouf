@@ -137,16 +137,28 @@ fn main() {
     if let Some(ip) = matches.subcommand_matches("internet.ip") {
         use fake::faker::internet::raw::{IPv4, IPv6};
 
+        let val: String;
         if let Some(_) = ip.args.get("ipv4") {
-            let val: String = IPv4(EN).fake();
+            val = IPv4(EN).fake();
             println!("{}", val);
             return;
         }
         if let Some(_) = ip.args.get("ipv6") {
-            let val: String = IPv6(EN).fake();
+            val = IPv6(EN).fake();
             println!("{}", val);
             return;
         }
+
+        use fake::faker::boolean::en;
+
+        if en::Boolean(50).fake() {
+            val = IPv4(EN).fake();
+            println!("{}", val);
+            return;
+        }
+        val = IPv6(EN).fake();
+        println!("{}", val);
+        return;
     }
 
     if let Some(_) = matches.subcommand_matches("internet.mac") {
