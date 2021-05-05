@@ -9,11 +9,9 @@ use chrono::Utc;
 
 use clap::{Arg, App};
 
-use fake::{Fake, Faker};
+use fake::Fake;
 use fake::locales::{EN};
 use fake::locales::{FR_FR};
-
-//use fake::faker::filesystem::raw::{Semver, SemverStable, SemverUnstable};
 
 const VERSION: &'static str = "0.0.1";
 const AUTHOR: &'static str = "Ferry Jérémie";
@@ -48,13 +46,6 @@ macro_rules! lang_struct {
 }
 
 fn main() {
-    /*
-    let matches = clap_app!(contact =>
-        //(@subcommand iban => (about: "get iban"))
-        //(@subcommand semver => (about: "get semver"))
-        
-    ).get_matches();
-    */
     let matches = App::new("pouf")
     .version(VERSION)
     .author(&*format!("{} <{}>", AUTHOR, AUTHOR_MAIL))
@@ -219,36 +210,4 @@ fn main() {
         let val: String = Time(EN).fake();
         println!("{}", val);
     }
-
-    if let Some(_) = matches.subcommand_matches("auto.licenseplate") {
-        
-        use fake::faker::automotive::raw::LicencePlate;
-
-        let val: String = LicencePlate(FR_FR).fake();
-        println!("{}", val);
-    }
-
-/*
-    match matches.subcommand_matches("semver") {
-        Some(_v) => {
-            let val_one: String = Semver(EN).fake(); // return X.Y.Z or X-Y-Z-V.W (V equals "rc", "beta" or "alpha")
-            println!("{}", val_one);
-
-            let val_two: String = SemverStable(EN).fake(); // return X.Y.Z
-            println!("{}", val_two);
-
-            let val_three: String = SemverUnstable(EN).fake(); // return X-Y-Z-V.W
-            println!("{}", val_three);
-            
-            let val_four: semver::Version = Faker.fake();
-            println!("{}", val_four);
-        },
-        None => { }
-    }
-
-    if let Some(_) = matches.subcommand_matches("iban") {
-        let val: String = Iban(EN).fake();
-        println!("{}", val);
-    }
-*/
 }
