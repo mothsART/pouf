@@ -2,11 +2,19 @@
 name    = "pouf"
 version = "0.1.0"
 authors = ["Ferry Jérémie <ferryjeremie@free.fr>"]
+description = "Pouf is a cli program for produce fake datas."
+keywords = ["app", "cli", "faker", "data", "generator", "random"]
+categories = ["command-line-utilities"]
+license-file = "LICENSE"
+readme = "README.md"
+repository = "https://github.com/mothsart/pouf"
+homepage = "https://github.com/mothsart/pouf"
+edition = "2018"
 
 [dependencies]
 clap = "2.33"
-# fake = { path = "../fake-rs/fake", features=['chrono', 'http', 'semver'] }
 fake = { version="2.4", features=['chrono', 'http'] }
+
 chrono = { version = "0.4" }
 http = { version = "0.2" }
 semver = { version = "0.11" }

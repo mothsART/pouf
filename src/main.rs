@@ -112,6 +112,9 @@ fn main() {
     .subcommand(App::new("finance.bic")
         .about("give a fake BIC (Business Identifier Code)")
     )
+    .subcommand(App::new("auto.licenseplate")
+        .about("give a automotive license plate")
+    )
     .get_matches();
 
     if let Some(_) = matches.subcommand_matches("lorem.word") {
@@ -214,6 +217,14 @@ fn main() {
         use fake::faker::chrono::raw::Time;
 
         let val: String = Time(EN).fake();
+        println!("{}", val);
+    }
+
+    if let Some(_) = matches.subcommand_matches("auto.licenseplate") {
+        
+        use fake::faker::automotive::raw::LicencePlate;
+
+        let val: String = LicencePlate(FR_FR).fake();
         println!("{}", val);
     }
 
