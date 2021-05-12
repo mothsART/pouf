@@ -9,7 +9,7 @@ use chrono::Utc;
 
 use clap::{Arg, App};
 
-use fake::Fake;
+use fake::{Fake, Faker};
 use fake::locales::{EN};
 use fake::locales::{FR_FR};
 
@@ -46,12 +46,22 @@ macro_rules! lang_struct {
 }
 
 fn main() {
+    /*
+    let matches = clap_app!(contact =>
+        //(@subcommand iban => (about: "get iban"))
+        //(@subcommand semver => (about: "get semver"))
+        
+    ).get_matches();
+    */
     let matches = App::new("pouf")
     .version(VERSION)
     .author(&*format!("{} <{}>", AUTHOR, AUTHOR_MAIL))
     .about("give fake datas")
     .subcommand(App::new("lorem.word")
         .about("give a fake word")
+    )
+    .subcommand(App::new("barecode.isbn")
+        .about("give an isbn code")
     )
     .subcommand(App::new("internet.mail")
         .about("give a fake mail")
@@ -97,6 +107,9 @@ fn main() {
     .subcommand(App::new("filesystem.mimetype")
         .about("give a fake mime-type")
     )
+    .subcommand(App::new("filesystem.semver")
+        .about("give a semver version")
+    )
     .subcommand(App::new("administrative.healthinsurrancecode")
         .about("give a Health insurrance code")
     )
@@ -105,6 +118,9 @@ fn main() {
     )
     .subcommand(App::new("auto.licenseplate")
         .about("give a automotive license plate")
+    )
+    .subcommand(App::new("color.color")
+        .about("give all format for the same color")
     )
     .get_matches();
 
@@ -142,7 +158,7 @@ fn main() {
             println!("{}", val);
             return;
         }
-
+        
         use fake::faker::boolean::en;
 
         if en::Boolean(50).fake() {
@@ -152,7 +168,6 @@ fn main() {
         }
         val = IPv6(EN).fake();
         println!("{}", val);
-        return;
     }
 
     if let Some(_) = matches.subcommand_matches("internet.mac") {
@@ -210,4 +225,68 @@ fn main() {
         let val: String = Time(EN).fake();
         println!("{}", val);
     }
+
+    /*
+    if let Some(_) = matches.subcommand_matches("color.color") {
+        use fake::faker::color::raw::*;
+
+        let val: String = HexColor(EN).fake();
+        println!("1. {}", val);
+
+        let val: String = RgbColor(EN).fake();
+        println!("2. {}", val);
+
+        let val: String = RgbaColor(EN).fake();
+        println!("3. {}", val);
+        
+        let val: String = HslColor(EN).fake();
+        println!("4. {}", val);
+
+        let val: String = HslaColor(EN).fake();
+        println!("5. {}", val);
+
+        let val: String = Color(EN).fake();
+        println!("6. {}", val);
+    }
+    */
+    
+    /*
+    if let Some(_) = matches.subcommand_matches("barecode.isbn") {
+        use fake::faker::barecode::fr_fr;
+        
+        let val: String = fr_fr::Isbn13().fake();
+        println!("{}", val);
+    }*/
+    /*
+    if let Some(_) = matches.subcommand_matches("auto.licenseplate") {
+
+        use fake::faker::automotive::raw::LicencePlate;
+
+        let val: String = LicencePlate(FR_FR).fake();
+        println!("{}", val);
+    }
+    */
+
+    if let Some(_v) = matches.subcommand_matches("filesystem.semver") {
+        use fake::faker::filesystem::raw::{Semver, SemverStable, SemverUnstable};
+
+        let val_one: String = Semver(EN).fake(); // return X.Y.Z or X-Y-Z-V.W (V equals "rc", "beta" or "alpha")
+        println!("{}", val_one);
+
+        let val_two: String = SemverStable(EN).fake(); // return X.Y.Z
+        println!("{}", val_two);
+
+        let val_three: String = SemverUnstable(EN).fake(); // return X-Y-Z-V.W
+        println!("{}", val_three);
+        
+        let val_four: semver::Version = Faker.fake();
+        println!("{}", val_four);
+    }
+
+    /*
+    if let Some(_) = matches.subcommand_matches("iban") {
+        let val: String = Iban(EN).fake();
+        println!("{}", val);
+    }
+    */
 }

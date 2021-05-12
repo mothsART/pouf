@@ -13,7 +13,7 @@ edition = "2018"
 
 [dependencies]
 clap = "2.33"
-fake = { version="2.4", features=['chrono', 'http'] }
+fake = { path = "../fake-rs/fake", features=['chrono', 'http', 'semver'] }
 
 chrono = { version = "0.4" }
 http = { version = "0.2" }
