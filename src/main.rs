@@ -4,18 +4,13 @@ extern crate chrono;
 extern crate http;
 extern crate semver;
 
+mod cli;
 use std::env;
 use chrono::Utc;
-
-use clap::{Arg, App};
 
 use fake::Fake;
 use fake::locales::{EN};
 use fake::locales::{FR_FR};
-
-const VERSION: &'static str = "0.0.1";
-const AUTHOR: &'static str = "Ferry Jérémie";
-const AUTHOR_MAIL: &'static str = "ferryjeremie@free.fr";
 
 macro_rules! lang_struct {
     ($struct_name:ident) => {
@@ -46,67 +41,7 @@ macro_rules! lang_struct {
 }
 
 fn main() {
-    let matches = App::new("pouf")
-    .version(VERSION)
-    .author(&*format!("{} <{}>", AUTHOR, AUTHOR_MAIL))
-    .about("give fake datas")
-    .subcommand(App::new("lorem.word")
-        .about("give a fake word")
-    )
-    .subcommand(App::new("internet.mail")
-        .about("give a fake mail")
-        .arg(Arg::with_name("lang")
-            .short("l")
-            .help("give lang (ie: fr_FR)")
-            .takes_value(true)
-        )
-        .arg(Arg::with_name("number")
-            .short("n")
-            .help("number of values")
-            .takes_value(true)
-        )
-    )
-    .subcommand(App::new("internet.ip")
-        .about("give a fake IP (Internet Protocol)")
-        .arg(Arg::with_name("ipv4")
-            .short("4")
-            .long("ipv4")
-            .help("give exclusivly IPv4")
-        )
-        .arg(Arg::with_name("ipv6")
-            .short("6")
-            .long("ipv6")
-            .help("give exclusivly IPv6")
-        )
-    )
-    .subcommand(App::new("internet.mac")
-        .about("give a fake mac adress")
-    )
-    .subcommand(App::new("internet.useragent")
-        .about("give a fake user agent")
-    )
-    .subcommand(App::new("http.code")
-        .about("give a fake HTTP code")
-    )
-    .subcommand(App::new("time.time")
-        .about("give a fake time")
-    )
-    .subcommand(App::new("time.date")
-        .about("give a fake date")
-    )
-    .subcommand(App::new("filesystem.mimetype")
-        .about("give a fake mime-type")
-    )
-    .subcommand(App::new("administrative.healthinsurrancecode")
-        .about("give a Health insurrance code")
-    )
-    .subcommand(App::new("finance.bic")
-        .about("give a fake BIC (Business Identifier Code)")
-    )
-    .subcommand(App::new("auto.licenseplate")
-        .about("give a automotive license plate")
-    )
-    .get_matches();
+    let matches = cli::build_cli().get_matches();
 
     if let Some(_) = matches.subcommand_matches("lorem.word") {
         use fake::faker::lorem::raw::Word;
@@ -118,9 +53,9 @@ fn main() {
     if let Some(mail) = matches.subcommand_matches("internet.mail") {
         use fake::faker::internet::raw::FreeEmail;
 
-        match mail.args.get("lang") {
+        match mail.value_of("lang") {
             Some(lang) => {
-                lang_struct!(FreeEmail, &*format!("{:?}", lang.vals[0]));
+                lang_struct!(FreeEmail, &*format!("{:?}", lang));
             },
             None => {
                 lang_struct!(FreeEmail);
@@ -132,12 +67,12 @@ fn main() {
         use fake::faker::internet::raw::{IPv4, IPv6};
 
         let val: String;
-        if let Some(_) = ip.args.get("ipv4") {
+        if let Some(_) = ip.value_of("ipv4") {
             val = IPv4(EN).fake();
             println!("{}", val);
             return;
         }
-        if let Some(_) = ip.args.get("ipv6") {
+        if let Some(_) = ip.value_of("ipv6") {
             val = IPv6(EN).fake();
             println!("{}", val);
             return;

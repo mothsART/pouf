@@ -1,5 +1,5 @@
 [package]
-name    = "pouf"
+name = "pouf"
 version = "0.1.0"
 authors = ["Ferry Jérémie <ferryjeremie@free.fr>"]
 description = "Pouf is a cli program for produce fake datas."
@@ -10,9 +10,10 @@ readme = "README.md"
 repository = "https://github.com/mothsart/pouf"
 homepage = "https://github.com/mothsart/pouf"
 edition = "2018"
+build = "build.rs"
 
 [dependencies]
-clap = "2.33"
+clap = "3.0.0-beta.2"
 fake = { version="2.4", features=['chrono', 'http'] }
 
 chrono = { version = "0.4" }
