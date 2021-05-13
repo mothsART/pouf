@@ -1,6 +1,6 @@
 [package]
 name = "pouf"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Ferry Jérémie <ferryjeremie@free.fr>"]
 description = "Pouf is a cli program for produce fake datas."
 keywords = ["app", "cli", "faker", "data", "random"]
@@ -13,7 +13,7 @@ edition = "2018"
 build = "build.rs"
 
 [dependencies]
-clap = { git = "https://github.com/clap-rs/clap.git", rev = "73cf47a", package = "clap" }
+clap = { git = "https://github.com/clap-rs/clap.git", rev = "73cf47a", package = "clap", version = "3.0.0-beta.2" }
 fake = { version="2.4", features=['chrono', 'http'] }
 
 chrono = { version = "0.4" }
@@ -21,5 +21,5 @@ http = { version = "0.2" }
 semver = { version = "0.11" }
 
 [build-dependencies]
-clap = { git = "https://github.com/clap-rs/clap.git", rev = "73cf47a", package = "clap" }
-clap_generate = { git = "https://github.com/clap-rs/clap.git", rev = "73cf47a", package = "clap_generate" }
+clap = { git = "https://github.com/clap-rs/clap.git", rev = "73cf47a", package = "clap", version = "3.0.0-beta.2" }
+clap_generate = { git = "https://github.com/clap-rs/clap.git", rev = "73cf47a", package = "clap_generate", version = "3.0.0-beta.2" }

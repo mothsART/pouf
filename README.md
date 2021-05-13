@@ -10,43 +10,43 @@ Latest with source :
 
 clone the projet and install it with :
 
-```bash
+```zsh
 cargo install --path .
 ```
 
 ## Examples
 
-```bash
+```zsh
 $ pouf internet.mail -l en
 >>> adriel_quia@hotmail.com
 ```
 
-```bash
+```zsh
 $ pouf internet.mail // if locales is "fr_FR.UTF-8"
 >>> karim_qui@orange.fr
 ```
 
-```bash
+```zsh
 $ pouf finance.bic
 >>> RSJECUA1x0hf8NV2FDvN5m8MFV
 ```
 
-```bash
+```zsh
 $ pouf time.time
 >>> 21:45:53
 ```
 
-```bash
+```zsh
 $ pouf filesystem.mimetype
 >>> application/vnd.xacml+json
 ```
 
-```bash
+```zsh
 $ pouf http.code
 >>> 412 Precondition Failed
 ```
 
-```bash
+```zsh
 $ pouf administrative.healthinsurrancecode
 >>> 1 85 02 974 777 624 88
 ```
@@ -55,7 +55,13 @@ $ pouf administrative.healthinsurrancecode
 
 On zsh :
 
-```bash
+```zsh
 source _pouf
 compdef _pouf pouf
+```
+
+## Publish
+
+```zsh
+cargo publish --no-verify
 ```

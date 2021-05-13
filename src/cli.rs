@@ -4,6 +4,7 @@ const VERSION: &'static str = "0.2.0";
 
 pub fn build_cli() -> App<'static> {
     App::new("pouf")
+    .bin_name("pouf")
     .version(VERSION)
     .author("Ferry Jérémie ferryjeremie@free.fr")
     .about("give fake datas")
