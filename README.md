@@ -11,7 +11,7 @@ Latest with source :
 clone the projet and install it with :
 
 ```bash
-cargo install
+cargo install --path .
 ```
 
 ## Examples

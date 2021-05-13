@@ -8,10 +8,7 @@ use clap_generate::{
 include!("src/cli.rs");
 
 fn main() {
-    let outdir = match env::var_os("OUT_DIR") {
-        None => return,
-        Some(outdir) => outdir,
-    };
+    let outdir = env!("CARGO_MANIFEST_DIR");
     let mut app = build_cli();
     generate_to::<Bash, _, _>(&mut app, "pouf", &outdir);
     generate_to::<Zsh, _, _>(&mut app, "pouf", &outdir);
