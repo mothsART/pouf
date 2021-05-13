@@ -50,3 +50,12 @@ $ pouf http.code
 $ pouf administrative.healthinsurrancecode
 >>> 1 85 02 974 777 624 88
 ```
+
+## Autocomple
+
+On zsh :
+
+```bash
+source _pouf
+compdef _pouf pouf
+```

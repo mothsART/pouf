@@ -202,11 +202,11 @@ _pouf() {
             fi
             case "${prev}" in
                 
-                    -l)
+                -l)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
                     ;;
-                    -n)
+                -n)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
                     ;;

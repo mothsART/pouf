@@ -146,111 +146,85 @@ esac
 (( $+functions[_pouf_commands] )) ||
 _pouf_commands() {
     local commands; commands=(
-        "lorem.word:give a fake word" \
-"internet.mail:give a fake mail" \
-"internet.ip:give a fake IP (Internet Protocol)" \
-"internet.mac:give a fake mac adress" \
-"internet.useragent:give a fake user agent" \
-"http.code:give a fake HTTP code" \
-"time.time:give a fake time" \
-"time.date:give a fake date" \
-"filesystem.mimetype:give a fake mime-type" \
-"administrative.healthinsurrancecode:give a Health insurrance code" \
-"finance.bic:give a fake BIC (Business Identifier Code)" \
-"auto.licenseplate:give a automotive license plate" \
-"help:Prints this message or the help of the given subcommand(s)" \
+'lorem.word:give a fake word' \
+'internet.mail:give a fake mail' \
+'internet.ip:give a fake IP (Internet Protocol)' \
+'internet.mac:give a fake mac adress' \
+'internet.useragent:give a fake user agent' \
+'http.code:give a fake HTTP code' \
+'time.time:give a fake time' \
+'time.date:give a fake date' \
+'filesystem.mimetype:give a fake mime-type' \
+'administrative.healthinsurrancecode:give a Health insurrance code' \
+'finance.bic:give a fake BIC (Business Identifier Code)' \
+'auto.licenseplate:give a automotive license plate' \
+'help:Prints this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'pouf commands' commands "$@"
 }
 (( $+functions[_pouf__administrative.healthinsurrancecode_commands] )) ||
 _pouf__administrative.healthinsurrancecode_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf administrative.healthinsurrancecode commands' commands "$@"
 }
 (( $+functions[_pouf__auto.licenseplate_commands] )) ||
 _pouf__auto.licenseplate_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf auto.licenseplate commands' commands "$@"
 }
 (( $+functions[_pouf__filesystem.mimetype_commands] )) ||
 _pouf__filesystem.mimetype_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf filesystem.mimetype commands' commands "$@"
 }
 (( $+functions[_pouf__finance.bic_commands] )) ||
 _pouf__finance.bic_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf finance.bic commands' commands "$@"
 }
 (( $+functions[_pouf__help_commands] )) ||
 _pouf__help_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf help commands' commands "$@"
 }
 (( $+functions[_pouf__http.code_commands] )) ||
 _pouf__http.code_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf http.code commands' commands "$@"
 }
 (( $+functions[_pouf__internet.ip_commands] )) ||
 _pouf__internet.ip_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf internet.ip commands' commands "$@"
 }
 (( $+functions[_pouf__internet.mac_commands] )) ||
 _pouf__internet.mac_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf internet.mac commands' commands "$@"
 }
 (( $+functions[_pouf__internet.mail_commands] )) ||
 _pouf__internet.mail_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf internet.mail commands' commands "$@"
 }
 (( $+functions[_pouf__internet.useragent_commands] )) ||
 _pouf__internet.useragent_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf internet.useragent commands' commands "$@"
 }
 (( $+functions[_pouf__lorem.word_commands] )) ||
 _pouf__lorem.word_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf lorem.word commands' commands "$@"
 }
 (( $+functions[_pouf__time.date_commands] )) ||
 _pouf__time.date_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf time.date commands' commands "$@"
 }
 (( $+functions[_pouf__time.time_commands] )) ||
 _pouf__time.time_commands() {
-    local commands; commands=(
-        
-    )
+    local commands; commands=()
     _describe -t commands 'pouf time.time commands' commands "$@"
 }
 
