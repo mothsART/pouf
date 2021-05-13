@@ -1,6 +1,6 @@
 use clap::{App, Arg};
 
-const VERSION: &'static str = "0.1.0";
+const VERSION: &'static str = "0.2.0";
 
 pub fn build_cli() -> App<'static> {
     App::new("pouf")
