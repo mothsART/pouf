@@ -1,5 +1,9 @@
 # Pouf
 
+[![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Crates.io Version](https://img.shields.io/crates/v/pouf.svg)](https://crates.io/crates/pouf)
+[![Minimum rustc version](https://img.shields.io/badge/rustc-1.45.0+-lightgray.svg)](#rust-version-requirements)
+
 ## Intro
 
 Pouf is a cli program for produce fake datas.
