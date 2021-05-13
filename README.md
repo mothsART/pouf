@@ -55,7 +55,7 @@ $ pouf administrative.healthinsurrancecode
 >>> 1 85 02 974 777 624 88
 ```
 
-## Autocomple
+## Autocomplete
 
 On zsh :
 
