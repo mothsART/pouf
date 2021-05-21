@@ -59,9 +59,15 @@ $ pouf administrative.healthinsurrancecode
 
 On zsh :
 
+Add this on your ~/.zshrc :
+
 ```zsh
-source _pouf
-compdef _pouf pouf
+fpath=("dir_of/_pouf" "${fpath[@]}")
+```
+
+before :
+```zsh
+autoload -Uz compinit && compinit
 ```
 
 ## Publish

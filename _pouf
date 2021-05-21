@@ -1,4 +1,4 @@
-#compdef _pouf pouf
+#compdef pouf
 
 autoload -U is-at-least
 
@@ -228,3 +228,4 @@ _pouf__time.time_commands() {
     _describe -t commands 'pouf time.time commands' commands "$@"
 }
 
+_pouf "$@"
