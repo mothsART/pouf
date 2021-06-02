@@ -122,6 +122,9 @@ fn main() {
     .subcommand(App::new("color.color")
         .about("give all format for the same color")
     )
+    .subcommand(App::new("chemical.molecule")
+        .about("give a chemical formula for a molecule")
+    )
     .get_matches();
 
     if let Some(_) = matches.subcommand_matches("lorem.word") {
