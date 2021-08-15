@@ -36,6 +36,14 @@ _arguments "${_arguments_options[@]}" \
 '--version[Prints version information]' \
 && ret=0
 ;;
+(barecode.isbn)
+_arguments "${_arguments_options[@]}" \
+'-h[Prints help information]' \
+'--help[Prints help information]' \
+'-V[Prints version information]' \
+'--version[Prints version information]' \
+&& ret=0
+;;
 (internet.mail)
 _arguments "${_arguments_options[@]}" \
 '-l+[give lang (ie: fr_FR)]' \
@@ -147,6 +155,7 @@ esac
 _pouf_commands() {
     local commands; commands=(
 'lorem.word:give a fake word' \
+'barecode.isbn:give an isbn code' \
 'internet.mail:give a fake mail' \
 'internet.ip:give a fake IP (Internet Protocol)' \
 'internet.mac:give a fake mac adress' \
@@ -171,6 +180,11 @@ _pouf__administrative.healthinsurrancecode_commands() {
 _pouf__auto.licenseplate_commands() {
     local commands; commands=()
     _describe -t commands 'pouf auto.licenseplate commands' commands "$@"
+}
+(( $+functions[_pouf__barecode.isbn_commands] )) ||
+_pouf__barecode.isbn_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf barecode.isbn commands' commands "$@"
 }
 (( $+functions[_pouf__filesystem.mimetype_commands] )) ||
 _pouf__filesystem.mimetype_commands() {

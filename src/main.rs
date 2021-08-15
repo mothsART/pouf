@@ -50,6 +50,13 @@ fn main() {
         println!("{}", val);
     }
 
+    if let Some(_) = matches.subcommand_matches("barecode.isbn") {
+        use fake::faker::barecode::fr_fr;
+        
+        let val: String = fr_fr::Isbn13().fake();
+        println!("{}", val);
+    }
+    
     if let Some(mail) = matches.subcommand_matches("internet.mail") {
         use fake::faker::internet::raw::FreeEmail;
 
@@ -144,5 +151,9 @@ fn main() {
 
         let val: String = Time(EN).fake();
         println!("{}", val);
+    }
+    
+    if let Some(_v) = matches.subcommand_matches("filesystem.semver") {
+        
     }
 }

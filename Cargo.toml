@@ -14,7 +14,7 @@ build = "build.rs"
 
 [dependencies]
 clap = { git = "https://github.com/clap-rs/clap.git", rev = "73cf47a", package = "clap", version = "3.0.0-beta.2" }
-fake = { version="2.4", features=['chrono', 'http'] }
+fake = { version="2.4.1", features=['chrono', 'http'] }
 
 chrono = { version = "0.4" }
 http = { version = "0.2" }
