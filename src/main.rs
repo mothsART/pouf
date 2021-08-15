@@ -153,7 +153,20 @@ fn main() {
         println!("{}", val);
     }
     
-    if let Some(_v) = matches.subcommand_matches("filesystem.semver") {
-        
+    if let Some(s) = matches.subcommand_matches("filesystem.semver") {
+        use fake::faker::filesystem::raw::{Semver, SemverStable, SemverUnstable};
+        let val: String;
+        if let Some(_) = s.value_of("stable") {
+            val = SemverStable(EN).fake();
+            println!("{}", val);
+            return;
+        }
+        if let Some(_) = s.value_of("unstable") {
+            val = SemverUnstable(EN).fake();
+            println!("{}", val);
+            return;
+        }
+        val = Semver(EN).fake();
+        println!("{}", val);
     }
 }
