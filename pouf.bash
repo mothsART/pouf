@@ -25,6 +25,9 @@ _pouf() {
             filesystem.mimetype)
                 cmd+="__filesystem.mimetype"
                 ;;
+            filesystem.semver)
+                cmd+="__filesystem.semver"
+                ;;
             finance.bic)
                 cmd+="__finance.bic"
                 ;;
@@ -62,7 +65,7 @@ _pouf() {
 
     case "${cmd}" in
         pouf)
-            opts=" -h -V  --help --version  lorem.word barecode.isbn internet.mail internet.ip internet.mac internet.useragent http.code time.time time.date filesystem.mimetype administrative.healthinsurrancecode finance.bic auto.licenseplate help"
+            opts=" -h -V  --help --version  lorem.word barecode.isbn internet.mail internet.ip internet.mac internet.useragent http.code time.time time.date filesystem.mimetype filesystem.semver administrative.healthinsurrancecode finance.bic auto.licenseplate help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -124,6 +127,21 @@ _pouf() {
             ;;
         pouf__filesystem.mimetype)
             opts=" -h -V  --help --version  "
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pouf__filesystem.semver)
+            opts=" -s -u -h -V  --stable --unstable --help --version  "
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
