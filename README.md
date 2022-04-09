@@ -6,7 +6,7 @@
 
 ## Intro
 
-Pouf is a cli program for produce fake datas.
+Pouf is a cli program to produce fake datas.
 
 ## Install with crates.io
 
