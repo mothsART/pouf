@@ -22,8 +22,6 @@ jobs:
 
   publish:
     if: github.repository == 'mothsart/pouf' && startsWith(github.ref, 'refs/tags/')
-    needs:
-      - release
     runs-on: ubuntu-latest
     steps:
         - uses: katyo/publish-crates@v1
