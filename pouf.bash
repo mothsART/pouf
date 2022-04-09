@@ -36,6 +36,9 @@ _pouf() {
             http.code)
                 cmd+="__http.code"
                 ;;
+            internet.color)
+                cmd+="__internet.color"
+                ;;
             internet.ip)
                 cmd+="__internet.ip"
                 ;;
@@ -64,7 +67,7 @@ _pouf() {
 
     case "${cmd}" in
         pouf)
-            opts="-h -V --help --version lorem.word barecode.isbn internet.mail internet.ip internet.mac internet.useragent http.code time.time time.date filesystem.mimetype filesystem.semver administrative.healthinsurrancecode finance.bic auto.licenseplate help"
+            opts="-h -V --help --version lorem.word barecode.isbn internet.mail internet.ip internet.mac internet.useragent internet.color http.code time.time time.date filesystem.mimetype filesystem.semver administrative.healthinsurrancecode finance.bic auto.licenseplate help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -176,6 +179,20 @@ _pouf() {
             return 0
             ;;
         pouf__http.code)
+            opts="-h --help"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pouf__internet.color)
             opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )

@@ -111,6 +111,13 @@ fn main() {
         println!("{}", val);
     }
 
+    if let Some(_) = matches.subcommand_matches("internet.color") {
+        use fake::faker::internet::raw::Color;
+
+        let val: String = Color(EN).fake();
+        println!("{}", val);
+    }
+
     if let Some(_) = matches.subcommand_matches("finance.bic") {
         use fake::faker::finance::raw::Bic;
 

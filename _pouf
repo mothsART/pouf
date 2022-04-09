@@ -70,6 +70,12 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
+(internet.color)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help information]' \
+'--help[Print help information]' \
+&& ret=0
+;;
 (http.code)
 _arguments "${_arguments_options[@]}" \
 '-h[Print help information]' \
@@ -141,6 +147,7 @@ _pouf_commands() {
 'internet.ip:give a fake IP (Internet Protocol)' \
 'internet.mac:give a fake mac adress' \
 'internet.useragent:give a fake user agent' \
+'internet.color:give a fake hexadecimal color' \
 'http.code:give a fake HTTP code' \
 'time.time:give a fake time' \
 'time.date:give a fake date' \
@@ -192,6 +199,11 @@ _pouf__help_commands() {
 _pouf__http.code_commands() {
     local commands; commands=()
     _describe -t commands 'pouf http.code commands' commands "$@"
+}
+(( $+functions[_pouf__internet.color_commands] )) ||
+_pouf__internet.color_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf internet.color commands' commands "$@"
 }
 (( $+functions[_pouf__internet.ip_commands] )) ||
 _pouf__internet.ip_commands() {

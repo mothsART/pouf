@@ -37,6 +37,11 @@ karim_qui@orange.fr
 ```
 
 ```zsh
+$ pouf internet.color
+#AAAA9A
+```
+
+```zsh
 $ pouf finance.bic
 RSJECUA1x0hf8NV2FDvN5m8MFV
 ```
