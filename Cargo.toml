@@ -10,6 +10,7 @@ readme = "README.md"
 repository = "https://github.com/mothsart/pouf"
 homepage = "https://github.com/mothsart/pouf"
 edition = "2021"
+build = "build.rs"
 
 [dependencies]
 clap = { version="3.1.8" }

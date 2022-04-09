@@ -9,10 +9,9 @@ _pouf() {
     for i in ${COMP_WORDS[@]}
     do
         case "${i}" in
-            pouf)
+            "$1")
                 cmd="pouf"
                 ;;
-            
             administrative.healthinsurrancecode)
                 cmd+="__administrative.healthinsurrancecode"
                 ;;
@@ -65,13 +64,12 @@ _pouf() {
 
     case "${cmd}" in
         pouf)
-            opts=" -h -V  --help --version  lorem.word barecode.isbn internet.mail internet.ip internet.mac internet.useragent http.code time.time time.date filesystem.mimetype filesystem.semver administrative.healthinsurrancecode finance.bic auto.licenseplate help"
+            opts="-h -V --help --version lorem.word barecode.isbn internet.mail internet.ip internet.mac internet.useragent http.code time.time time.date filesystem.mimetype filesystem.semver administrative.healthinsurrancecode finance.bic auto.licenseplate help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -79,15 +77,13 @@ _pouf() {
             COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
             return 0
             ;;
-        
         pouf__administrative.healthinsurrancecode)
-            opts=" -h -V  --help --version  "
+            opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -96,13 +92,12 @@ _pouf() {
             return 0
             ;;
         pouf__auto.licenseplate)
-            opts=" -h -V  --help --version  "
+            opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -111,13 +106,12 @@ _pouf() {
             return 0
             ;;
         pouf__barecode.isbn)
-            opts=" -h -V  --help --version  "
+            opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -126,13 +120,12 @@ _pouf() {
             return 0
             ;;
         pouf__filesystem.mimetype)
-            opts=" -h -V  --help --version  "
+            opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -141,13 +134,12 @@ _pouf() {
             return 0
             ;;
         pouf__filesystem.semver)
-            opts=" -s -u -h -V  --stable --unstable --help --version  "
+            opts="-s -u -h --stable --unstable --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -156,13 +148,12 @@ _pouf() {
             return 0
             ;;
         pouf__finance.bic)
-            opts=" -h -V  --help --version  "
+            opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -171,13 +162,12 @@ _pouf() {
             return 0
             ;;
         pouf__help)
-            opts=" -h -V  --help --version  "
+            opts="<SUBCOMMAND>..."
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -186,13 +176,12 @@ _pouf() {
             return 0
             ;;
         pouf__http.code)
-            opts=" -h -V  --help --version  "
+            opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -201,13 +190,12 @@ _pouf() {
             return 0
             ;;
         pouf__internet.ip)
-            opts=" -4 -6 -h -V  --ipv4 --ipv6 --help --version  "
+            opts="-4 -6 -h --ipv4 --ipv6 --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -216,13 +204,12 @@ _pouf() {
             return 0
             ;;
         pouf__internet.mac)
-            opts=" -h -V  --help --version  "
+            opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -231,13 +218,12 @@ _pouf() {
             return 0
             ;;
         pouf__internet.mail)
-            opts=" -l -n -h -V  --help --version  "
+            opts="-l -n -h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 -l)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
@@ -254,13 +240,12 @@ _pouf() {
             return 0
             ;;
         pouf__internet.useragent)
-            opts=" -h -V  --help --version  "
+            opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -269,13 +254,12 @@ _pouf() {
             return 0
             ;;
         pouf__lorem.word)
-            opts=" -h -V  --help --version  "
+            opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -284,13 +268,12 @@ _pouf() {
             return 0
             ;;
         pouf__time.date)
-            opts=" -h -V  --help --version  "
+            opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
@@ -299,13 +282,12 @@ _pouf() {
             return 0
             ;;
         pouf__time.time)
-            opts=" -h -V  --help --version  "
+            opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                
                 *)
                     COMPREPLY=()
                     ;;
