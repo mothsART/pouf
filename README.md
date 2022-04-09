@@ -8,6 +8,12 @@
 
 Pouf is a cli program for produce fake datas.
 
+## Install with crates.io
+
+```zsh
+cargo install pouf
+```
+
 ## Install on your system
 
 Latest with source :
