@@ -9,17 +9,16 @@ license-file = "LICENSE"
 readme = "README.md"
 repository = "https://github.com/mothsart/pouf"
 homepage = "https://github.com/mothsart/pouf"
-edition = "2018"
-build = "build.rs"
+edition = "2021"
 
 [dependencies]
-clap = { git = "https://github.com/clap-rs/clap.git", rev = "73cf47a", package = "clap", version = "3.0.0-beta.2" }
-fake = { version="2.4.1", features=['chrono', 'http'] }
+clap = { version="3.1.8" }
+fake = { version="2.4.3", features=['chrono', 'http', 'semver'] }
 
 chrono = { version = "0.4" }
 http = { version = "0.2" }
-semver = { version = "0.11" }
+semver = { version = "1" }
 
 [build-dependencies]
-clap = { git = "https://github.com/clap-rs/clap.git", rev = "73cf47a", package = "clap", version = "3.0.0-beta.2" }
-clap_generate = { git = "https://github.com/clap-rs/clap.git", rev = "73cf47a", package = "clap_generate", version = "3.0.0-beta.2" }
+clap = { version="3.1.8" }
+clap_complete = { version="3.1.1" }

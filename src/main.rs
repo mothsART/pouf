@@ -152,8 +152,10 @@ fn main() {
         let val: String = Time(EN).fake();
         println!("{}", val);
     }
-    
+
     if let Some(_v) = matches.subcommand_matches("filesystem.semver") {
-        
+        use fake::faker::filesystem::raw::Semver;
+        let val: String = Semver(EN).fake();
+        println!("{}", val);
     }
 }
