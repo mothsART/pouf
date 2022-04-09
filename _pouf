@@ -148,7 +148,7 @@ _pouf_commands() {
 'filesystem.semver:give a fake semver version' \
 'administrative.healthinsurrancecode:give a Health insurrance code' \
 'finance.bic:give a fake BIC (Business Identifier Code)' \
-'auto.licenseplate:give a automotive license plate' \
+'auto.licenseplate:give a french automotive license plate' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'pouf commands' commands "$@"

@@ -152,7 +152,7 @@ fn main() {
         let val: String = Time(EN).fake();
         println!("{}", val);
     }
-    
+
     if let Some(s) = matches.subcommand_matches("filesystem.semver") {
         use fake::faker::filesystem::raw::{Semver, SemverStable, SemverUnstable};
         let val: String;
@@ -167,6 +167,12 @@ fn main() {
             return;
         }
         val = Semver(EN).fake();
+        println!("{}", val);
+    }
+
+    if let Some(_) = matches.subcommand_matches("auto.licenseplate") {
+        use fake::faker::automotive::raw::LicencePlate;
+        let val: String = LicencePlate(FR_FR).fake();
         println!("{}", val);
     }
 }

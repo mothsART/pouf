@@ -79,4 +79,7 @@ pub fn build_cli() -> Command<'static> {
     .subcommand(Command::new("finance.bic")
         .about("give a fake BIC (Business Identifier Code)")
     )
+    .subcommand(Command::new("auto.licenseplate")
+        .about("give a french automotive license plate")
+    )
 }

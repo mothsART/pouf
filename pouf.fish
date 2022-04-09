@@ -13,7 +13,7 @@ complete -c pouf -n "__fish_use_subcommand" -f -a "filesystem.mimetype" -d 'give
 complete -c pouf -n "__fish_use_subcommand" -f -a "filesystem.semver" -d 'give a fake semver version'
 complete -c pouf -n "__fish_use_subcommand" -f -a "administrative.healthinsurrancecode" -d 'give a Health insurrance code'
 complete -c pouf -n "__fish_use_subcommand" -f -a "finance.bic" -d 'give a fake BIC (Business Identifier Code)'
-complete -c pouf -n "__fish_use_subcommand" -f -a "auto.licenseplate" -d 'give a automotive license plate'
+complete -c pouf -n "__fish_use_subcommand" -f -a "auto.licenseplate" -d 'give a french automotive license plate'
 complete -c pouf -n "__fish_use_subcommand" -f -a "help" -d 'Print this message or the help of the given subcommand(s)'
 complete -c pouf -n "__fish_seen_subcommand_from lorem.word" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from barecode.isbn" -s h -l help -d 'Print help information'
