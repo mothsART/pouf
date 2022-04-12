@@ -193,7 +193,7 @@ _pouf() {
             return 0
             ;;
         pouf__internet.color)
-            opts="-h --help"
+            opts="-d -r -a -t -l -h --hexa --rgb --rgba --hsl --hsla --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0

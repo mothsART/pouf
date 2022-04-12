@@ -14,7 +14,7 @@ build = "build.rs"
 
 [dependencies]
 clap = { version="3.1.8" }
-fake = { version="2.4.3", features=['chrono', 'http', 'semver'] }
+fake = { version="2.4.3", path="../fake-rs/fake", features=['chrono', 'http', 'semver', 'random_color'] }
 
 chrono = { version = "0.4" }
 http = { version = "0.2" }

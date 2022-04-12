@@ -72,6 +72,16 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (internet.color)
 _arguments "${_arguments_options[@]}" \
+'-d[give a fake hexadecimal color]' \
+'--hexa[give a fake hexadecimal color]' \
+'-r[give a fake rgb color]' \
+'--rgb[give a fake rgb color]' \
+'-a[give a fake rgba color]' \
+'--rgba[give a fake rgba color]' \
+'-t[give a fake hsl (tsl) color]' \
+'--hsl[give a fake hsl (tsl) color]' \
+'-l[give a fake hsla (tsl) color]' \
+'--hsla[give a fake hsla (tsl) color]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
@@ -147,7 +157,7 @@ _pouf_commands() {
 'internet.ip:give a fake IP (Internet Protocol)' \
 'internet.mac:give a fake mac adress' \
 'internet.useragent:give a fake user agent' \
-'internet.color:give a fake hexadecimal color' \
+'internet.color:give a fake color (hexadécimal, rgb, rgba, hsl and hsla representation)' \
 'http.code:give a fake HTTP code' \
 'time.time:give a fake time' \
 'time.date:give a fake date' \

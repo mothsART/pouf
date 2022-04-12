@@ -111,11 +111,32 @@ fn main() {
         println!("{}", val);
     }
 
-    if let Some(_) = matches.subcommand_matches("internet.color") {
-        use fake::faker::internet::raw::Color;
+    if let Some(s) = matches.subcommand_matches("internet.color") {
+        use fake::faker::color::raw::{HexColor, RgbColor, RgbaColor, HslColor, HslaColor, Color};
+        let val: String;
+        if s.is_present("hexa") {
+            let hex_val: String = HexColor(EN).fake();
+            println!("{}", hex_val);
+        }
+        if s.is_present("rgb") {
+            let rgb_val: String = RgbColor(EN).fake();
+            println!("{}", rgb_val);
+        }
+        if s.is_present("rgba") {
+            let rgba_val: String = RgbaColor(EN).fake();
+            println!("{}", rgba_val);
+        }
+        if s.is_present("hsl") {
+            let hsl_val: String = HslColor(EN).fake();
+            println!("{}", hsl_val);
+        }
+        if s.is_present("hsla") {
+            let hsla_val: String = HslaColor(EN).fake();
+            println!("{}", hsla_val);
+        }
 
-        let val: String = Color(EN).fake();
-        println!("{}", val);
+        let newval: String = Color(EN).fake();
+        println!("{}", newval);
     }
 
     if let Some(_) = matches.subcommand_matches("finance.bic") {
@@ -163,12 +184,12 @@ fn main() {
     if let Some(s) = matches.subcommand_matches("filesystem.semver") {
         use fake::faker::filesystem::raw::{Semver, SemverStable, SemverUnstable};
         let val: String;
-        if let Some(_) = s.value_of("stable") {
+        if s.is_present("stable") && !s.is_present("unstable") {
             val = SemverStable(EN).fake();
             println!("{}", val);
             return;
         }
-        if let Some(_) = s.value_of("unstable") {
+        if s.is_present("unstable") && !s.is_present("stable") {
             val = SemverUnstable(EN).fake();
             println!("{}", val);
             return;
