@@ -72,29 +72,31 @@ fn main() {
 
     if let Some(ip) = matches.subcommand_matches("internet.ip") {
         use fake::faker::internet::raw::{IPv4, IPv6};
+        use fake::faker::boolean::en;
 
         let val: String;
-        if let Some(_) = ip.value_of("ipv4") {
-            val = IPv4(EN).fake();
-            println!("{}", val);
-            return;
-        }
-        if let Some(_) = ip.value_of("ipv6") {
+
+        if !ip.args_present() || (ip.is_present("ipv4") && ip.is_present("ipv6")) {
+            if en::Boolean(50).fake() {
+                val = IPv4(EN).fake();
+                println!("{}", val);
+                return;
+            }
             val = IPv6(EN).fake();
             println!("{}", val);
             return;
         }
 
-        use fake::faker::boolean::en;
-
-        if en::Boolean(50).fake() {
+        if ip.is_present("ipv4") {
             val = IPv4(EN).fake();
             println!("{}", val);
             return;
         }
-        val = IPv6(EN).fake();
-        println!("{}", val);
-        return;
+        if ip.is_present("ipv6") {
+            val = IPv6(EN).fake();
+            println!("{}", val);
+            return;
+        }
     }
 
     if let Some(_) = matches.subcommand_matches("internet.mac") {
@@ -163,18 +165,23 @@ fn main() {
     if let Some(s) = matches.subcommand_matches("filesystem.semver") {
         use fake::faker::filesystem::raw::{Semver, SemverStable, SemverUnstable};
         let val: String;
-        if let Some(_) = s.value_of("stable") {
+
+        if !s.args_present() || (s.is_present("stable") && s.is_present("unstable")) {
+            val = Semver(EN).fake();
+            println!("{}", val);
+            return;
+        }
+
+        if s.is_present("stable") {
             val = SemverStable(EN).fake();
             println!("{}", val);
             return;
         }
-        if let Some(_) = s.value_of("unstable") {
+        if s.is_present("unstable") {
             val = SemverUnstable(EN).fake();
             println!("{}", val);
             return;
         }
-        val = Semver(EN).fake();
-        println!("{}", val);
     }
 
     if let Some(_) = matches.subcommand_matches("auto.licenseplate") {

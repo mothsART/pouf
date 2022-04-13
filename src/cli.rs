@@ -1,6 +1,6 @@
 use clap::{Command, Arg};
 
-const VERSION: &'static str = "0.3.0";
+const VERSION: &'static str = "0.3.1";
 
 pub fn build_cli() -> Command<'static> {
     Command::new("pouf")
@@ -8,6 +8,7 @@ pub fn build_cli() -> Command<'static> {
     .version(VERSION)
     .author("Ferry Jérémie ferryjeremie@free.fr")
     .about("give fake datas")
+    .arg_required_else_help(true)
     .subcommand(
         Command::new("lorem.word")
         .about("give a fake word")
