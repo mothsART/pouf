@@ -56,7 +56,7 @@ fn main() {
         let val: String = fr_fr::Isbn13().fake();
         println!("{}", val);
     }
-    
+
     if let Some(mail) = matches.subcommand_matches("internet.mail") {
         use fake::faker::internet::raw::FreeEmail;
 
@@ -72,29 +72,31 @@ fn main() {
 
     if let Some(ip) = matches.subcommand_matches("internet.ip") {
         use fake::faker::internet::raw::{IPv4, IPv6};
+        use fake::faker::boolean::en;
 
         let val: String;
-        if let Some(_) = ip.value_of("ipv4") {
-            val = IPv4(EN).fake();
-            println!("{}", val);
-            return;
-        }
-        if let Some(_) = ip.value_of("ipv6") {
+
+        if !ip.args_present() || (ip.is_present("ipv4") && ip.is_present("ipv6")) {
+            if en::Boolean(50).fake() {
+                val = IPv4(EN).fake();
+                println!("{}", val);
+                return;
+            }
             val = IPv6(EN).fake();
             println!("{}", val);
             return;
         }
 
-        use fake::faker::boolean::en;
-
-        if en::Boolean(50).fake() {
+        if ip.is_present("ipv4") {
             val = IPv4(EN).fake();
             println!("{}", val);
             return;
         }
-        val = IPv6(EN).fake();
-        println!("{}", val);
-        return;
+        if ip.is_present("ipv6") {
+            val = IPv6(EN).fake();
+            println!("{}", val);
+            return;
+        }
     }
 
     if let Some(_) = matches.subcommand_matches("internet.mac") {
@@ -111,32 +113,35 @@ fn main() {
         println!("{}", val);
     }
 
-    if let Some(s) = matches.subcommand_matches("internet.color") {
+    if let Some(c) = matches.subcommand_matches("internet.color") {
         use fake::faker::color::raw::{HexColor, RgbColor, RgbaColor, HslColor, HslaColor, Color};
-        let val: String;
-        if s.is_present("hexa") {
+
+        if !c.args_present() {
+            let all_color: String = Color(EN).fake();
+            println!("{}", all_color);
+            return;
+        }
+
+        if c.is_present("hexa") {
             let hex_val: String = HexColor(EN).fake();
             println!("{}", hex_val);
         }
-        if s.is_present("rgb") {
+        if c.is_present("rgb") {
             let rgb_val: String = RgbColor(EN).fake();
             println!("{}", rgb_val);
         }
-        if s.is_present("rgba") {
+        if c.is_present("rgba") {
             let rgba_val: String = RgbaColor(EN).fake();
             println!("{}", rgba_val);
         }
-        if s.is_present("hsl") {
+        if c.is_present("hsl") {
             let hsl_val: String = HslColor(EN).fake();
             println!("{}", hsl_val);
         }
-        if s.is_present("hsla") {
+        if c.is_present("hsla") {
             let hsla_val: String = HslaColor(EN).fake();
             println!("{}", hsla_val);
         }
-
-        let newval: String = Color(EN).fake();
-        println!("{}", newval);
     }
 
     if let Some(_) = matches.subcommand_matches("finance.bic") {
@@ -184,18 +189,24 @@ fn main() {
     if let Some(s) = matches.subcommand_matches("filesystem.semver") {
         use fake::faker::filesystem::raw::{Semver, SemverStable, SemverUnstable};
         let val: String;
-        if s.is_present("stable") && !s.is_present("unstable") {
+
+        if !s.args_present() || (s.is_present("stable") && s.is_present("unstable")) {
+            val = Semver(EN).fake();
+            println!("{}", val);
+            return;
+        }
+
+        if s.is_present("stable") {
             val = SemverStable(EN).fake();
             println!("{}", val);
             return;
         }
-        if s.is_present("unstable") && !s.is_present("stable") {
+
+        if s.is_present("unstable") {
             val = SemverUnstable(EN).fake();
             println!("{}", val);
             return;
         }
-        val = Semver(EN).fake();
-        println!("{}", val);
     }
 
     if let Some(_) = matches.subcommand_matches("auto.licenseplate") {
