@@ -54,6 +54,9 @@ _pouf() {
             lorem.word)
                 cmd+="__lorem.word"
                 ;;
+            people.name)
+                cmd+="__people.name"
+                ;;
             time.date)
                 cmd+="__time.date"
                 ;;
@@ -67,7 +70,7 @@ _pouf() {
 
     case "${cmd}" in
         pouf)
-            opts="-h -V --help --version lorem.word barecode.isbn internet.mail internet.ip internet.mac internet.useragent internet.color http.code time.time time.date filesystem.mimetype filesystem.semver administrative.healthinsurrancecode finance.bic auto.licenseplate help"
+            opts="-h -V --help --version lorem.word barecode.isbn people.name internet.mail internet.ip internet.mac internet.useragent internet.color http.code time.time time.date filesystem.mimetype filesystem.semver administrative.healthinsurrancecode finance.bic auto.licenseplate help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -235,14 +238,18 @@ _pouf() {
             return 0
             ;;
         pouf__internet.mail)
-            opts="-l -n -h --help"
+            opts="-l -n -h --lang --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
+                --lang)
+                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    return 0
+                    ;;
                 -l)
-                    COMPREPLY=($(compgen -f "${cur}"))
+                    COMPREPLY=($(compgen -W "" -- "${cur}"))
                     return 0
                     ;;
                 -n)
@@ -277,6 +284,28 @@ _pouf() {
                 return 0
             fi
             case "${prev}" in
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pouf__people.name)
+            opts="-l -f -n -h --lang --firstname --lastname --help"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                --lang)
+                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    return 0
+                    ;;
+                -l)
+                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    return 0
+                    ;;
                 *)
                     COMPREPLY=()
                     ;;

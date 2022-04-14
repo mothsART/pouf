@@ -40,9 +40,22 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
+(people.name)
+_arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-f[give a fake firstname]' \
+'--firstname[give a fake firstname]' \
+'-n[give a fake lastname]' \
+'--lastname[give a fake lastname]' \
+'-h[Print help information]' \
+'--help[Print help information]' \
+&& ret=0
+;;
 (internet.mail)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: : ' \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
@@ -143,6 +156,7 @@ _pouf_commands() {
     local commands; commands=(
 'lorem.word:give a fake word' \
 'barecode.isbn:give an isbn code' \
+'people.name:give a fake name' \
 'internet.mail:give a fake mail' \
 'internet.ip:give a fake IP (Internet Protocol)' \
 'internet.mac:give a fake mac adress' \
@@ -229,6 +243,11 @@ _pouf__internet.useragent_commands() {
 _pouf__lorem.word_commands() {
     local commands; commands=()
     _describe -t commands 'pouf lorem.word commands' commands "$@"
+}
+(( $+functions[_pouf__people.name_commands] )) ||
+_pouf__people.name_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf people.name commands' commands "$@"
 }
 (( $+functions[_pouf__time.date_commands] )) ||
 _pouf__time.date_commands() {

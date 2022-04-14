@@ -2,6 +2,7 @@ complete -c pouf -n "__fish_use_subcommand" -s h -l help -d 'Print help informat
 complete -c pouf -n "__fish_use_subcommand" -s V -l version -d 'Print version information'
 complete -c pouf -n "__fish_use_subcommand" -f -a "lorem.word" -d 'give a fake word'
 complete -c pouf -n "__fish_use_subcommand" -f -a "barecode.isbn" -d 'give an isbn code'
+complete -c pouf -n "__fish_use_subcommand" -f -a "people.name" -d 'give a fake name'
 complete -c pouf -n "__fish_use_subcommand" -f -a "internet.mail" -d 'give a fake mail'
 complete -c pouf -n "__fish_use_subcommand" -f -a "internet.ip" -d 'give a fake IP (Internet Protocol)'
 complete -c pouf -n "__fish_use_subcommand" -f -a "internet.mac" -d 'give a fake mac adress'
@@ -18,7 +19,11 @@ complete -c pouf -n "__fish_use_subcommand" -f -a "auto.licenseplate" -d 'give a
 complete -c pouf -n "__fish_use_subcommand" -f -a "help" -d 'Print this message or the help of the given subcommand(s)'
 complete -c pouf -n "__fish_seen_subcommand_from lorem.word" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from barecode.isbn" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from internet.mail" -s l -d 'give lang (ie: fr_FR)' -r
+complete -c pouf -n "__fish_seen_subcommand_from people.name" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
+complete -c pouf -n "__fish_seen_subcommand_from people.name" -s f -l firstname -d 'give a fake firstname'
+complete -c pouf -n "__fish_seen_subcommand_from people.name" -s n -l lastname -d 'give a fake lastname'
+complete -c pouf -n "__fish_seen_subcommand_from people.name" -s h -l help -d 'Print help information'
+complete -c pouf -n "__fish_seen_subcommand_from internet.mail" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from internet.mail" -s n -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from internet.mail" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from internet.ip" -s 4 -l ipv4 -d 'give exclusivly IPv4'

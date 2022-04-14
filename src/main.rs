@@ -18,7 +18,7 @@ macro_rules! lang_struct {
             Ok(_l) => {
                 let split = _l.split(".");
                 let vec = split.collect::<Vec<&str>>();
-                lang_struct!(FreeEmail, &*vec[0].to_lowercase());
+                lang_struct!($struct_name, &*vec[0].to_lowercase());
             },
             Err(_e) => {
                 let val: String = $struct_name(EN).fake();
@@ -40,6 +40,20 @@ macro_rules! lang_struct {
     };
 }
 
+macro_rules! lang {
+    ($struct_name:ident, $matches:expr) => {
+        match $matches.value_of("lang") {
+            Some(lang) => {
+                lang_struct!($struct_name, &*format!("{}", lang));
+            },
+            None => {
+                lang_struct!($struct_name);
+            }
+        }
+    }
+}
+
+
 fn main() {
     let matches = cli::build_cli().get_matches();
 
@@ -56,17 +70,27 @@ fn main() {
         let val: String = fr_fr::Isbn13().fake();
         println!("{}", val);
     }
-    
+
     if let Some(mail) = matches.subcommand_matches("internet.mail") {
         use fake::faker::internet::raw::FreeEmail;
 
-        match mail.value_of("lang") {
-            Some(lang) => {
-                lang_struct!(FreeEmail, &*format!("{:?}", lang));
-            },
-            None => {
-                lang_struct!(FreeEmail);
-            }
+        lang!(FreeEmail, mail);
+    }
+
+    if let Some(name) = matches.subcommand_matches("people.name") {
+        use fake::faker::name::raw::{Name, FirstName, LastName};
+
+        if !name.args_present() || (name.is_present("firstname") && name.is_present("lastname")) {
+            lang!(Name, name);
+            return;
+        }
+        if name.is_present("firstname") {
+            lang!(FirstName, name);
+            return;
+        }
+        if name.is_present("lastname") {
+            lang!(LastName, name);
+            return;
         }
     }
 
