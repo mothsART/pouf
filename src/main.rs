@@ -80,7 +80,7 @@ fn main() {
     if let Some(name) = matches.subcommand_matches("people.name") {
         use fake::faker::name::raw::{Name, FirstName, LastName};
 
-        if !name.args_present() || (name.is_present("firstname") && name.is_present("lastname")) {
+        if name.is_present("firstname") && name.is_present("lastname") {
             lang!(Name, name);
             return;
         }
@@ -92,6 +92,8 @@ fn main() {
             lang!(LastName, name);
             return;
         }
+        lang!(Name, name);
+        return;
     }
 
     if let Some(ip) = matches.subcommand_matches("internet.ip") {

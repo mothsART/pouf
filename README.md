@@ -37,6 +37,11 @@ karim_qui@orange.fr
 ```
 
 ```zsh
+$ pouf people.name
+Axel Sipes
+```
+
+```zsh
 $ pouf internet.color
 #AAAA9A
 ```
