@@ -1,54 +1,70 @@
 use clap::{Command, Arg};
 
-const VERSION: &'static str = "0.3.1";
+struct GenCommand<'a> {
+    lang: Arg<'a>,
+    number: Arg<'a>
+}
 
-pub fn build_cli() -> Command<'static> {
-    let lang_arg = Arg::new("lang")
-        .short('l')
-        .long("lang")
-        .help("give lang (ie: fr_FR)")
-        .possible_values(&[ "fr", "fr_FR", "en"])
-        .takes_value(true);
+impl<'a> GenCommand<'a> {
+    fn new() -> Self {
+        let lang_arg = Arg::new("lang")
+            .short('l')
+            .long("lang")
+            .help("give lang (ie: fr_FR)")
+            .possible_values(&[ "fr", "fr_FR", "en"]);
+        let number_arg = Arg::new("number")
+            .short('n')
+            .long("number")
+            .help("number of values")
+            .takes_value(true);
+        GenCommand {
+            lang: lang_arg,
+            number: number_arg
+        }
+    }
+    fn create(&self, c: Command<'a>) -> Command<'a> {
+        c.arg(&self.lang)
+        .arg(&self.number)
+    }
+}
 
-    let number_arg = Arg::new("number")
-        .short('n')
-        .help("number of values")
-        .takes_value(true);
+pub fn build_cli(name: &'static str, version: &'static str) -> Command<'static> {
+    let gen_command = GenCommand::new();
 
-    Command::new("pouf")
-    .bin_name("pouf")
-    .version(VERSION)
+    Command::new(name)
+    .bin_name(name)
+    .version(version)
     .author("Ferry Jérémie ferryjeremie@free.fr")
     .about("give fake datas")
     .arg_required_else_help(true)
-    .subcommand(
+    .subcommand(gen_command.create(
         Command::new("lorem.word")
         .about("give a fake word")
-    )
-    .subcommand(
+    ))
+    .subcommand(gen_command.create(
         Command::new("barecode.isbn")
         .about("give an isbn code")
-    )
-    .subcommand(Command::new("people.name")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("people.name")
         .about("give a fake name")
-        .arg(&lang_arg)
         .arg(Arg::new("firstname")
             .short('f')
             .long("firstname")
             .help("give a fake firstname")
         )
         .arg(Arg::new("lastname")
-            .short('n')
+            .short('t')
             .long("lastname")
             .help("give a fake lastname")
         )
-    )
-    .subcommand(Command::new("internet.mail")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("internet.mail")
         .about("give a fake mail")
-        .arg(&lang_arg)
-        .arg(number_arg)
-    )
-    .subcommand(Command::new("internet.ip")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("internet.ip")
         .about("give a fake IP (Internet Protocol)")
         .arg(Arg::new("ipv4")
             .short('4')
@@ -60,29 +76,37 @@ pub fn build_cli() -> Command<'static> {
             .long("ipv6")
             .help("give exclusivly IPv6")
         )
-    )
-    .subcommand(Command::new("internet.mac")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("internet.mac")
         .about("give a fake mac adress")
-    )
-    .subcommand(Command::new("internet.useragent")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("internet.useragent")
         .about("give a fake user agent")
-    )
-    .subcommand(Command::new("internet.color")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("internet.color")
         .about("give a fake hexadecimal color")
-    )
-    .subcommand(Command::new("http.code")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("http.code")
         .about("give a fake HTTP code")
-    )
-    .subcommand(Command::new("time.time")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("time.time")
         .about("give a fake time")
-    )
-    .subcommand(Command::new("time.date")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("time.date")
         .about("give a fake date")
-    )
-    .subcommand(Command::new("filesystem.mimetype")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("filesystem.mimetype")
         .about("give a fake mime-type")
-    )
-    .subcommand(Command::new("filesystem.semver")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("filesystem.semver")
         .about("give a fake semver version")
         .arg(Arg::new("stable")
             .short('s')
@@ -94,14 +118,17 @@ pub fn build_cli() -> Command<'static> {
             .long("unstable")
             .help("give exclusivly unstable semver version (X-Y-Z-V.W)")
         )
-    )
-    .subcommand(Command::new("administrative.healthinsurrancecode")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("administrative.healthinsurrancecode")
         .about("give a Health insurrance code")
-    )
-    .subcommand(Command::new("finance.bic")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("finance.bic")
         .about("give a fake BIC (Business Identifier Code)")
-    )
-    .subcommand(Command::new("auto.licenseplate")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("auto.licenseplate")
         .about("give a french automotive license plate")
-    )
+    ))
 }

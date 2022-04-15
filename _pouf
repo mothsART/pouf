@@ -30,12 +30,20 @@ _pouf() {
         case $line[1] in
             (lorem.word)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (barecode.isbn)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
@@ -44,9 +52,11 @@ _arguments "${_arguments_options[@]}" \
 _arguments "${_arguments_options[@]}" \
 '-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-f[give a fake firstname]' \
 '--firstname[give a fake firstname]' \
-'-n[give a fake lastname]' \
+'-t[give a fake lastname]' \
 '--lastname[give a fake lastname]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
@@ -57,12 +67,17 @@ _arguments "${_arguments_options[@]}" \
 '-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (internet.ip)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-4[give exclusivly IPv4]' \
 '--ipv4[give exclusivly IPv4]' \
 '-6[give exclusivly IPv6]' \
@@ -73,48 +88,80 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (internet.mac)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (internet.useragent)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (internet.color)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (http.code)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (time.time)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (time.date)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (filesystem.mimetype)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (filesystem.semver)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-s[give exclusivly stable semver version (X.Y.Z)]' \
 '--stable[give exclusivly stable semver version (X.Y.Z)]' \
 '-u[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
@@ -125,18 +172,30 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (administrative.healthinsurrancecode)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (finance.bic)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (auto.licenseplate)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
