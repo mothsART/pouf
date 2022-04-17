@@ -58,27 +58,43 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command<'static> 
     .author("Ferry Jérémie ferryjeremie@free.fr")
     .about("give fake datas")
     .arg_required_else_help(true)
-    .subcommand(number_command.create(
-        Command::new("lorem.word")
-        .about("give a fake word (in Latin)")
+    .subcommand(gen_command.create(
+        Command::new("administrative.healthinsurrancecode")
+        .about("give a Health insurrance code (French only)")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("auto.licenseplate")
+        .about("give an automotive license plate (French only)")
     ))
     .subcommand(number_command.create(
         Command::new("barecode.isbn")
         .about("give an isbn code")
     ))
-    .subcommand(gen_command.create(
-        Command::new("people.name")
-        .about("give a fake name")
-        .arg(Arg::new("firstname")
-            .short('f')
-            .long("firstname")
-            .help("give a fake firstname")
+    .subcommand(number_command.create(
+        Command::new("filesystem.mimetype")
+        .about("give a fake mime-type")
+    ))
+    .subcommand(number_command.create(
+        Command::new("filesystem.semver")
+        .about("give a fake semver version")
+        .arg(Arg::new("stable")
+            .short('s')
+            .long("stable")
+            .help("give exclusivly stable semver version (X.Y.Z)")
         )
-        .arg(Arg::new("lastname")
-            .short('t')
-            .long("lastname")
-            .help("give a fake lastname")
+        .arg(Arg::new("unstable")
+            .short('u')
+            .long("unstable")
+            .help("give exclusivly unstable semver version (X-Y-Z-V.W)")
         )
+    ))
+    .subcommand(number_command.create(
+        Command::new("finance.bic")
+        .about("give a fake BIC (Business Identifier Code)")
+    ))
+    .subcommand(number_command.create(
+        Command::new("http.code")
+        .about("give a fake HTTP code")
     ))
     .subcommand(gen_command.create(
         Command::new("internet.mail")
@@ -111,8 +127,22 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command<'static> 
         .about("give a fake hexadecimal color")
     ))
     .subcommand(number_command.create(
-        Command::new("http.code")
-        .about("give a fake HTTP code")
+        Command::new("lorem.word")
+        .about("give a fake word (in Latin)")
+    ))
+    .subcommand(gen_command.create(
+        Command::new("people.name")
+        .about("give a fake name")
+        .arg(Arg::new("firstname")
+            .short('f')
+            .long("firstname")
+            .help("give a fake firstname")
+        )
+        .arg(Arg::new("lastname")
+            .short('t')
+            .long("lastname")
+            .help("give a fake lastname")
+        )
     ))
     .subcommand(number_command.create(
         Command::new("time.time")
@@ -121,35 +151,5 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command<'static> 
     .subcommand(number_command.create(
         Command::new("time.date")
         .about("give a fake date")
-    ))
-    .subcommand(number_command.create(
-        Command::new("filesystem.mimetype")
-        .about("give a fake mime-type")
-    ))
-    .subcommand(number_command.create(
-        Command::new("filesystem.semver")
-        .about("give a fake semver version")
-        .arg(Arg::new("stable")
-            .short('s')
-            .long("stable")
-            .help("give exclusivly stable semver version (X.Y.Z)")
-        )
-        .arg(Arg::new("unstable")
-            .short('u')
-            .long("unstable")
-            .help("give exclusivly unstable semver version (X-Y-Z-V.W)")
-        )
-    ))
-    .subcommand(gen_command.create(
-        Command::new("administrative.healthinsurrancecode")
-        .about("give a Health insurrance code (French only)")
-    ))
-    .subcommand(number_command.create(
-        Command::new("finance.bic")
-        .about("give a fake BIC (Business Identifier Code)")
-    ))
-    .subcommand(gen_command.create(
-        Command::new("auto.licenseplate")
-        .about("give an automotive license plate (French only)")
     ))
 }
