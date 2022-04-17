@@ -30,8 +30,6 @@ _pouf() {
         case $line[1] in
             (lorem.word)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
@@ -40,8 +38,6 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (barecode.isbn)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
@@ -74,8 +70,6 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (internet.ip)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-4[give exclusivly IPv4]' \
@@ -88,8 +82,6 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (internet.mac)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
@@ -98,8 +90,6 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (internet.useragent)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
@@ -108,8 +98,6 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (internet.color)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
@@ -118,8 +106,6 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (http.code)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
@@ -128,8 +114,6 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (time.time)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
@@ -138,8 +122,6 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (time.date)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
@@ -148,8 +130,6 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (filesystem.mimetype)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
@@ -158,8 +138,6 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (filesystem.semver)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-s[give exclusivly stable semver version (X.Y.Z)]' \
@@ -182,8 +160,6 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (finance.bic)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
@@ -213,7 +189,7 @@ esac
 (( $+functions[_pouf_commands] )) ||
 _pouf_commands() {
     local commands; commands=(
-'lorem.word:give a fake word' \
+'lorem.word:give a fake word (in Latin)' \
 'barecode.isbn:give an isbn code' \
 'people.name:give a fake name' \
 'internet.mail:give a fake mail' \
@@ -226,9 +202,9 @@ _pouf_commands() {
 'time.date:give a fake date' \
 'filesystem.mimetype:give a fake mime-type' \
 'filesystem.semver:give a fake semver version' \
-'administrative.healthinsurrancecode:give a Health insurrance code' \
+'administrative.healthinsurrancecode:give a Health insurrance code (French only)' \
 'finance.bic:give a fake BIC (Business Identifier Code)' \
-'auto.licenseplate:give a french automotive license plate' \
+'auto.licenseplate:give an automotive license plate (French only)' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'pouf commands' commands "$@"

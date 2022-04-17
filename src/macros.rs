@@ -27,12 +27,17 @@ macro_rules! lang_struct {
 
 macro_rules! lang {
     ($struct_name:ident, $matches:expr) => {
-        match $matches.value_of("lang") {
-            Some(lang) => {
-                lang_struct!($struct_name, lang);
-            },
-            None => {
-                lang_struct!($struct_name);
+        if !$matches.is_valid_arg("lang") {
+            lang_struct!($struct_name);
+        }
+        else {
+            match $matches.value_of("lang") {
+                Some(lang) => {
+                    lang_struct!($struct_name, lang);
+                },
+                None => {
+                    lang_struct!($struct_name);
+                }
             }
         }
     }
@@ -125,12 +130,17 @@ macro_rules! force_lang_struct {
 
 macro_rules! force_lang {
     ($struct_name:ident, $force_lang:ident, $matches:expr) => {
-        match $matches.value_of("lang") {
-            Some(lang) => {
-                force_lang_struct!($struct_name, $force_lang, lang);
-            },
-            None => {
-                force_lang_struct!($struct_name, $force_lang);
+        if !$matches.is_valid_arg("lang") {
+            force_lang_struct!($struct_name, $force_lang);
+        }
+        else {
+            match $matches.value_of("lang") {
+                Some(lang) => {
+                    force_lang_struct!($struct_name, $force_lang, lang);
+                },
+                None => {
+                    force_lang_struct!($struct_name, $force_lang);
+                }
             }
         }
     }

@@ -13,7 +13,7 @@ edition = "2021"
 build = "build.rs"
 
 [dependencies]
-clap = { version="3.1.8", features=['cargo'] }
+clap = { version="3.1.9", features=['cargo'] }
 fake = { version="2.4.3", features=['chrono', 'http', 'semver'] }
 
 chrono = { version = "0.4" }

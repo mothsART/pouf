@@ -1,6 +1,6 @@
 complete -c pouf -n "__fish_use_subcommand" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_use_subcommand" -s V -l version -d 'Print version information'
-complete -c pouf -n "__fish_use_subcommand" -f -a "lorem.word" -d 'give a fake word'
+complete -c pouf -n "__fish_use_subcommand" -f -a "lorem.word" -d 'give a fake word (in Latin)'
 complete -c pouf -n "__fish_use_subcommand" -f -a "barecode.isbn" -d 'give an isbn code'
 complete -c pouf -n "__fish_use_subcommand" -f -a "people.name" -d 'give a fake name'
 complete -c pouf -n "__fish_use_subcommand" -f -a "internet.mail" -d 'give a fake mail'
@@ -13,14 +13,12 @@ complete -c pouf -n "__fish_use_subcommand" -f -a "time.time" -d 'give a fake ti
 complete -c pouf -n "__fish_use_subcommand" -f -a "time.date" -d 'give a fake date'
 complete -c pouf -n "__fish_use_subcommand" -f -a "filesystem.mimetype" -d 'give a fake mime-type'
 complete -c pouf -n "__fish_use_subcommand" -f -a "filesystem.semver" -d 'give a fake semver version'
-complete -c pouf -n "__fish_use_subcommand" -f -a "administrative.healthinsurrancecode" -d 'give a Health insurrance code'
+complete -c pouf -n "__fish_use_subcommand" -f -a "administrative.healthinsurrancecode" -d 'give a Health insurrance code (French only)'
 complete -c pouf -n "__fish_use_subcommand" -f -a "finance.bic" -d 'give a fake BIC (Business Identifier Code)'
-complete -c pouf -n "__fish_use_subcommand" -f -a "auto.licenseplate" -d 'give a french automotive license plate'
+complete -c pouf -n "__fish_use_subcommand" -f -a "auto.licenseplate" -d 'give an automotive license plate (French only)'
 complete -c pouf -n "__fish_use_subcommand" -f -a "help" -d 'Print this message or the help of the given subcommand(s)'
-complete -c pouf -n "__fish_seen_subcommand_from lorem.word" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from lorem.word" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from lorem.word" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from barecode.isbn" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from barecode.isbn" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from barecode.isbn" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from people.name" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
@@ -31,33 +29,24 @@ complete -c pouf -n "__fish_seen_subcommand_from people.name" -s h -l help -d 'P
 complete -c pouf -n "__fish_seen_subcommand_from internet.mail" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from internet.mail" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from internet.mail" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from internet.ip" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from internet.ip" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from internet.ip" -s 4 -l ipv4 -d 'give exclusivly IPv4'
 complete -c pouf -n "__fish_seen_subcommand_from internet.ip" -s 6 -l ipv6 -d 'give exclusivly IPv6'
 complete -c pouf -n "__fish_seen_subcommand_from internet.ip" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from internet.mac" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from internet.mac" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from internet.mac" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from internet.useragent" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from internet.useragent" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from internet.useragent" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from internet.color" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from internet.color" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from internet.color" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from http.code" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from http.code" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from http.code" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from time.time" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from time.time" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from time.time" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from time.date" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from time.date" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from time.date" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from filesystem.mimetype" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.mimetype" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.mimetype" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from filesystem.semver" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.semver" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.semver" -s s -l stable -d 'give exclusivly stable semver version (X.Y.Z)'
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.semver" -s u -l unstable -d 'give exclusivly unstable semver version (X-Y-Z-V.W)'
@@ -65,7 +54,6 @@ complete -c pouf -n "__fish_seen_subcommand_from filesystem.semver" -s h -l help
 complete -c pouf -n "__fish_seen_subcommand_from administrative.healthinsurrancecode" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from administrative.healthinsurrancecode" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from administrative.healthinsurrancecode" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from finance.bic" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from finance.bic" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from finance.bic" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from auto.licenseplate" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
