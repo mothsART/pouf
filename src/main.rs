@@ -13,6 +13,24 @@ mod cli;
 mod macros;
 mod domain;
 
+fn lang_env() -> Option<String> {
+    match std::env::var("LANG") {
+        Ok(_l) => {
+            match _l.find(".") {
+                Some(pos) => {
+                    Some(_l[0..pos].to_lowercase().to_string())
+                },
+                None => {
+                    None
+                }
+            }
+        },
+        Err(_) => {
+            None
+        }
+    }
+}
+
 fn main() {
     let matches = cli::build_cli(crate_name!(), crate_version!()).get_matches();
 
