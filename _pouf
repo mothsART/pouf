@@ -28,8 +28,50 @@ _pouf() {
         (( CURRENT += 1 ))
         curcontext="${curcontext%:*:*}:pouf-command-$line[1]:"
         case $line[1] in
-            (lorem.word)
+            (administrative.healthinsurrancecode)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
+'-h[Print help information]' \
+'--help[Print help information]' \
+&& ret=0
+;;
+(address.country)
+_arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
+'-h[Print help information]' \
+'--help[Print help information]' \
+&& ret=0
+;;
+(address.city)
+_arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
+'-h[Print help information]' \
+'--help[Print help information]' \
+&& ret=0
+;;
+(address.street)
+_arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
+'-h[Print help information]' \
+'--help[Print help information]' \
+&& ret=0
+;;
+(auto.licenseplate)
+_arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
@@ -44,16 +86,38 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
-(people.name)
+(filesystem.mimetype)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-f[give a fake firstname]' \
-'--firstname[give a fake firstname]' \
-'-t[give a fake lastname]' \
-'--lastname[give a fake lastname]' \
+'-h[Print help information]' \
+'--help[Print help information]' \
+&& ret=0
+;;
+(filesystem.semver)
+_arguments "${_arguments_options[@]}" \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
+'-s[give exclusivly stable semver version (X.Y.Z)]' \
+'--stable[give exclusivly stable semver version (X.Y.Z)]' \
+'-u[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
+'--unstable[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
+'-h[Print help information]' \
+'--help[Print help information]' \
+&& ret=0
+;;
+(finance.bic)
+_arguments "${_arguments_options[@]}" \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
+'-h[Print help information]' \
+'--help[Print help information]' \
+&& ret=0
+;;
+(http.code)
+_arguments "${_arguments_options[@]}" \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
@@ -104,10 +168,28 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
-(http.code)
+(lorem.word)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
+'-h[Print help information]' \
+'--help[Print help information]' \
+&& ret=0
+;;
+(people.name)
+_arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
+'-t[give a fake name title]' \
+'--title[give a fake name title]' \
+'-w[give a fake name with her title]' \
+'--with-title[give a fake name with her title]' \
+'-f[give a fake firstname]' \
+'--firstname[give a fake firstname]' \
+'-z[give a fake lastname]' \
+'--lastname[give a fake lastname]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
@@ -128,54 +210,6 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
-(filesystem.mimetype)
-_arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
-&& ret=0
-;;
-(filesystem.semver)
-_arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
-'-s[give exclusivly stable semver version (X.Y.Z)]' \
-'--stable[give exclusivly stable semver version (X.Y.Z)]' \
-'-u[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
-'--unstable[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
-'-h[Print help information]' \
-'--help[Print help information]' \
-&& ret=0
-;;
-(administrative.healthinsurrancecode)
-_arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
-&& ret=0
-;;
-(finance.bic)
-_arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
-&& ret=0
-;;
-(auto.licenseplate)
-_arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
-&& ret=0
-;;
 (help)
 _arguments "${_arguments_options[@]}" \
 '*::subcommand -- The subcommand whose help message to display:' \
@@ -189,25 +223,43 @@ esac
 (( $+functions[_pouf_commands] )) ||
 _pouf_commands() {
     local commands; commands=(
-'lorem.word:give a fake word (in Latin)' \
+'administrative.healthinsurrancecode:give a Health insurrance code (French only)' \
+'address.country:give a country name and code (English only)' \
+'address.city:give a city name (English only)' \
+'address.street:give a street name (English only)' \
+'auto.licenseplate:give an automotive license plate (French only)' \
 'barecode.isbn:give an isbn code' \
-'people.name:give a fake name' \
+'filesystem.mimetype:give a fake mime-type' \
+'filesystem.semver:give a fake semver version' \
+'finance.bic:give a fake BIC (Business Identifier Code)' \
+'http.code:give a fake HTTP code' \
 'internet.mail:give a fake mail' \
 'internet.ip:give a fake IP (Internet Protocol)' \
 'internet.mac:give a fake mac adress' \
 'internet.useragent:give a fake user agent' \
 'internet.color:give a fake hexadecimal color' \
-'http.code:give a fake HTTP code' \
+'lorem.word:give a fake word (in Latin)' \
+'people.name:give a fake name' \
 'time.time:give a fake time' \
 'time.date:give a fake date' \
-'filesystem.mimetype:give a fake mime-type' \
-'filesystem.semver:give a fake semver version' \
-'administrative.healthinsurrancecode:give a Health insurrance code (French only)' \
-'finance.bic:give a fake BIC (Business Identifier Code)' \
-'auto.licenseplate:give an automotive license plate (French only)' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'pouf commands' commands "$@"
+}
+(( $+functions[_pouf__address.city_commands] )) ||
+_pouf__address.city_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf address.city commands' commands "$@"
+}
+(( $+functions[_pouf__address.country_commands] )) ||
+_pouf__address.country_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf address.country commands' commands "$@"
+}
+(( $+functions[_pouf__address.street_commands] )) ||
+_pouf__address.street_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf address.street commands' commands "$@"
 }
 (( $+functions[_pouf__administrative.healthinsurrancecode_commands] )) ||
 _pouf__administrative.healthinsurrancecode_commands() {

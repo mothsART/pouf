@@ -1,4 +1,5 @@
 pub mod administrative;
+pub mod address;
 pub mod auto;
 pub mod barecode;
 pub mod filesystem;

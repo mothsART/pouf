@@ -3,21 +3,23 @@ use fake::Fake;
 
 pub fn run(matches: &ArgMatches) {
     if let Some(name) = matches.subcommand_matches("people.name") {
-        use fake::faker::name::raw::{Name, FirstName, LastName};
+        use fake::faker::name::raw::{Name, NameWithTitle, FirstName, LastName, Title};
 
+        if name.is_present("title") {
+            return each!(Title, name);
+        }
+        if name.is_present("with-title") {
+            return each!(NameWithTitle, name);
+        }
         if name.is_present("firstname") && name.is_present("lastname") {
-            each!(Name, name);
-            return;
+            return each!(Name, name);
         }
         if name.is_present("firstname") {
-            each!(FirstName, name);
-            return;
+            return each!(FirstName, name);
         }
         if name.is_present("lastname") {
-            each!(LastName, name);
-            return;
+            return each!(LastName, name);
         }
-        each!(Name, name);
-        return;
+        return each!(Name, name);
     }
 }

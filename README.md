@@ -27,6 +27,11 @@ cargo install --path .
 ## Examples
 
 ```zsh
+$ pouf administrative.healthinsurrancecode --lang fr
+1 85 02 974 777 624 88
+```
+
+```zsh
 $ pouf internet.mail -l en
 adriel_quia@hotmail.com
 ```
@@ -69,11 +74,6 @@ filesystem.semver
 ```zsh
 $ pouf http.code
 412 Precondition Failed
-```
-
-```zsh
-$ pouf administrative.healthinsurrancecode
-1 85 02 974 777 624 88
 ```
 
 ## Autocomplete
