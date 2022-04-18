@@ -79,7 +79,7 @@ _pouf() {
 
     case "${cmd}" in
         pouf)
-            opts="-h -V --help --version administrative.healthinsurrancecode address.country address.city address.street auto.licenseplate barecode.isbn filesystem.mimetype filesystem.semver finance.bic http.code internet.mail internet.ip internet.mac internet.useragent internet.color lorem.word people.name time.time time.date help"
+            opts="-h -V --help --version address.city address.country address.street administrative.healthinsurrancecode auto.licenseplate barecode.isbn filesystem.mimetype filesystem.semver finance.bic http.code internet.color internet.ip internet.mac internet.mail internet.useragent lorem.word people.name time.time time.date help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0

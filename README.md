@@ -26,9 +26,42 @@ cargo install --path .
 
 ## Examples
 
+### Address
+
+```zsh
+$ pouf address.country --lang en
+Congo
+```
+
+```zsh
+$ pouf address.city --lang en
+Carter burgh
+```
+
+```zsh
+$ pouf address.country --lang en
+Wunsch Vista
+```
+
+### Administrative
+
 ```zsh
 $ pouf administrative.healthinsurrancecode --lang fr
 1 85 02 974 777 624 88
+```
+
+### Http
+
+```zsh
+$ pouf http.code
+412 Precondition Failed
+```
+
+### Internet
+
+```zsh
+$ pouf internet.color
+#AAAA9A
 ```
 
 ```zsh
@@ -41,25 +74,7 @@ $ pouf internet.mail // if locales is "fr_FR.UTF-8"
 karim_qui@orange.fr
 ```
 
-```zsh
-$ pouf people.name
-Axel Sipes
-```
-
-```zsh
-$ pouf internet.color
-#AAAA9A
-```
-
-```zsh
-$ pouf finance.bic
-RSJECUA1x0hf8NV2FDvN5m8MFV
-```
-
-```zsh
-$ pouf time.time
-21:45:53
-```
+### Filesystem
 
 ```zsh
 $ pouf filesystem.mimetype
@@ -71,9 +86,25 @@ $ pouf filesystem.semver
 filesystem.semver
 ```
 
+### Finance
+
 ```zsh
-$ pouf http.code
-412 Precondition Failed
+$ pouf finance.bic
+RSJECUA1x0hf8NV2FDvN5m8MFV
+```
+
+### People
+
+```zsh
+$ pouf people.name
+Axel Sipes
+```
+
+### Time
+
+```zsh
+$ pouf time.time
+21:45:53
 ```
 
 ## Autocomplete

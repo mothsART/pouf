@@ -58,30 +58,35 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command<'static> 
     .author("Ferry Jérémie ferryjeremie@free.fr")
     .about("give fake datas")
     .arg_required_else_help(true)
+    // address
     .subcommand(gen_command.create(
-        Command::new("administrative.healthinsurrancecode")
-        .about("give a Health insurrance code (French only)")
+        Command::new("address.city")
+        .about("give a city name (English only)")
     ))
     .subcommand(gen_command.create(
         Command::new("address.country")
         .about("give a country name and code (English only)")
     ))
     .subcommand(gen_command.create(
-        Command::new("address.city")
-        .about("give a city name (English only)")
-    ))
-    .subcommand(gen_command.create(
         Command::new("address.street")
         .about("give a street name (English only)")
     ))
+    // administrative
+    .subcommand(gen_command.create(
+        Command::new("administrative.healthinsurrancecode")
+        .about("give a Health insurrance code (French only)")
+    ))
+    // auto
     .subcommand(gen_command.create(
         Command::new("auto.licenseplate")
         .about("give an automotive license plate (French only)")
     ))
+    // barecode
     .subcommand(number_command.create(
         Command::new("barecode.isbn")
         .about("give an isbn code")
     ))
+    //filesystem
     .subcommand(number_command.create(
         Command::new("filesystem.mimetype")
         .about("give a fake mime-type")
@@ -100,17 +105,20 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command<'static> 
             .help("give exclusivly unstable semver version (X-Y-Z-V.W)")
         )
     ))
+    // finance
     .subcommand(number_command.create(
         Command::new("finance.bic")
         .about("give a fake BIC (Business Identifier Code)")
     ))
+    // http
     .subcommand(number_command.create(
         Command::new("http.code")
         .about("give a fake HTTP code")
     ))
-    .subcommand(gen_command.create(
-        Command::new("internet.mail")
-        .about("give a fake mail")
+    // internet
+    .subcommand(number_command.create(
+        Command::new("internet.color")
+        .about("give a fake hexadecimal color")
     ))
     .subcommand(number_command.create(
         Command::new("internet.ip")
@@ -130,18 +138,20 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command<'static> 
         Command::new("internet.mac")
         .about("give a fake mac adress")
     ))
+    .subcommand(gen_command.create(
+        Command::new("internet.mail")
+        .about("give a fake mail")
+    ))
     .subcommand(number_command.create(
         Command::new("internet.useragent")
         .about("give a fake user agent")
     ))
-    .subcommand(number_command.create(
-        Command::new("internet.color")
-        .about("give a fake hexadecimal color")
-    ))
+    // lorem
     .subcommand(number_command.create(
         Command::new("lorem.word")
         .about("give a fake word (in Latin)")
     ))
+    // people
     .subcommand(gen_command.create(
         Command::new("people.name")
         .about("give a fake name")
@@ -166,6 +176,7 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command<'static> 
             .help("give a fake lastname")
         )
     ))
+    // time
     .subcommand(number_command.create(
         Command::new("time.time")
         .about("give a fake time")

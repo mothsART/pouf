@@ -28,7 +28,7 @@ _pouf() {
         (( CURRENT += 1 ))
         curcontext="${curcontext%:*:*}:pouf-command-$line[1]:"
         case $line[1] in
-            (administrative.healthinsurrancecode)
+            (address.city)
 _arguments "${_arguments_options[@]}" \
 '-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
@@ -48,7 +48,7 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
-(address.city)
+(address.street)
 _arguments "${_arguments_options[@]}" \
 '-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
@@ -58,7 +58,7 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
-(address.street)
+(administrative.healthinsurrancecode)
 _arguments "${_arguments_options[@]}" \
 '-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
@@ -122,10 +122,8 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
-(internet.mail)
+(internet.color)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
@@ -152,15 +150,17 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
-(internet.useragent)
+(internet.mail)
 _arguments "${_arguments_options[@]}" \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
-(internet.color)
+(internet.useragent)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
@@ -223,21 +223,21 @@ esac
 (( $+functions[_pouf_commands] )) ||
 _pouf_commands() {
     local commands; commands=(
-'administrative.healthinsurrancecode:give a Health insurrance code (French only)' \
-'address.country:give a country name and code (English only)' \
 'address.city:give a city name (English only)' \
+'address.country:give a country name and code (English only)' \
 'address.street:give a street name (English only)' \
+'administrative.healthinsurrancecode:give a Health insurrance code (French only)' \
 'auto.licenseplate:give an automotive license plate (French only)' \
 'barecode.isbn:give an isbn code' \
 'filesystem.mimetype:give a fake mime-type' \
 'filesystem.semver:give a fake semver version' \
 'finance.bic:give a fake BIC (Business Identifier Code)' \
 'http.code:give a fake HTTP code' \
-'internet.mail:give a fake mail' \
+'internet.color:give a fake hexadecimal color' \
 'internet.ip:give a fake IP (Internet Protocol)' \
 'internet.mac:give a fake mac adress' \
+'internet.mail:give a fake mail' \
 'internet.useragent:give a fake user agent' \
-'internet.color:give a fake hexadecimal color' \
 'lorem.word:give a fake word (in Latin)' \
 'people.name:give a fake name' \
 'time.time:give a fake time' \

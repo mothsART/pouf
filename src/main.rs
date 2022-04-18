@@ -34,8 +34,8 @@ fn lang_env() -> Option<String> {
 fn main() {
     let matches = cli::build_cli(crate_name!(), crate_version!()).get_matches();
 
-    domain::administrative::run(&matches);
     domain::address::run(&matches);
+    domain::administrative::run(&matches);
     domain::auto::run(&matches);
     domain::barecode::run(&matches);
     domain::filesystem::run(&matches);
