@@ -1,6 +1,6 @@
 [package]
 name = "pouf"
-version = "0.3.1"
+version = "0.4.0"
 authors = ["Ferry Jérémie <ferryjeremie@free.fr>"]
 description = "Pouf is a cli program for produce fake datas."
 keywords = ["app", "cli", "faker", "data", "random"]
