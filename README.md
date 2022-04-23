@@ -107,6 +107,19 @@ $ pouf time.time
 21:45:53
 ```
 
+### multiple launch
+
+You can launch n time like this :
+
+```zsh
+$ pouf finance.bic -n 5
+TLNINTG1361
+HJGOCSK1
+VUKIBZB1
+RJCIAZV1177
+TVGOSIC1
+```
+
 ## Autocomplete
 
 On zsh :
