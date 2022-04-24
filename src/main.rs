@@ -16,14 +16,7 @@ mod domain;
 fn lang_env() -> Option<String> {
     match std::env::var("LANG") {
         Ok(_l) => {
-            match _l.find(".") {
-                Some(pos) => {
-                    Some(_l[0..pos].to_lowercase().to_string())
-                },
-                None => {
-                    None
-                }
-            }
+            _l.find('.').map(|pos| _l[0..pos].to_lowercase())
         },
         Err(_) => {
             None
