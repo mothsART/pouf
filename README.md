@@ -8,6 +8,10 @@
 
 Pouf is a cli program to produce fake datas.
 
+## Last stable version
+
+[![Packaging status](https://repology.org/badge/vertical-allrepos/pouf.svg)](https://repology.org/project/pouf/versions)
+
 ## Install with crates.io
 
 ```zsh
