@@ -194,14 +194,16 @@ checksum = "8e22443d1643a904602595ba1cd8f7d896afe56d26712531c5ff73a15b2fbf64"
 
 [[package]]
 name = "pouf"
-version = "0.4.1"
+version = "0.4.2"
 dependencies = [
  "chrono",
  "clap",
  "clap_complete",
  "fake",
  "http",
+ "rand",
  "semver",
+ "unidecode",
 ]
 
 [[package]]
@@ -276,6 +278,12 @@ dependencies = [
  "libc",
  "winapi",
 ]
+
+[[package]]
+name = "unidecode"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "402bb19d8e03f1d1a7450e2bd613980869438e0666331be3e073089124aa1adc"
 
 [[package]]
 name = "wasi"

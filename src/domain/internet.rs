@@ -1,10 +1,23 @@
 use clap::ArgMatches;
-use fake::Fake;
+use fake::{Fake, Dummy};
+use fake::locales::Data;
+use rand::Rng;
+
+
+struct UnidecodeFreeEmail<L>(L);
+
+impl<L: Data + Copy> Dummy<UnidecodeFreeEmail<L>> for String {
+    fn dummy_with_rng<R: Rng + ?Sized>(c: &UnidecodeFreeEmail<L>, rng: &mut R) -> Self {
+        use fake::faker::internet::raw::FreeEmail;
+        use unidecode::unidecode;
+        let mail: String = FreeEmail(c.0).fake_with_rng(rng);
+        format!("{}", unidecode(&mail))
+    }
+}
 
 pub fn run(matches: &ArgMatches) {
     if let Some(mail) = matches.subcommand_matches("internet.mail") {
-        use fake::faker::internet::raw::FreeEmail;
-        return each!(FreeEmail, mail);
+        return each!(UnidecodeFreeEmail, mail);
     }
 
     if let Some(mac) = matches.subcommand_matches("internet.mac") {
