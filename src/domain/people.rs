@@ -3,7 +3,7 @@ use fake::Fake;
 
 pub fn run(matches: &ArgMatches) {
     if let Some(name) = matches.subcommand_matches("people.name") {
-        use fake::faker::name::raw::{Name, NameWithTitle, FirstName, LastName, Title};
+        use fake::faker::name::raw::{FirstName, LastName, Name, NameWithTitle, Title};
 
         if name.is_present("title") {
             return each!(Title, name);

@@ -3,12 +3,7 @@ extern crate clap;
 
 use std::env;
 
-use clap_complete::{
-    generate_to,
-    shells::Bash,
-    shells::Zsh,
-    shells::Fish
-};
+use clap_complete::{generate_to, shells::Bash, shells::Fish, shells::Zsh};
 
 include!("src/cli.rs");
 

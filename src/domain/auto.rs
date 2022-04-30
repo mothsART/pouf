@@ -1,6 +1,6 @@
 use clap::ArgMatches;
-use fake::Fake;
 use fake::locales::FR_FR;
+use fake::Fake;
 
 pub fn run(matches: &ArgMatches) {
     if let Some(l) = matches.subcommand_matches("auto.licenseplate") {

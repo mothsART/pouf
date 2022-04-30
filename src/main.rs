@@ -1,8 +1,8 @@
 #[macro_use]
 extern crate clap;
 
-extern crate fake;
 extern crate chrono;
+extern crate fake;
 extern crate http;
 extern crate semver;
 
@@ -15,12 +15,8 @@ mod domain;
 
 fn lang_env() -> Option<String> {
     match std::env::var("LANG") {
-        Ok(_l) => {
-            _l.find('.').map(|pos| _l[0..pos].to_lowercase())
-        },
-        Err(_) => {
-            None
-        }
+        Ok(_l) => _l.find('.').map(|pos| _l[0..pos].to_lowercase()),
+        Err(_) => None,
     }
 }
 

@@ -1,8 +1,7 @@
 use clap::ArgMatches;
-use fake::{Fake, Dummy};
 use fake::locales::Data;
+use fake::{Dummy, Fake};
 use rand::Rng;
-
 
 struct UnidecodeFreeEmail<L>(L);
 
@@ -26,8 +25,8 @@ pub fn run(matches: &ArgMatches) {
     }
 
     if let Some(ip) = matches.subcommand_matches("internet.ip") {
-        use fake::faker::internet::raw::{IPv4, IPv6};
         use fake::faker::boolean::en;
+        use fake::faker::internet::raw::{IPv4, IPv6};
 
         if !ip.args_present() || (ip.is_present("ipv4") && ip.is_present("ipv6")) {
             if en::Boolean(50).fake() {
