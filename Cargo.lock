@@ -194,7 +194,7 @@ checksum = "8e22443d1643a904602595ba1cd8f7d896afe56d26712531c5ff73a15b2fbf64"
 
 [[package]]
 name = "pouf"
-version = "0.4.2"
+version = "0.4.3"
 dependencies = [
  "chrono",
  "clap",
