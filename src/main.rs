@@ -50,8 +50,8 @@ fn main() {
         println!("{}", val);
     }
 
-    if let Some(_) = matches.subcommand_matches("barecode.isbn") {
-        use fake::faker::barecode::fr_fr;
+    if let Some(_) = matches.subcommand_matches("barcode.isbn") {
+        use fake::faker::barcode::fr_fr;
         
         let val: String = fr_fr::Isbn13().fake();
         println!("{}", val);

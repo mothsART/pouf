@@ -18,8 +18,8 @@ _pouf() {
             auto.licenseplate)
                 cmd+="__auto.licenseplate"
                 ;;
-            barecode.isbn)
-                cmd+="__barecode.isbn"
+            barcode.isbn)
+                cmd+="__barcode.isbn"
                 ;;
             filesystem.mimetype)
                 cmd+="__filesystem.mimetype"
@@ -67,7 +67,7 @@ _pouf() {
 
     case "${cmd}" in
         pouf)
-            opts="-h -V --help --version lorem.word barecode.isbn internet.mail internet.ip internet.mac internet.useragent internet.color http.code time.time time.date filesystem.mimetype filesystem.semver administrative.healthinsurrancecode finance.bic auto.licenseplate help"
+            opts="-h -V --help --version lorem.word barcode.isbn internet.mail internet.ip internet.mac internet.useragent internet.color http.code time.time time.date filesystem.mimetype filesystem.semver administrative.healthinsurrancecode finance.bic auto.licenseplate help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -108,7 +108,7 @@ _pouf() {
             COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
             return 0
             ;;
-        pouf__barecode.isbn)
+        pouf__barcode.isbn)
             opts="-h --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )

@@ -34,7 +34,7 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
-(barecode.isbn)
+(barcode.isbn)
 _arguments "${_arguments_options[@]}" \
 '-h[Print help information]' \
 '--help[Print help information]' \
@@ -152,7 +152,7 @@ esac
 _pouf_commands() {
     local commands; commands=(
 'lorem.word:give a fake word' \
-'barecode.isbn:give an isbn code' \
+'barcode.isbn:give an isbn code' \
 'internet.mail:give a fake mail' \
 'internet.ip:give a fake IP (Internet Protocol)' \
 'internet.mac:give a fake mac adress' \
@@ -180,10 +180,10 @@ _pouf__auto.licenseplate_commands() {
     local commands; commands=()
     _describe -t commands 'pouf auto.licenseplate commands' commands "$@"
 }
-(( $+functions[_pouf__barecode.isbn_commands] )) ||
-_pouf__barecode.isbn_commands() {
+(( $+functions[_pouf__barcode.isbn_commands] )) ||
+_pouf__barcode.isbn_commands() {
     local commands; commands=()
-    _describe -t commands 'pouf barecode.isbn commands' commands "$@"
+    _describe -t commands 'pouf barcode.isbn commands' commands "$@"
 }
 (( $+functions[_pouf__filesystem.mimetype_commands] )) ||
 _pouf__filesystem.mimetype_commands() {

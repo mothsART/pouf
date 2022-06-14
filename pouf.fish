@@ -1,7 +1,7 @@
 complete -c pouf -n "__fish_use_subcommand" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_use_subcommand" -s V -l version -d 'Print version information'
 complete -c pouf -n "__fish_use_subcommand" -f -a "lorem.word" -d 'give a fake word'
-complete -c pouf -n "__fish_use_subcommand" -f -a "barecode.isbn" -d 'give an isbn code'
+complete -c pouf -n "__fish_use_subcommand" -f -a "barcode.isbn" -d 'give an isbn code'
 complete -c pouf -n "__fish_use_subcommand" -f -a "internet.mail" -d 'give a fake mail'
 complete -c pouf -n "__fish_use_subcommand" -f -a "internet.ip" -d 'give a fake IP (Internet Protocol)'
 complete -c pouf -n "__fish_use_subcommand" -f -a "internet.mac" -d 'give a fake mac adress'
@@ -17,7 +17,7 @@ complete -c pouf -n "__fish_use_subcommand" -f -a "finance.bic" -d 'give a fake 
 complete -c pouf -n "__fish_use_subcommand" -f -a "auto.licenseplate" -d 'give a french automotive license plate'
 complete -c pouf -n "__fish_use_subcommand" -f -a "help" -d 'Print this message or the help of the given subcommand(s)'
 complete -c pouf -n "__fish_seen_subcommand_from lorem.word" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from barecode.isbn" -s h -l help -d 'Print help information'
+complete -c pouf -n "__fish_seen_subcommand_from barcode.isbn" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from internet.mail" -s l -d 'give lang (ie: fr_FR)' -r
 complete -c pouf -n "__fish_seen_subcommand_from internet.mail" -s n -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from internet.mail" -s h -l help -d 'Print help information'

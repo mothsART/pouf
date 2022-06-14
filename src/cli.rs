@@ -14,7 +14,7 @@ pub fn build_cli() -> Command<'static> {
         .about("give a fake word")
     )
     .subcommand(
-        Command::new("barecode.isbn")
+        Command::new("barcode.isbn")
         .about("give an isbn code")
     )
     .subcommand(Command::new("internet.mail")
