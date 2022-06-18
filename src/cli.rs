@@ -84,34 +84,40 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command<'static> 
         // barecode
         .subcommand(number_command.create(Command::new("barcode.isbn").about("give an isbn code")))
         // color
-        .subcommand(Command::new("color")
-            .about("give a fake hexadecimal color")
-            .about("give a fake color (hexadécimal, rgb, rgba, hsl and hsla representation)")
-            .arg(Arg::new("hexa")
-                .short('d')
-                .long("hexa")
-                .help("give a fake hexadecimal color")
-            )
-            .arg(Arg::new("rgb")
-                .short('r')
-                .long("rgb")
-                .help("give a fake rgb color")
-            )
-            .arg(Arg::new("rgba")
-                .short('a')
-                .long("rgba")
-                .help("give a fake rgba color")
-            )
-            .arg(Arg::new("hsl")
-                .short('t')
-                .long("hsl")
-                .help("give a fake hsl (tsl) color")
-            )
-            .arg(Arg::new("hsla")
-                .short('l')
-                .long("hsla")
-                .help("give a fake hsla (tsl) color")
-            )
+        .subcommand(
+            Command::new("color")
+                .about("give a fake hexadecimal color")
+                .about("give a fake color (hexadécimal, rgb, rgba, hsl and hsla representation)")
+                .arg(
+                    Arg::new("hexa")
+                        .short('d')
+                        .long("hexa")
+                        .help("give a fake hexadecimal color"),
+                )
+                .arg(
+                    Arg::new("rgb")
+                        .short('r')
+                        .long("rgb")
+                        .help("give a fake rgb color"),
+                )
+                .arg(
+                    Arg::new("rgba")
+                        .short('a')
+                        .long("rgba")
+                        .help("give a fake rgba color"),
+                )
+                .arg(
+                    Arg::new("hsl")
+                        .short('t')
+                        .long("hsl")
+                        .help("give a fake hsl (tsl) color"),
+                )
+                .arg(
+                    Arg::new("hsla")
+                        .short('l')
+                        .long("hsla")
+                        .help("give a fake hsla (tsl) color"),
+                ),
         )
         //filesystem
         .subcommand(

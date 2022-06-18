@@ -10,7 +10,7 @@ impl<L: Data + Copy> Dummy<UnidecodeFreeEmail<L>> for String {
         use fake::faker::internet::raw::FreeEmail;
         use unidecode::unidecode;
         let mail: String = FreeEmail(c.0).fake_with_rng(rng);
-        format!("{}", unidecode(&mail))
+        format!("{}", unidecode(&mail).to_string())
     }
 }
 
@@ -46,6 +46,5 @@ pub fn run(matches: &ArgMatches) {
     if let Some(useragent) = matches.subcommand_matches("internet.useragent") {
         use fake::faker::internet::raw::UserAgent;
         each!(UserAgent, useragent);
-        return;
     }
 }

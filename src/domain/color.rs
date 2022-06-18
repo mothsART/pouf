@@ -4,7 +4,7 @@ use fake::Fake;
 
 pub fn run(matches: &ArgMatches) {
     if let Some(c) = matches.subcommand_matches("color") {
-        use fake::faker::color::raw::{HexColor, RgbColor, RgbaColor, HslColor, HslaColor, Color};
+        use fake::faker::color::raw::{Color, HexColor, HslColor, HslaColor, RgbColor, RgbaColor};
 
         if !c.args_present() {
             let all_color: String = Color(EN).fake();
