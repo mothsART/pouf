@@ -64,11 +64,6 @@ $ pouf http.code
 ### Internet
 
 ```zsh
-$ pouf internet.color
-#AAAA9A
-```
-
-```zsh
 $ pouf internet.mail -l en
 adriel_quia@hotmail.com
 ```

@@ -26,7 +26,7 @@ fn main() {
     domain::address::run(&matches);
     domain::administrative::run(&matches);
     domain::auto::run(&matches);
-    domain::barecode::run(&matches);
+    domain::barcode::run(&matches);
     domain::filesystem::run(&matches);
     domain::finance::run(&matches);
     domain::http::run(&matches);

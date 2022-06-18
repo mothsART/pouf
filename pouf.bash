@@ -27,8 +27,8 @@ _pouf() {
             auto.licenseplate)
                 cmd+="__auto.licenseplate"
                 ;;
-            barecode.isbn)
-                cmd+="__barecode.isbn"
+            barcode.isbn)
+                cmd+="__barcode.isbn"
                 ;;
             filesystem.mimetype)
                 cmd+="__filesystem.mimetype"
@@ -44,9 +44,6 @@ _pouf() {
                 ;;
             http.code)
                 cmd+="__http.code"
-                ;;
-            internet.color)
-                cmd+="__internet.color"
                 ;;
             internet.ip)
                 cmd+="__internet.ip"
@@ -79,7 +76,7 @@ _pouf() {
 
     case "${cmd}" in
         pouf)
-            opts="-h -V --help --version address.city address.country address.street administrative.healthinsurrancecode auto.licenseplate barecode.isbn filesystem.mimetype filesystem.semver finance.bic http.code internet.color internet.ip internet.mac internet.mail internet.useragent lorem.word people.name time.time time.date help"
+            opts="-h -V --help --version address.city address.country address.street administrative.healthinsurrancecode auto.licenseplate barcode.isbn filesystem.mimetype filesystem.semver finance.bic http.code internet.ip internet.mac internet.mail internet.useragent lorem.word people.name time.time time.date help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -242,7 +239,7 @@ _pouf() {
             COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
             return 0
             ;;
-        pouf__barecode.isbn)
+        pouf__barcode.isbn)
             opts="-n -h --number --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
@@ -345,28 +342,6 @@ _pouf() {
             return 0
             ;;
         pouf__http.code)
-            opts="-n -h --number --help"
-            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
-                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-                return 0
-            fi
-            case "${prev}" in
-                --number)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -n)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                *)
-                    COMPREPLY=()
-                    ;;
-            esac
-            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
-            return 0
-            ;;
-        pouf__internet.color)
             opts="-n -h --number --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )

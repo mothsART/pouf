@@ -48,9 +48,4 @@ pub fn run(matches: &ArgMatches) {
         each!(UserAgent, useragent);
         return;
     }
-
-    if let Some(color) = matches.subcommand_matches("internet.color") {
-        use fake::faker::internet::raw::Color;
-        return each!(Color, color);
-    }
 }

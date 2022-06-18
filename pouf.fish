@@ -5,12 +5,11 @@ complete -c pouf -n "__fish_use_subcommand" -f -a "address.country" -d 'give a c
 complete -c pouf -n "__fish_use_subcommand" -f -a "address.street" -d 'give a street name (English only)'
 complete -c pouf -n "__fish_use_subcommand" -f -a "administrative.healthinsurrancecode" -d 'give a Health insurrance code (French only)'
 complete -c pouf -n "__fish_use_subcommand" -f -a "auto.licenseplate" -d 'give an automotive license plate (French only)'
-complete -c pouf -n "__fish_use_subcommand" -f -a "barecode.isbn" -d 'give an isbn code'
+complete -c pouf -n "__fish_use_subcommand" -f -a "barcode.isbn" -d 'give an isbn code'
 complete -c pouf -n "__fish_use_subcommand" -f -a "filesystem.mimetype" -d 'give a fake mime-type'
 complete -c pouf -n "__fish_use_subcommand" -f -a "filesystem.semver" -d 'give a fake semver version'
 complete -c pouf -n "__fish_use_subcommand" -f -a "finance.bic" -d 'give a fake BIC (Business Identifier Code)'
 complete -c pouf -n "__fish_use_subcommand" -f -a "http.code" -d 'give a fake HTTP code'
-complete -c pouf -n "__fish_use_subcommand" -f -a "internet.color" -d 'give a fake hexadecimal color'
 complete -c pouf -n "__fish_use_subcommand" -f -a "internet.ip" -d 'give a fake IP (Internet Protocol)'
 complete -c pouf -n "__fish_use_subcommand" -f -a "internet.mac" -d 'give a fake mac adress'
 complete -c pouf -n "__fish_use_subcommand" -f -a "internet.mail" -d 'give a fake mail'
@@ -35,8 +34,8 @@ complete -c pouf -n "__fish_seen_subcommand_from administrative.healthinsurrance
 complete -c pouf -n "__fish_seen_subcommand_from auto.licenseplate" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from auto.licenseplate" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from auto.licenseplate" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from barecode.isbn" -s n -l number -d 'number of values' -r
-complete -c pouf -n "__fish_seen_subcommand_from barecode.isbn" -s h -l help -d 'Print help information'
+complete -c pouf -n "__fish_seen_subcommand_from barcode.isbn" -s n -l number -d 'number of values' -r
+complete -c pouf -n "__fish_seen_subcommand_from barcode.isbn" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.mimetype" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.mimetype" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.semver" -s n -l number -d 'number of values' -r
@@ -47,8 +46,6 @@ complete -c pouf -n "__fish_seen_subcommand_from finance.bic" -s n -l number -d 
 complete -c pouf -n "__fish_seen_subcommand_from finance.bic" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from http.code" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from http.code" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from internet.color" -s n -l number -d 'number of values' -r
-complete -c pouf -n "__fish_seen_subcommand_from internet.color" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from internet.ip" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from internet.ip" -s 4 -l ipv4 -d 'give exclusivly IPv4'
 complete -c pouf -n "__fish_seen_subcommand_from internet.ip" -s 6 -l ipv6 -d 'give exclusivly IPv6'

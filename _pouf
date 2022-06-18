@@ -78,7 +78,7 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
-(barecode.isbn)
+(barcode.isbn)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
@@ -115,14 +115,6 @@ _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (http.code)
-_arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
-&& ret=0
-;;
-(internet.color)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
@@ -228,12 +220,11 @@ _pouf_commands() {
 'address.street:give a street name (English only)' \
 'administrative.healthinsurrancecode:give a Health insurrance code (French only)' \
 'auto.licenseplate:give an automotive license plate (French only)' \
-'barecode.isbn:give an isbn code' \
+'barcode.isbn:give an isbn code' \
 'filesystem.mimetype:give a fake mime-type' \
 'filesystem.semver:give a fake semver version' \
 'finance.bic:give a fake BIC (Business Identifier Code)' \
 'http.code:give a fake HTTP code' \
-'internet.color:give a fake hexadecimal color' \
 'internet.ip:give a fake IP (Internet Protocol)' \
 'internet.mac:give a fake mac adress' \
 'internet.mail:give a fake mail' \
@@ -271,10 +262,10 @@ _pouf__auto.licenseplate_commands() {
     local commands; commands=()
     _describe -t commands 'pouf auto.licenseplate commands' commands "$@"
 }
-(( $+functions[_pouf__barecode.isbn_commands] )) ||
-_pouf__barecode.isbn_commands() {
+(( $+functions[_pouf__barcode.isbn_commands] )) ||
+_pouf__barcode.isbn_commands() {
     local commands; commands=()
-    _describe -t commands 'pouf barecode.isbn commands' commands "$@"
+    _describe -t commands 'pouf barcode.isbn commands' commands "$@"
 }
 (( $+functions[_pouf__filesystem.mimetype_commands] )) ||
 _pouf__filesystem.mimetype_commands() {
@@ -300,11 +291,6 @@ _pouf__help_commands() {
 _pouf__http.code_commands() {
     local commands; commands=()
     _describe -t commands 'pouf http.code commands' commands "$@"
-}
-(( $+functions[_pouf__internet.color_commands] )) ||
-_pouf__internet.color_commands() {
-    local commands; commands=()
-    _describe -t commands 'pouf internet.color commands' commands "$@"
 }
 (( $+functions[_pouf__internet.ip_commands] )) ||
 _pouf__internet.ip_commands() {

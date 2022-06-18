@@ -82,7 +82,7 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command<'static> 
             ),
         )
         // barecode
-        .subcommand(number_command.create(Command::new("barecode.isbn").about("give an isbn code")))
+        .subcommand(number_command.create(Command::new("barcode.isbn").about("give an isbn code")))
         //filesystem
         .subcommand(
             number_command
@@ -113,10 +113,6 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command<'static> 
         // http
         .subcommand(number_command.create(Command::new("http.code").about("give a fake HTTP code")))
         // internet
-        .subcommand(
-            number_command
-                .create(Command::new("internet.color").about("give a fake hexadecimal color")),
-        )
         .subcommand(
             number_command.create(
                 Command::new("internet.ip")
