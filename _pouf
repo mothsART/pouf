@@ -86,6 +86,22 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
+(color)
+_arguments "${_arguments_options[@]}" \
+'-d[give a fake hexadecimal color]' \
+'--hexa[give a fake hexadecimal color]' \
+'-r[give a fake rgb color]' \
+'--rgb[give a fake rgb color]' \
+'-a[give a fake rgba color]' \
+'--rgba[give a fake rgba color]' \
+'-t[give a fake hsl (tsl) color]' \
+'--hsl[give a fake hsl (tsl) color]' \
+'-l[give a fake hsla (tsl) color]' \
+'--hsla[give a fake hsla (tsl) color]' \
+'-h[Print help information]' \
+'--help[Print help information]' \
+&& ret=0
+;;
 (filesystem.mimetype)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
@@ -221,6 +237,7 @@ _pouf_commands() {
 'administrative.healthinsurrancecode:give a Health insurrance code (French only)' \
 'auto.licenseplate:give an automotive license plate (French only)' \
 'barcode.isbn:give an isbn code' \
+'color:give a fake color (hexadécimal, rgb, rgba, hsl and hsla representation)' \
 'filesystem.mimetype:give a fake mime-type' \
 'filesystem.semver:give a fake semver version' \
 'finance.bic:give a fake BIC (Business Identifier Code)' \
@@ -266,6 +283,11 @@ _pouf__auto.licenseplate_commands() {
 _pouf__barcode.isbn_commands() {
     local commands; commands=()
     _describe -t commands 'pouf barcode.isbn commands' commands "$@"
+}
+(( $+functions[_pouf__color_commands] )) ||
+_pouf__color_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf color commands' commands "$@"
 }
 (( $+functions[_pouf__filesystem.mimetype_commands] )) ||
 _pouf__filesystem.mimetype_commands() {

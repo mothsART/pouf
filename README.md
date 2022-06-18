@@ -54,6 +54,17 @@ $ pouf administrative.healthinsurrancecode --lang fr
 1 85 02 974 777 624 88
 ```
 
+### Color
+
+```zsh
+$ pouf color
+#434733
+rgb(67, 71, 51)
+rgba(67, 71, 51, 0.4)
+hsl(71, 16%, 24%)
+hsl(71, 16%, 24%, 0.4)
+```
+
 ### Http
 
 ```zsh

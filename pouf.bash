@@ -30,6 +30,9 @@ _pouf() {
             barcode.isbn)
                 cmd+="__barcode.isbn"
                 ;;
+            color)
+                cmd+="__color"
+                ;;
             filesystem.mimetype)
                 cmd+="__filesystem.mimetype"
                 ;;
@@ -76,7 +79,7 @@ _pouf() {
 
     case "${cmd}" in
         pouf)
-            opts="-h -V --help --version address.city address.country address.street administrative.healthinsurrancecode auto.licenseplate barcode.isbn filesystem.mimetype filesystem.semver finance.bic http.code internet.ip internet.mac internet.mail internet.useragent lorem.word people.name time.time time.date help"
+            opts="-h -V --help --version address.city address.country address.street administrative.healthinsurrancecode auto.licenseplate barcode.isbn color filesystem.mimetype filesystem.semver finance.bic http.code internet.ip internet.mac internet.mail internet.useragent lorem.word people.name time.time time.date help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -254,6 +257,20 @@ _pouf() {
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
                     ;;
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pouf__color)
+            opts="-d -r -a -t -l -h --hexa --rgb --rgba --hsl --hsla --help"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
                 *)
                     COMPREPLY=()
                     ;;

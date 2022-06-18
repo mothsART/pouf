@@ -6,6 +6,7 @@ complete -c pouf -n "__fish_use_subcommand" -f -a "address.street" -d 'give a st
 complete -c pouf -n "__fish_use_subcommand" -f -a "administrative.healthinsurrancecode" -d 'give a Health insurrance code (French only)'
 complete -c pouf -n "__fish_use_subcommand" -f -a "auto.licenseplate" -d 'give an automotive license plate (French only)'
 complete -c pouf -n "__fish_use_subcommand" -f -a "barcode.isbn" -d 'give an isbn code'
+complete -c pouf -n "__fish_use_subcommand" -f -a "color" -d 'give a fake color (hexadécimal, rgb, rgba, hsl and hsla representation)'
 complete -c pouf -n "__fish_use_subcommand" -f -a "filesystem.mimetype" -d 'give a fake mime-type'
 complete -c pouf -n "__fish_use_subcommand" -f -a "filesystem.semver" -d 'give a fake semver version'
 complete -c pouf -n "__fish_use_subcommand" -f -a "finance.bic" -d 'give a fake BIC (Business Identifier Code)'
@@ -36,6 +37,12 @@ complete -c pouf -n "__fish_seen_subcommand_from auto.licenseplate" -s n -l numb
 complete -c pouf -n "__fish_seen_subcommand_from auto.licenseplate" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from barcode.isbn" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from barcode.isbn" -s h -l help -d 'Print help information'
+complete -c pouf -n "__fish_seen_subcommand_from color" -s d -l hexa -d 'give a fake hexadecimal color'
+complete -c pouf -n "__fish_seen_subcommand_from color" -s r -l rgb -d 'give a fake rgb color'
+complete -c pouf -n "__fish_seen_subcommand_from color" -s a -l rgba -d 'give a fake rgba color'
+complete -c pouf -n "__fish_seen_subcommand_from color" -s t -l hsl -d 'give a fake hsl (tsl) color'
+complete -c pouf -n "__fish_seen_subcommand_from color" -s l -l hsla -d 'give a fake hsla (tsl) color'
+complete -c pouf -n "__fish_seen_subcommand_from color" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.mimetype" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.mimetype" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.semver" -s n -l number -d 'number of values' -r

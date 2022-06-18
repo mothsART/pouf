@@ -2,6 +2,7 @@ pub mod address;
 pub mod administrative;
 pub mod auto;
 pub mod barcode;
+pub mod color;
 pub mod filesystem;
 pub mod finance;
 pub mod http;
