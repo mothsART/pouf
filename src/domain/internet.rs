@@ -10,7 +10,7 @@ impl<L: Data + Copy> Dummy<UnidecodeFreeEmail<L>> for String {
         use fake::faker::internet::raw::FreeEmail;
         use unidecode::unidecode;
         let mail: String = FreeEmail(c.0).fake_with_rng(rng);
-        format!("{}", unidecode(&mail).to_string())
+        unidecode(&mail)
     }
 }
 

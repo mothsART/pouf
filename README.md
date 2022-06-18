@@ -152,5 +152,5 @@ Makefile inspire by https://git.sr.ht/~julienxx/castor/tree/master/item/Makefile
 ## Publish
 
 ```zsh
-cargo publish --no-verify
+make cargo-publish
 ```
