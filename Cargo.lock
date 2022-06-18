@@ -68,9 +68,9 @@ dependencies = [
 
 [[package]]
 name = "clap_complete"
-version = "3.1.2"
+version = "3.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1506b87ee866f7a53a5131f7b31fba656170d797e873d0609884cfd56b8bbda8"
+checksum = "0f6ebaab5f25e4f0312dfa07cb30a755204b96e6531457c2cfdecfdf5f2adf40"
 dependencies = [
  "clap",
 ]
@@ -206,7 +206,7 @@ checksum = "8e22443d1643a904602595ba1cd8f7d896afe56d26712531c5ff73a15b2fbf64"
 
 [[package]]
 name = "pouf"
-version = "0.4.3"
+version = "0.5.0"
 dependencies = [
  "chrono",
  "clap",

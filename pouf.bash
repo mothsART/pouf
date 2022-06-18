@@ -100,11 +100,11 @@ _pouf() {
             fi
             case "${prev}" in
                 --lang)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 -l)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 --number)
@@ -130,11 +130,11 @@ _pouf() {
             fi
             case "${prev}" in
                 --lang)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 -l)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 --number)
@@ -160,11 +160,11 @@ _pouf() {
             fi
             case "${prev}" in
                 --lang)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 -l)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 --number)
@@ -190,11 +190,11 @@ _pouf() {
             fi
             case "${prev}" in
                 --lang)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 -l)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 --number)
@@ -220,11 +220,11 @@ _pouf() {
             fi
             case "${prev}" in
                 --lang)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 -l)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 --number)
@@ -432,11 +432,11 @@ _pouf() {
             fi
             case "${prev}" in
                 --lang)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 -l)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 --number)
@@ -506,11 +506,11 @@ _pouf() {
             fi
             case "${prev}" in
                 --lang)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 -l)
-                    COMPREPLY=($(compgen -W "" -- "${cur}"))
+                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 --number)

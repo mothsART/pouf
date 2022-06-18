@@ -145,6 +145,10 @@ before :
 autoload -Uz compinit && compinit
 ```
 
+## Dev
+
+Makefile inspire by https://git.sr.ht/~julienxx/castor/tree/master/item/Makefile
+
 ## Publish
 
 ```zsh
