@@ -20,6 +20,6 @@ pub fn run(matches: &ArgMatches) {
         if name.is_present("lastname") {
             return each!(LastName, name);
         }
-        return each!(Name, name);
+        each!(Name, name)
     }
 }

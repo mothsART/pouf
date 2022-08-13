@@ -4,6 +4,6 @@ use fake::Fake;
 pub fn run(matches: &ArgMatches) {
     if let Some(bic) = matches.subcommand_matches("finance.bic") {
         use fake::faker::finance::raw::Bic;
-        return each!(Bic, bic);
+        each!(Bic, bic)
     }
 }

@@ -18,7 +18,7 @@ pub fn run(matches: &ArgMatches) {
             return each!(SemverStable, s);
         }
         if s.is_present("unstable") {
-            return each!(SemverUnstable, s);
+            each!(SemverUnstable, s)
         }
     }
 }
