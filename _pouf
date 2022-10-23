@@ -104,10 +104,10 @@ _arguments "${_arguments_options[@]}" \
 _arguments "${_arguments_options[@]}" \
 '*-n+[number of values]: : ' \
 '*--number=[number of values]: : ' \
-'-s[give exclusivly stable semver version (X.Y.Z)]' \
-'--stable[give exclusivly stable semver version (X.Y.Z)]' \
-'-u[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
-'--unstable[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
+'*-s[give exclusivly stable semver version (X.Y.Z)]' \
+'*--stable[give exclusivly stable semver version (X.Y.Z)]' \
+'*-u[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
+'*--unstable[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
@@ -134,10 +134,10 @@ _arguments "${_arguments_options[@]}" \
 _arguments "${_arguments_options[@]}" \
 '*-n+[number of values]: : ' \
 '*--number=[number of values]: : ' \
-'-4[give exclusivly IPv4]' \
-'--ipv4[give exclusivly IPv4]' \
-'-6[give exclusivly IPv6]' \
-'--ipv6[give exclusivly IPv6]' \
+'*-4[give exclusivly IPv4]' \
+'*--ipv4[give exclusivly IPv4]' \
+'*-6[give exclusivly IPv6]' \
+'*--ipv6[give exclusivly IPv6]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
