@@ -10,15 +10,19 @@ pub fn run(matches: &ArgMatches) {
     if let Some(s) = matches.subcommand_matches("filesystem.semver") {
         use fake::faker::filesystem::raw::{Semver, SemverStable, SemverUnstable};
 
-        if !s.args_present() || (s.contains_id("stable") && s.contains_id("unstable")) {
-            return each!(Semver, s);
-        }
-
-        if s.contains_id("stable") {
-            return each!(SemverStable, s);
-        }
-        if s.contains_id("unstable") {
-            each!(SemverUnstable, s)
+        if let (Some(stable), Some(unstable)) =
+            (s.get_one::<bool>("stable"), s.get_one::<bool>("unstable"))
+        {
+            if *stable && *unstable {
+                return each!(Semver, s);
+            }
+            if *stable {
+                return each!(SemverStable, s);
+            }
+            if *unstable {
+                return each!(SemverUnstable, s);
+            }
+            each!(Semver, s)
         }
     }
 }

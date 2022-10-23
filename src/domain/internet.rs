@@ -28,18 +28,35 @@ pub fn run(matches: &ArgMatches) {
         use fake::faker::boolean::en;
         use fake::faker::internet::raw::{IPv4, IPv6};
 
-        if !ip.args_present() || (ip.contains_id("ipv4") && ip.contains_id("ipv6")) {
-            if en::Boolean(50).fake() {
+        if let (Some(ipv4), Some(ipv6)) = (ip.get_one::<bool>("ipv4"), ip.get_one::<bool>("ipv6")) {
+            if *ipv4 && *ipv6 || !*ipv4 && !*ipv6 {
+                match ip.get_one::<String>("number").map(|s| s.as_str()) {
+                    Some(number) => {
+                        let n: i32 = number.parse().unwrap_or(1);
+                        for _i in 0..n {
+                            if en::Boolean(50).fake() {
+                                lang!(IPv4, ip);
+                                continue;
+                            }
+                            lang!(IPv6, ip);
+                        }
+                        return;
+                    }
+                    None => {
+                        if en::Boolean(50).fake() {
+                            return lang!(IPv4, ip);
+                        }
+                        return lang!(IPv6, ip);
+                    }
+                }
+            }
+
+            if *ipv4 {
                 return each!(IPv4, ip);
             }
-            return each!(IPv6, ip);
-        }
-
-        if ip.contains_id("ipv4") {
-            return each!(IPv4, ip);
-        }
-        if ip.contains_id("ipv6") {
-            return each!(IPv6, ip);
+            if *ipv6 {
+                return each!(IPv6, ip);
+            }
         }
     }
 

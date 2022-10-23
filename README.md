@@ -30,28 +30,35 @@ cargo install --path .
 
 ## Examples
 
-### Address
+### Address (English Only)
 
 ```zsh
-$ pouf address.country --lang en
-Congo
-```
-
-```zsh
-$ pouf address.city --lang en
+$ pouf address.city
 Carter burgh
 ```
 
 ```zsh
-$ pouf address.country --lang en
-Wunsch Vista
+$ pouf address.country
+Congo
 ```
 
-### Administrative
+```zsh
+$ pouf address.street
+Tillman Freeway
+```
+
+### Administrative (French Only)
 
 ```zsh
-$ pouf administrative.healthinsurrancecode --lang fr
+$ pouf administrative.healthinsurrancecode
 1 85 02 974 777 624 88
+```
+
+### Licenseplate (French Only)
+
+```zsh
+$ pouf auto.licenseplate
+QV-951-KA
 ```
 
 ### Color
@@ -65,6 +72,29 @@ hsl(71, 16%, 24%)
 hsl(71, 16%, 24%, 0.4)
 ```
 
+### Filesystem
+
+```zsh
+$ pouf filesystem.mimetype
+application/vnd.lotus-1-2-3
+```
+
+```zsh
+$ pouf filesystem.semver
+0.15.0
+$ pouf filesystem.semver --stable
+4.4.12
+$ pouf filesystem.semver --unstable
+2.16.8-rc.7
+```
+
+### Finance
+
+```zsh
+$ pouf finance.bic
+YMEEIOX1284
+```
+
 ### Http
 
 ```zsh
@@ -73,6 +103,20 @@ $ pouf http.code
 ```
 
 ### Internet
+
+```zsh
+$ pouf internet.ip
+196.124.139.106
+$ pouf internet.ip --ipv6 true
+DFC4:E3DD:6124:DD1:1D69:F2C7:B968:59BD
+$ pouf internet.ip --ipv4 true
+19.59.17.64
+```
+
+```zsh
+$ pouf internet.mac
+7C:41:B6:CC:A2:67
+```
 
 ```zsh
 $ pouf internet.mail -l en
@@ -84,30 +128,13 @@ $ pouf internet.mail // if locales is "fr_FR.UTF-8"
 karim_qui@orange.fr
 ```
 
-### Filesystem
-
-```zsh
-$ pouf filesystem.mimetype
-application/vnd.xacml+json
-```
-
-```zsh
-$ pouf filesystem.semver
-filesystem.semver
-```
-
-### Finance
-
-```zsh
-$ pouf finance.bic
-RSJECUA1x0hf8NV2FDvN5m8MFV
-```
-
 ### People
 
 ```zsh
 $ pouf people.name
 Axel Sipes
+$ pouf people.name -l fr
+Gerard Sablonnière
 ```
 
 ### Time
@@ -115,6 +142,11 @@ Axel Sipes
 ```zsh
 $ pouf time.time
 21:45:53
+```
+
+```zsh
+$ pouf time.date
+2176-01-27T01:25:42.642830566+00:00
 ```
 
 ### multiple launch

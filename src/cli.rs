@@ -95,10 +95,12 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command {
                     &Arg::new("stable")
                         .short('s')
                         .long("stable")
+                        .action(clap::ArgAction::SetTrue)
                         .help("give exclusivly stable semver version (X.Y.Z)"),
                     &Arg::new("unstable")
                         .short('u')
                         .long("unstable")
+                        .action(clap::ArgAction::SetTrue)
                         .help("give exclusivly unstable semver version (X-Y-Z-V.W)"),
                     &number_arg,
                 ]),
@@ -123,10 +125,12 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command {
                     &Arg::new("ipv4")
                         .short('4')
                         .long("ipv4")
+                        .action(clap::ArgAction::SetTrue)
                         .help("give exclusivly IPv4"),
                     &Arg::new("ipv6")
                         .short('6')
                         .long("ipv6")
+                        .action(clap::ArgAction::SetTrue)
                         .help("give exclusivly IPv6"),
                     &number_arg,
                 ]),
