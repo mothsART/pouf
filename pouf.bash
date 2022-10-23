@@ -93,20 +93,12 @@ _pouf() {
             return 0
             ;;
         pouf__address.city)
-            opts="-l -n -h --lang --number --help"
+            opts="-n -h --number --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                --lang)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
-                -l)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
                 --number)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
@@ -123,20 +115,12 @@ _pouf() {
             return 0
             ;;
         pouf__address.country)
-            opts="-l -n -h --lang --number --help"
+            opts="-n -h --number --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                --lang)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
-                -l)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
                 --number)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
@@ -153,20 +137,12 @@ _pouf() {
             return 0
             ;;
         pouf__address.street)
-            opts="-l -n -h --lang --number --help"
+            opts="-n -h --number --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                --lang)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
-                -l)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
                 --number)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
@@ -183,20 +159,12 @@ _pouf() {
             return 0
             ;;
         pouf__administrative.healthinsurrancecode)
-            opts="-l -n -h --lang --number --help"
+            opts="-n -h --number --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                --lang)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
-                -l)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
                 --number)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
@@ -213,20 +181,12 @@ _pouf() {
             return 0
             ;;
         pouf__auto.licenseplate)
-            opts="-l -n -h --lang --number --help"
+            opts="-n -h --number --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                --lang)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
-                -l)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
                 --number)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
@@ -359,7 +319,7 @@ _pouf() {
             return 0
             ;;
         pouf__http.code)
-            opts="-n -h --number --help"
+            opts="-l -n -h --lang --number --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -425,20 +385,12 @@ _pouf() {
             return 0
             ;;
         pouf__internet.mail)
-            opts="-l -n -h --lang --number --help"
+            opts="-n -h --number --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                --lang)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
-                -l)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
                 --number)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
@@ -505,14 +457,6 @@ _pouf() {
                 return 0
             fi
             case "${prev}" in
-                --lang)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
-                -l)
-                    COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
-                    return 0
-                    ;;
                 --number)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0

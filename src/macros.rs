@@ -27,16 +27,17 @@ macro_rules! lang_struct {
 
 macro_rules! lang {
     ($struct_name:ident, $matches:expr) => {
-        if !$matches.is_valid_arg("lang") {
-            lang_struct!($struct_name);
-        } else {
-            match $matches.value_of("lang") {
+        match $matches.try_contains_id("lang") {
+            Ok(_) => match $matches.get_one::<String>("lang") {
                 Some(lang) => {
-                    lang_struct!($struct_name, lang);
+                    lang_struct!($struct_name, lang.as_str());
                 }
                 None => {
                     lang_struct!($struct_name);
                 }
+            },
+            Err(_) => {
+                lang_struct!($struct_name);
             }
         }
     };
@@ -44,7 +45,7 @@ macro_rules! lang {
 
 macro_rules! each {
     ($struct_name:ident, $matches:expr) => {
-        match $matches.value_of("number") {
+        match $matches.get_one::<String>("number").map(|s| s.as_str()) {
             Some(number) => {
                 let n: i32 = number.parse().unwrap_or(1);
                 for _i in 0..n {
@@ -59,38 +60,46 @@ macro_rules! each {
 }
 
 macro_rules! force_lang_struct {
-    ($struct_name:ident, $force_lang:ident) => {
+    ($struct_name:ident, $force_lang:ident, $has_user_lang:expr) => {
         use crate::lang_env;
-        use clap::{Command, Error, ErrorKind};
+        use clap::error::ErrorKind;
+        use clap::{Command, Error};
 
         let val: String;
-        match lang_env() {
-            Some(lang) => {
-                force_lang_struct!($struct_name, $force_lang, &*lang);
-            }
-            None => {
-                match stringify!($force_lang) {
-                    "FR" | "FR_FR" | "EN" => {
-                        val = $struct_name($force_lang).fake();
-                    }
-                    other_lang => {
-                        Error::raw(
-                            ErrorKind::UnrecognizedSubcommand,
-                            &*format!(
-                                "this feature is not supported in \"{}\" langage.",
-                                other_lang
-                            ),
-                        )
-                        .format(&mut Command::new(""))
-                        .exit();
-                    }
+
+        if !$has_user_lang {
+            val = $struct_name($force_lang).fake();
+            println!("{}", val);
+        } else {
+            match lang_env() {
+                Some(lang) => {
+                    force_lang_struct!($struct_name, $force_lang, &*lang, $has_user_lang);
                 }
-                println!("{}", val);
+                None => {
+                    match stringify!($force_lang) {
+                        "FR" | "FR_FR" | "EN" => {
+                            val = $struct_name($force_lang).fake();
+                        }
+                        other_lang => {
+                            Error::raw(
+                                ErrorKind::InvalidSubcommand,
+                                &*format!(
+                                    "this feature is not supported in \"{}\" langage.",
+                                    other_lang
+                                ),
+                            )
+                            .format(&mut Command::new(""))
+                            .exit();
+                        }
+                    }
+                    println!("{}", val);
+                }
             }
         }
     };
-    ($struct_name:ident, $force_lang:ident, $lang:expr) => {
-        use clap::{Command, Error, ErrorKind};
+    ($struct_name:ident, $force_lang:ident, $lang:expr, $has_user_lang:expr) => {
+        use clap::error::ErrorKind;
+        use clap::{Command, Error};
 
         let val: String;
 
@@ -101,7 +110,7 @@ macro_rules! force_lang_struct {
                 }
                 _ => {
                     Error::raw(
-                        ErrorKind::UnrecognizedSubcommand,
+                        ErrorKind::InvalidSubcommand,
                         "this feature is not supported in French.",
                     )
                     .format(&mut Command::new(""))
@@ -114,7 +123,7 @@ macro_rules! force_lang_struct {
                 }
                 _ => {
                     Error::raw(
-                        ErrorKind::UnrecognizedSubcommand,
+                        ErrorKind::InvalidSubcommand,
                         "this feature is not supported in English.",
                     )
                     .format(&mut Command::new(""))
@@ -123,7 +132,7 @@ macro_rules! force_lang_struct {
             },
             other_lang => {
                 Error::raw(
-                    ErrorKind::UnrecognizedSubcommand,
+                    ErrorKind::InvalidSubcommand,
                     &*format!(
                         "this feature is not supported in \"{}\" langage.",
                         other_lang
@@ -139,16 +148,17 @@ macro_rules! force_lang_struct {
 
 macro_rules! force_lang {
     ($struct_name:ident, $force_lang:ident, $matches:expr) => {
-        if !$matches.is_valid_arg("lang") {
-            force_lang_struct!($struct_name, $force_lang);
-        } else {
-            match $matches.value_of("lang") {
+        match $matches.try_contains_id("lang") {
+            Ok(_) => match $matches.get_one::<String>("lang").map(|s| s.as_str()) {
                 Some(lang) => {
-                    force_lang_struct!($struct_name, $force_lang, lang);
+                    force_lang_struct!($struct_name, $force_lang, lang, true);
                 }
                 None => {
-                    force_lang_struct!($struct_name, $force_lang);
+                    force_lang_struct!($struct_name, $force_lang, true);
                 }
+            },
+            Err(_) => {
+                force_lang_struct!($struct_name, $force_lang, false);
             }
         }
     };
@@ -156,7 +166,7 @@ macro_rules! force_lang {
 
 macro_rules! force_each {
     ($struct_name:ident, $force_lang:ident, $matches:expr) => {
-        match $matches.value_of("number") {
+        match $matches.get_one::<String>("number").map(|s| s.as_str()) {
             Some(number) => {
                 let n: i32 = number.parse().unwrap_or(1);
                 for _i in 0..n {

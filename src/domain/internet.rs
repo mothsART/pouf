@@ -28,17 +28,17 @@ pub fn run(matches: &ArgMatches) {
         use fake::faker::boolean::en;
         use fake::faker::internet::raw::{IPv4, IPv6};
 
-        if !ip.args_present() || (ip.is_present("ipv4") && ip.is_present("ipv6")) {
+        if !ip.args_present() || (ip.contains_id("ipv4") && ip.contains_id("ipv6")) {
             if en::Boolean(50).fake() {
                 return each!(IPv4, ip);
             }
             return each!(IPv6, ip);
         }
 
-        if ip.is_present("ipv4") {
+        if ip.contains_id("ipv4") {
             return each!(IPv4, ip);
         }
-        if ip.is_present("ipv6") {
+        if ip.contains_id("ipv6") {
             return each!(IPv6, ip);
         }
     }

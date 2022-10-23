@@ -30,58 +30,48 @@ _pouf() {
         case $line[1] in
             (address.city)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (address.country)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (address.street)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (administrative.healthinsurrancecode)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (auto.licenseplate)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (barcode.isbn)
 _arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
@@ -104,16 +94,16 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (filesystem.mimetype)
 _arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (filesystem.semver)
 _arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-s[give exclusivly stable semver version (X.Y.Z)]' \
 '--stable[give exclusivly stable semver version (X.Y.Z)]' \
 '-u[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
@@ -124,24 +114,26 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (finance.bic)
 _arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (http.code)
 _arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
+'-l[give lang (ie: fr_FR)]' \
+'--lang[give lang (ie: fr_FR)]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (internet.ip)
 _arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-4[give exclusivly IPv4]' \
 '--ipv4[give exclusivly IPv4]' \
 '-6[give exclusivly IPv6]' \
@@ -152,44 +144,40 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (internet.mac)
 _arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (internet.mail)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (internet.useragent)
 _arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (lorem.word)
 _arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (people.name)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-t[give a fake name title]' \
 '--title[give a fake name title]' \
 '-w[give a fake name with her title]' \
@@ -198,22 +186,24 @@ _arguments "${_arguments_options[@]}" \
 '--firstname[give a fake firstname]' \
 '-z[give a fake lastname]' \
 '--lastname[give a fake lastname]' \
+'-l[give lang (ie: fr_FR)]' \
+'--lang[give lang (ie: fr_FR)]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (time.time)
 _arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (time.date)
 _arguments "${_arguments_options[@]}" \
-'-n+[number of values]: : ' \
-'--number=[number of values]: : ' \
+'*-n+[number of values]: : ' \
+'*--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0

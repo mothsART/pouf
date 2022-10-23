@@ -10,14 +10,14 @@ pub fn run(matches: &ArgMatches) {
     if let Some(s) = matches.subcommand_matches("filesystem.semver") {
         use fake::faker::filesystem::raw::{Semver, SemverStable, SemverUnstable};
 
-        if !s.args_present() || (s.is_present("stable") && s.is_present("unstable")) {
+        if !s.args_present() || (s.contains_id("stable") && s.contains_id("unstable")) {
             return each!(Semver, s);
         }
 
-        if s.is_present("stable") {
+        if s.contains_id("stable") {
             return each!(SemverStable, s);
         }
-        if s.is_present("unstable") {
+        if s.contains_id("unstable") {
             each!(SemverUnstable, s)
         }
     }

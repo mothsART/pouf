@@ -12,23 +12,23 @@ pub fn run(matches: &ArgMatches) {
             return;
         }
 
-        if c.is_present("hexa") {
+        if c.contains_id("hexa") {
             let hex_val: String = HexColor(EN).fake();
             println!("{}", hex_val);
         }
-        if c.is_present("rgb") {
+        if c.contains_id("rgb") {
             let rgb_val: String = RgbColor(EN).fake();
             println!("{}", rgb_val);
         }
-        if c.is_present("rgba") {
+        if c.contains_id("rgba") {
             let rgba_val: String = RgbaColor(EN).fake();
             println!("{}", rgba_val);
         }
-        if c.is_present("hsl") {
+        if c.contains_id("hsl") {
             let hsl_val: String = HslColor(EN).fake();
             println!("{}", hsl_val);
         }
-        if c.is_present("hsla") {
+        if c.contains_id("hsla") {
             let hsla_val: String = HslaColor(EN).fake();
             println!("{}", hsla_val);
         }
