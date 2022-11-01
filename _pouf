@@ -30,188 +30,279 @@ _pouf() {
         case $line[1] in
             (address.city)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (address.country)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (address.street)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (administrative.healthinsurrancecode)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (auto.licenseplate)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (barcode.isbn)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (color)
 _arguments "${_arguments_options[@]}" \
-'-d[give a fake hexadecimal color]' \
-'--hexa[give a fake hexadecimal color]' \
-'-r[give a fake rgb color]' \
-'--rgb[give a fake rgb color]' \
-'-a[give a fake rgba color]' \
-'--rgba[give a fake rgba color]' \
-'-t[give a fake hsl (tsl) color]' \
-'--hsl[give a fake hsl (tsl) color]' \
-'-l[give a fake hsla (tsl) color]' \
-'--hsla[give a fake hsla (tsl) color]' \
+'-d+[give a fake hexadecimal color]: : ' \
+'--hexa=[give a fake hexadecimal color]: : ' \
+'-r+[give a fake rgb color]: : ' \
+'--rgb=[give a fake rgb color]: : ' \
+'-a+[give a fake rgba color]: : ' \
+'--rgba=[give a fake rgba color]: : ' \
+'-t+[give a fake hsl (tsl) color]: : ' \
+'--hsl=[give a fake hsl (tsl) color]: : ' \
+'-l+[give a fake hsla (tsl) color]: : ' \
+'--hsla=[give a fake hsla (tsl) color]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (filesystem.mimetype)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (filesystem.semver)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
-'*-s[give exclusivly stable semver version (X.Y.Z)]' \
-'*--stable[give exclusivly stable semver version (X.Y.Z)]' \
-'*-u[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
-'*--unstable[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
+'-s[give exclusivly stable semver version (X.Y.Z)]' \
+'--stable[give exclusivly stable semver version (X.Y.Z)]' \
+'-u[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
+'--unstable[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (finance.bic)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (http.code)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
-'-l[give lang (ie: fr_FR)]' \
-'--lang[give lang (ie: fr_FR)]' \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (internet.ip)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
-'*-4[give exclusivly IPv4]' \
-'*--ipv4[give exclusivly IPv4]' \
-'*-6[give exclusivly IPv6]' \
-'*--ipv6[give exclusivly IPv6]' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
+'-4[give exclusivly IPv4]' \
+'--ipv4[give exclusivly IPv4]' \
+'-6[give exclusivly IPv6]' \
+'--ipv6[give exclusivly IPv6]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (internet.mac)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (internet.mail)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (internet.useragent)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (lorem.word)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (people.name)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
-'-t[give a fake name title]' \
-'--title[give a fake name title]' \
-'-w[give a fake name with her title]' \
-'--with-title[give a fake name with her title]' \
-'-f[give a fake firstname]' \
-'--firstname[give a fake firstname]' \
-'-z[give a fake lastname]' \
-'--lastname[give a fake lastname]' \
-'-l[give lang (ie: fr_FR)]' \
-'--lang[give lang (ie: fr_FR)]' \
+'-t+[give a fake name title]: : ' \
+'--title=[give a fake name title]: : ' \
+'-w+[give a fake name with her title]: : ' \
+'--with-title=[give a fake name with her title]: : ' \
+'-f+[give a fake firstname]: : ' \
+'--firstname=[give a fake firstname]: : ' \
+'-z+[give a fake lastname]: : ' \
+'--lastname=[give a fake lastname]: : ' \
+'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (time.time)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (time.date)
 _arguments "${_arguments_options[@]}" \
-'*-n+[number of values]: : ' \
-'*--number=[number of values]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
 ;;
 (help)
 _arguments "${_arguments_options[@]}" \
-'*::subcommand -- The subcommand whose help message to display:' \
+":: :_pouf__help_commands" \
+"*::: :->help" \
 && ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pouf-help-command-$line[1]:"
+        case $line[1] in
+            (address.city)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(address.country)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(address.street)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(administrative.healthinsurrancecode)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(auto.licenseplate)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(barcode.isbn)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(color)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(filesystem.mimetype)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(filesystem.semver)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(finance.bic)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(http.code)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(internet.ip)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(internet.mac)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(internet.mail)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(internet.useragent)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(lorem.word)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(people.name)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(time.time)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(time.date)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
 ;;
         esac
     ;;
@@ -249,95 +340,216 @@ _pouf__address.city_commands() {
     local commands; commands=()
     _describe -t commands 'pouf address.city commands' commands "$@"
 }
+(( $+functions[_pouf__help__address.city_commands] )) ||
+_pouf__help__address.city_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help address.city commands' commands "$@"
+}
 (( $+functions[_pouf__address.country_commands] )) ||
 _pouf__address.country_commands() {
     local commands; commands=()
     _describe -t commands 'pouf address.country commands' commands "$@"
+}
+(( $+functions[_pouf__help__address.country_commands] )) ||
+_pouf__help__address.country_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help address.country commands' commands "$@"
 }
 (( $+functions[_pouf__address.street_commands] )) ||
 _pouf__address.street_commands() {
     local commands; commands=()
     _describe -t commands 'pouf address.street commands' commands "$@"
 }
+(( $+functions[_pouf__help__address.street_commands] )) ||
+_pouf__help__address.street_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help address.street commands' commands "$@"
+}
 (( $+functions[_pouf__administrative.healthinsurrancecode_commands] )) ||
 _pouf__administrative.healthinsurrancecode_commands() {
     local commands; commands=()
     _describe -t commands 'pouf administrative.healthinsurrancecode commands' commands "$@"
+}
+(( $+functions[_pouf__help__administrative.healthinsurrancecode_commands] )) ||
+_pouf__help__administrative.healthinsurrancecode_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help administrative.healthinsurrancecode commands' commands "$@"
 }
 (( $+functions[_pouf__auto.licenseplate_commands] )) ||
 _pouf__auto.licenseplate_commands() {
     local commands; commands=()
     _describe -t commands 'pouf auto.licenseplate commands' commands "$@"
 }
+(( $+functions[_pouf__help__auto.licenseplate_commands] )) ||
+_pouf__help__auto.licenseplate_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help auto.licenseplate commands' commands "$@"
+}
 (( $+functions[_pouf__barcode.isbn_commands] )) ||
 _pouf__barcode.isbn_commands() {
     local commands; commands=()
     _describe -t commands 'pouf barcode.isbn commands' commands "$@"
+}
+(( $+functions[_pouf__help__barcode.isbn_commands] )) ||
+_pouf__help__barcode.isbn_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help barcode.isbn commands' commands "$@"
 }
 (( $+functions[_pouf__color_commands] )) ||
 _pouf__color_commands() {
     local commands; commands=()
     _describe -t commands 'pouf color commands' commands "$@"
 }
+(( $+functions[_pouf__help__color_commands] )) ||
+_pouf__help__color_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help color commands' commands "$@"
+}
 (( $+functions[_pouf__filesystem.mimetype_commands] )) ||
 _pouf__filesystem.mimetype_commands() {
     local commands; commands=()
     _describe -t commands 'pouf filesystem.mimetype commands' commands "$@"
+}
+(( $+functions[_pouf__help__filesystem.mimetype_commands] )) ||
+_pouf__help__filesystem.mimetype_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help filesystem.mimetype commands' commands "$@"
 }
 (( $+functions[_pouf__filesystem.semver_commands] )) ||
 _pouf__filesystem.semver_commands() {
     local commands; commands=()
     _describe -t commands 'pouf filesystem.semver commands' commands "$@"
 }
+(( $+functions[_pouf__help__filesystem.semver_commands] )) ||
+_pouf__help__filesystem.semver_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help filesystem.semver commands' commands "$@"
+}
 (( $+functions[_pouf__finance.bic_commands] )) ||
 _pouf__finance.bic_commands() {
     local commands; commands=()
     _describe -t commands 'pouf finance.bic commands' commands "$@"
 }
+(( $+functions[_pouf__help__finance.bic_commands] )) ||
+_pouf__help__finance.bic_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help finance.bic commands' commands "$@"
+}
 (( $+functions[_pouf__help_commands] )) ||
 _pouf__help_commands() {
-    local commands; commands=()
+    local commands; commands=(
+'address.city:give a city name (English only)' \
+'address.country:give a country name and code (English only)' \
+'address.street:give a street name (English only)' \
+'administrative.healthinsurrancecode:give a Health insurrance code (French only)' \
+'auto.licenseplate:give an automotive license plate (French only)' \
+'barcode.isbn:give an isbn code' \
+'color:give a fake color (hexadécimal, rgb, rgba, hsl and hsla representation)' \
+'filesystem.mimetype:give a fake mime-type' \
+'filesystem.semver:give a fake semver version' \
+'finance.bic:give a fake BIC (Business Identifier Code)' \
+'http.code:give a fake HTTP code' \
+'internet.ip:give a fake IP (Internet Protocol)' \
+'internet.mac:give a fake mac adress' \
+'internet.mail:give a fake mail' \
+'internet.useragent:give a fake user agent' \
+'lorem.word:give a fake word (in Latin)' \
+'people.name:give a fake name' \
+'time.time:give a fake time' \
+'time.date:give a fake date' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
     _describe -t commands 'pouf help commands' commands "$@"
+}
+(( $+functions[_pouf__help__help_commands] )) ||
+_pouf__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help help commands' commands "$@"
+}
+(( $+functions[_pouf__help__http.code_commands] )) ||
+_pouf__help__http.code_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help http.code commands' commands "$@"
 }
 (( $+functions[_pouf__http.code_commands] )) ||
 _pouf__http.code_commands() {
     local commands; commands=()
     _describe -t commands 'pouf http.code commands' commands "$@"
 }
+(( $+functions[_pouf__help__internet.ip_commands] )) ||
+_pouf__help__internet.ip_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help internet.ip commands' commands "$@"
+}
 (( $+functions[_pouf__internet.ip_commands] )) ||
 _pouf__internet.ip_commands() {
     local commands; commands=()
     _describe -t commands 'pouf internet.ip commands' commands "$@"
+}
+(( $+functions[_pouf__help__internet.mac_commands] )) ||
+_pouf__help__internet.mac_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help internet.mac commands' commands "$@"
 }
 (( $+functions[_pouf__internet.mac_commands] )) ||
 _pouf__internet.mac_commands() {
     local commands; commands=()
     _describe -t commands 'pouf internet.mac commands' commands "$@"
 }
+(( $+functions[_pouf__help__internet.mail_commands] )) ||
+_pouf__help__internet.mail_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help internet.mail commands' commands "$@"
+}
 (( $+functions[_pouf__internet.mail_commands] )) ||
 _pouf__internet.mail_commands() {
     local commands; commands=()
     _describe -t commands 'pouf internet.mail commands' commands "$@"
+}
+(( $+functions[_pouf__help__internet.useragent_commands] )) ||
+_pouf__help__internet.useragent_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help internet.useragent commands' commands "$@"
 }
 (( $+functions[_pouf__internet.useragent_commands] )) ||
 _pouf__internet.useragent_commands() {
     local commands; commands=()
     _describe -t commands 'pouf internet.useragent commands' commands "$@"
 }
+(( $+functions[_pouf__help__lorem.word_commands] )) ||
+_pouf__help__lorem.word_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help lorem.word commands' commands "$@"
+}
 (( $+functions[_pouf__lorem.word_commands] )) ||
 _pouf__lorem.word_commands() {
     local commands; commands=()
     _describe -t commands 'pouf lorem.word commands' commands "$@"
+}
+(( $+functions[_pouf__help__people.name_commands] )) ||
+_pouf__help__people.name_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help people.name commands' commands "$@"
 }
 (( $+functions[_pouf__people.name_commands] )) ||
 _pouf__people.name_commands() {
     local commands; commands=()
     _describe -t commands 'pouf people.name commands' commands "$@"
 }
+(( $+functions[_pouf__help__time.date_commands] )) ||
+_pouf__help__time.date_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help time.date commands' commands "$@"
+}
 (( $+functions[_pouf__time.date_commands] )) ||
 _pouf__time.date_commands() {
     local commands; commands=()
     _describe -t commands 'pouf time.date commands' commands "$@"
+}
+(( $+functions[_pouf__help__time.time_commands] )) ||
+_pouf__help__time.time_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help time.time commands' commands "$@"
 }
 (( $+functions[_pouf__time.time_commands] )) ||
 _pouf__time.time_commands() {
