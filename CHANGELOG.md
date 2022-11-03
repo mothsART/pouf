@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Roadmap]
 
+- using template
+- create a web API
+- produce data like https://randomuser.me/
+
 ### Added
 
 - using clap::ArgAction:Count for multiples values
