@@ -14,7 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - using clap::ArgAction:Count for multiples values
 
-## [0.6.1] - 2022-10-23
+## [0.6.3] - 2022-12-17
+
+### bugfix
+
+- subcommands on "people" and color doesn't work well.
+
+## [0.6.2] - 2022-10-23
 
 ### Added
 
