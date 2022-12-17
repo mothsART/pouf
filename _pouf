@@ -78,16 +78,18 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (color)
 _arguments "${_arguments_options[@]}" \
-'-d+[give a fake hexadecimal color]: : ' \
-'--hexa=[give a fake hexadecimal color]: : ' \
-'-r+[give a fake rgb color]: : ' \
-'--rgb=[give a fake rgb color]: : ' \
-'-a+[give a fake rgba color]: : ' \
-'--rgba=[give a fake rgba color]: : ' \
-'-t+[give a fake hsl (tsl) color]: : ' \
-'--hsl=[give a fake hsl (tsl) color]: : ' \
-'-l+[give a fake hsla (tsl) color]: : ' \
-'--hsla=[give a fake hsla (tsl) color]: : ' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
+'-d[give a fake hexadecimal color]' \
+'--hexa[give a fake hexadecimal color]' \
+'-r[give a fake rgb color]' \
+'--rgb[give a fake rgb color]' \
+'-a[give a fake rgba color]' \
+'--rgba[give a fake rgba color]' \
+'-t[give a fake hsl (tsl) color]' \
+'--hsl[give a fake hsl (tsl) color]' \
+'-l[give a fake hsla (tsl) color]' \
+'--hsla[give a fake hsla (tsl) color]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
@@ -176,18 +178,18 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (people.name)
 _arguments "${_arguments_options[@]}" \
-'-t+[give a fake name title]: : ' \
-'--title=[give a fake name title]: : ' \
-'-w+[give a fake name with her title]: : ' \
-'--with-title=[give a fake name with her title]: : ' \
-'-f+[give a fake firstname]: : ' \
-'--firstname=[give a fake firstname]: : ' \
-'-z+[give a fake lastname]: : ' \
-'--lastname=[give a fake lastname]: : ' \
 '-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
+'-t[give a fake name title]' \
+'--title[give a fake name title]' \
+'-w[give a fake name with her title]' \
+'--with-title[give a fake name with her title]' \
+'-f[give a fake firstname]' \
+'--firstname[give a fake firstname]' \
+'-z[give a fake lastname]' \
+'--lastname[give a fake lastname]' \
 '-h[Print help information]' \
 '--help[Print help information]' \
 && ret=0
