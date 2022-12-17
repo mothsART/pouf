@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use clap::builder::PossibleValuesParser;
 use clap::{Arg, ArgAction, Command};
 
@@ -20,6 +22,20 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command {
         .author("Ferry Jérémie ferryjeremie@free.fr")
         .about("give fake datas")
         .arg_required_else_help(true)
+        // template
+        .subcommand(
+            Command::new("template")
+                .about("generate file with template")
+                .args([
+                    &Arg::new("input")
+                    .short('i')
+                    .long("input")
+                    .value_parser(clap::value_parser!(PathBuf))
+                    .required(true)
+                    .help("give an input template file (tera : https://tera.netlify.app/)"),
+                    &number_arg,
+                ]),
+        )
         // address
         .subcommand(
             Command::new("address.city")
@@ -60,26 +76,32 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command {
                 .about("give a fake hexadecimal color")
                 .about("give a fake color (hexadécimal, rgb, rgba, hsl and hsla representation)")
                 .args([
-                    Arg::new("hexa")
+                    &Arg::new("hexa")
                         .short('d')
                         .long("hexa")
+                        .action(clap::ArgAction::SetTrue)
                         .help("give a fake hexadecimal color"),
-                    Arg::new("rgb")
+                    &Arg::new("rgb")
                         .short('r')
                         .long("rgb")
+                        .action(clap::ArgAction::SetTrue)
                         .help("give a fake rgb color"),
-                    Arg::new("rgba")
+                    &Arg::new("rgba")
                         .short('a')
                         .long("rgba")
+                        .action(clap::ArgAction::SetTrue)
                         .help("give a fake rgba color"),
-                    Arg::new("hsl")
+                    &Arg::new("hsl")
                         .short('t')
                         .long("hsl")
+                        .action(clap::ArgAction::SetTrue)
                         .help("give a fake hsl (tsl) color"),
-                    Arg::new("hsla")
+                    &Arg::new("hsla")
                         .short('l')
                         .long("hsla")
+                        .action(clap::ArgAction::SetTrue)
                         .help("give a fake hsla (tsl) color"),
+                    &number_arg,
                 ]),
         )
         //filesystem
@@ -162,18 +184,22 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command {
                 &Arg::new("title")
                     .short('t')
                     .long("title")
+                    .action(clap::ArgAction::SetTrue)
                     .help("give a fake name title"),
                 &Arg::new("with-title")
                     .short('w')
                     .long("with-title")
+                    .action(clap::ArgAction::SetTrue)
                     .help("give a fake name with her title"),
                 &Arg::new("firstname")
                     .short('f')
                     .long("firstname")
+                    .action(clap::ArgAction::SetTrue)
                     .help("give a fake firstname"),
                 &Arg::new("lastname")
                     .short('z')
                     .long("lastname")
+                    .action(clap::ArgAction::SetTrue)
                     .help("give a fake lastname"),
                 &lang_arg,
                 &number_arg,

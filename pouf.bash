@@ -66,6 +66,9 @@ _pouf() {
             pouf,people.name)
                 cmd="pouf__people.name"
                 ;;
+            pouf,template)
+                cmd="pouf__template"
+                ;;
             pouf,time.date)
                 cmd="pouf__time.date"
                 ;;
@@ -126,6 +129,9 @@ _pouf() {
             pouf__help,people.name)
                 cmd="pouf__help__people.name"
                 ;;
+            pouf__help,template)
+                cmd="pouf__help__template"
+                ;;
             pouf__help,time.date)
                 cmd="pouf__help__time.date"
                 ;;
@@ -139,7 +145,7 @@ _pouf() {
 
     case "${cmd}" in
         pouf)
-            opts="-h -V --help --version address.city address.country address.street administrative.healthinsurrancecode auto.licenseplate barcode.isbn color filesystem.mimetype filesystem.semver finance.bic http.code internet.ip internet.mac internet.mail internet.useragent lorem.word people.name time.time time.date help"
+            opts="-h -V --help --version template address.city address.country address.street administrative.healthinsurrancecode auto.licenseplate barcode.isbn color filesystem.mimetype filesystem.semver finance.bic http.code internet.ip internet.mac internet.mail internet.useragent lorem.word people.name time.time time.date help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -285,49 +291,17 @@ _pouf() {
             return 0
             ;;
         pouf__color)
-            opts="-d -r -a -t -l -h --hexa --rgb --rgba --hsl --hsla --help"
+            opts="-d -r -a -t -l -n -h --hexa --rgb --rgba --hsl --hsla --number --help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
             case "${prev}" in
-                --hexa)
+                --number)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
                     ;;
-                -d)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --rgb)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -r)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --rgba)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -a)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --hsl)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -t)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --hsla)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -l)
+                -n)
                     COMPREPLY=($(compgen -f "${cur}"))
                     return 0
                     ;;
@@ -405,7 +379,7 @@ _pouf() {
             return 0
             ;;
         pouf__help)
-            opts="address.city address.country address.street administrative.healthinsurrancecode auto.licenseplate barcode.isbn color filesystem.mimetype filesystem.semver finance.bic http.code internet.ip internet.mac internet.mail internet.useragent lorem.word people.name time.time time.date help"
+            opts="template address.city address.country address.street administrative.healthinsurrancecode auto.licenseplate barcode.isbn color filesystem.mimetype filesystem.semver finance.bic http.code internet.ip internet.mac internet.mail internet.useragent lorem.word people.name time.time time.date help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -670,6 +644,20 @@ _pouf() {
             COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
             return 0
             ;;
+        pouf__help__template)
+            opts=""
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
         pouf__help__time.date)
             opts=""
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
@@ -845,44 +833,42 @@ _pouf() {
                 return 0
             fi
             case "${prev}" in
-                --title)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -t)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --with-title)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -w)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --firstname)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -f)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                --lastname)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
-                -z)
-                    COMPREPLY=($(compgen -f "${cur}"))
-                    return 0
-                    ;;
                 --lang)
                     COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
                     return 0
                     ;;
                 -l)
                     COMPREPLY=($(compgen -W "fr fr_FR en" -- "${cur}"))
+                    return 0
+                    ;;
+                --number)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                    ;;
+                -n)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                    ;;
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        pouf__template)
+            opts="-i -n -h --input --number --help"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                --input)
+                    COMPREPLY=($(compgen -f "${cur}"))
+                    return 0
+                    ;;
+                -i)
+                    COMPREPLY=($(compgen -f "${cur}"))
                     return 0
                     ;;
                 --number)
