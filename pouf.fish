@@ -32,11 +32,12 @@ complete -c pouf -n "__fish_seen_subcommand_from auto.licenseplate" -s n -l numb
 complete -c pouf -n "__fish_seen_subcommand_from auto.licenseplate" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from barcode.isbn" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from barcode.isbn" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from color" -s d -l hexa -d 'give a fake hexadecimal color' -r
-complete -c pouf -n "__fish_seen_subcommand_from color" -s r -l rgb -d 'give a fake rgb color' -r
-complete -c pouf -n "__fish_seen_subcommand_from color" -s a -l rgba -d 'give a fake rgba color' -r
-complete -c pouf -n "__fish_seen_subcommand_from color" -s t -l hsl -d 'give a fake hsl (tsl) color' -r
-complete -c pouf -n "__fish_seen_subcommand_from color" -s l -l hsla -d 'give a fake hsla (tsl) color' -r
+complete -c pouf -n "__fish_seen_subcommand_from color" -s n -l number -d 'number of values' -r
+complete -c pouf -n "__fish_seen_subcommand_from color" -s d -l hexa -d 'give a fake hexadecimal color'
+complete -c pouf -n "__fish_seen_subcommand_from color" -s r -l rgb -d 'give a fake rgb color'
+complete -c pouf -n "__fish_seen_subcommand_from color" -s a -l rgba -d 'give a fake rgba color'
+complete -c pouf -n "__fish_seen_subcommand_from color" -s t -l hsl -d 'give a fake hsl (tsl) color'
+complete -c pouf -n "__fish_seen_subcommand_from color" -s l -l hsla -d 'give a fake hsla (tsl) color'
 complete -c pouf -n "__fish_seen_subcommand_from color" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.mimetype" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.mimetype" -s h -l help -d 'Print help information'
@@ -61,12 +62,12 @@ complete -c pouf -n "__fish_seen_subcommand_from internet.useragent" -s n -l num
 complete -c pouf -n "__fish_seen_subcommand_from internet.useragent" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from lorem.word" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from lorem.word" -s h -l help -d 'Print help information'
-complete -c pouf -n "__fish_seen_subcommand_from people.name" -s t -l title -d 'give a fake name title' -r
-complete -c pouf -n "__fish_seen_subcommand_from people.name" -s w -l with-title -d 'give a fake name with her title' -r
-complete -c pouf -n "__fish_seen_subcommand_from people.name" -s f -l firstname -d 'give a fake firstname' -r
-complete -c pouf -n "__fish_seen_subcommand_from people.name" -s z -l lastname -d 'give a fake lastname' -r
 complete -c pouf -n "__fish_seen_subcommand_from people.name" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
 complete -c pouf -n "__fish_seen_subcommand_from people.name" -s n -l number -d 'number of values' -r
+complete -c pouf -n "__fish_seen_subcommand_from people.name" -s t -l title -d 'give a fake name title'
+complete -c pouf -n "__fish_seen_subcommand_from people.name" -s w -l with-title -d 'give a fake name with her title'
+complete -c pouf -n "__fish_seen_subcommand_from people.name" -s f -l firstname -d 'give a fake firstname'
+complete -c pouf -n "__fish_seen_subcommand_from people.name" -s z -l lastname -d 'give a fake lastname'
 complete -c pouf -n "__fish_seen_subcommand_from people.name" -s h -l help -d 'Print help information'
 complete -c pouf -n "__fish_seen_subcommand_from time.time" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from time.time" -s h -l help -d 'Print help information'
