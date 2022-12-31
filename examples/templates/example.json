@@ -1,0 +1,21 @@
+{% set peoples_nb = 2 %}
+{% set lang = "fr" %}
+
+{
+  "results": [
+    {% for people in peoples %}
+    {
+      "name": {
+        "title": "{{ people.title }}",
+        "first": "{{ people.first_name }}",
+        "last": "{{ people.last_name }}"
+      },
+      "location": {
+        "city": "{{ people.location.city }}",
+        "state": "{{ people.location.city }}",
+        "country": "{{ people.location.country }}",
+        "zipcode": "{{ people.location.zipcode }}",
+    }
+    {% endfor %}
+  ],
+}
