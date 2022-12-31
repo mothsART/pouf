@@ -28,7 +28,17 @@ _pouf() {
         (( CURRENT += 1 ))
         curcontext="${curcontext%:*:*}:pouf-command-$line[1]:"
         case $line[1] in
-            (address.city)
+            (template)
+_arguments "${_arguments_options[@]}" \
+'-i+[give an input template file (tera : https://tera.netlify.app/)]: :_files' \
+'--input=[give an input template file (tera : https://tera.netlify.app/)]: :_files' \
+'-n+[number of values]: : ' \
+'--number=[number of values]: : ' \
+'-h[Print help information]' \
+'--help[Print help information]' \
+&& ret=0
+;;
+(address.city)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
@@ -222,7 +232,11 @@ _arguments "${_arguments_options[@]}" \
         (( CURRENT += 1 ))
         curcontext="${curcontext%:*:*}:pouf-help-command-$line[1]:"
         case $line[1] in
-            (address.city)
+            (template)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(address.city)
 _arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
@@ -314,6 +328,7 @@ esac
 (( $+functions[_pouf_commands] )) ||
 _pouf_commands() {
     local commands; commands=(
+'template:generate file with template' \
 'address.city:give a city name (English only)' \
 'address.country:give a country name and code (English only)' \
 'address.street:give a street name (English only)' \
@@ -440,6 +455,7 @@ _pouf__help__finance.bic_commands() {
 (( $+functions[_pouf__help_commands] )) ||
 _pouf__help_commands() {
     local commands; commands=(
+'template:generate file with template' \
 'address.city:give a city name (English only)' \
 'address.country:give a country name and code (English only)' \
 'address.street:give a street name (English only)' \
@@ -537,6 +553,16 @@ _pouf__help__people.name_commands() {
 _pouf__people.name_commands() {
     local commands; commands=()
     _describe -t commands 'pouf people.name commands' commands "$@"
+}
+(( $+functions[_pouf__help__template_commands] )) ||
+_pouf__help__template_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf help template commands' commands "$@"
+}
+(( $+functions[_pouf__template_commands] )) ||
+_pouf__template_commands() {
+    local commands; commands=()
+    _describe -t commands 'pouf template commands' commands "$@"
 }
 (( $+functions[_pouf__help__time.date_commands] )) ||
 _pouf__help__time.date_commands() {

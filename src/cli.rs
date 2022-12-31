@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use clap::builder::PossibleValuesParser;
 use clap::{Arg, ArgAction, Command};
 
@@ -20,6 +22,20 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command {
         .author("Ferry Jérémie ferryjeremie@free.fr")
         .about("give fake datas")
         .arg_required_else_help(true)
+        // template
+        .subcommand(
+            Command::new("template")
+                .about("generate file with template")
+                .args([
+                    &Arg::new("input")
+                        .short('i')
+                        .long("input")
+                        .value_parser(clap::value_parser!(PathBuf))
+                        .required(true)
+                        .help("give an input template file (tera : https://tera.netlify.app/)"),
+                    &number_arg,
+                ]),
+        )
         // address
         .subcommand(
             Command::new("address.city")
@@ -85,7 +101,7 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command {
                         .long("hsla")
                         .action(clap::ArgAction::SetTrue)
                         .help("give a fake hsla (tsl) color"),
-                    &number_arg
+                    &number_arg,
                 ]),
         )
         //filesystem

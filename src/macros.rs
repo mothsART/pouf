@@ -1,3 +1,45 @@
+macro_rules! lang_struct_return {
+    ($struct_name:ident) => {
+        match lang_env() {
+            Some(lang) => {
+                lang_struct_return!($struct_name, &*lang)
+            }
+            None => {
+                let val: String = $struct_name(fake::locales::EN).fake();
+                format!("{}", val)
+            }
+        }
+    };
+    ($struct_name:ident, $lang:expr) => {
+        match $lang {
+            "fr" | "fr_fr" => {
+                format!("{}", $struct_name(fake::locales::FR_FR).fake::<String>())
+            }
+            _ => {
+                format!("{}", $struct_name(fake::locales::EN).fake::<String>())
+            }
+        }
+    };
+}
+
+macro_rules! lang_return {
+    ($struct_name:ident, $matches:expr) => {
+        match $matches.try_contains_id("lang") {
+            Ok(_) => match $matches.get_one::<String>("lang") {
+                Some(lang) => {
+                    lang_struct_return!($struct_name, lang.as_str())
+                }
+                None => {
+                    lang_struct_return!($struct_name)
+                }
+            },
+            Err(_) => {
+                lang_struct_return!($struct_name)
+            }
+        }
+    };
+}
+
 macro_rules! lang_struct {
     ($struct_name:ident) => {
         use crate::lang_env;
