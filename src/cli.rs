@@ -28,11 +28,11 @@ pub fn build_cli(name: &'static str, version: &'static str) -> Command {
                 .about("generate file with template")
                 .args([
                     &Arg::new("input")
-                    .short('i')
-                    .long("input")
-                    .value_parser(clap::value_parser!(PathBuf))
-                    .required(true)
-                    .help("give an input template file (tera : https://tera.netlify.app/)"),
+                        .short('i')
+                        .long("input")
+                        .value_parser(clap::value_parser!(PathBuf))
+                        .required(true)
+                        .help("give an input template file (tera : https://tera.netlify.app/)"),
                     &number_arg,
                 ]),
         )
