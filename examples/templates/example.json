@@ -15,6 +15,10 @@
         "state": "{{ people.location.city }}",
         "country": "{{ people.location.country }}",
         "zipcode": "{{ people.location.zipcode }}",
+      },
+      "automotive": {
+        "licenceplate": "{{ people.automotive.licence_plate }}",
+      }
     }
     {% endfor %}
   ],

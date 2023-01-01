@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::lang_env;
 use crate::template::address::Address;
+use crate::template::automotive::Automotive;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct People {
@@ -13,6 +14,8 @@ pub struct People {
     pub last_name: String,
 
     pub location: Address,
+
+    pub automotive: Automotive,
 }
 
 impl People {
@@ -23,6 +26,8 @@ impl People {
             last_name: lang_return!(LastName, arg),
 
             location: Address::create(arg),
+
+            automotive: Automotive::create(arg),
         }
     }
 }
