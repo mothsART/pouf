@@ -14,18 +14,52 @@ use std::path::PathBuf;
 
 use tera::{Context, Tera};
 
+use serde::{Deserialize, Serialize};
+
 mod cli;
 #[macro_use]
 mod macros;
 mod domain;
 mod template;
 
+use crate::template::lorem::Lorem;
 use crate::template::{parser::parse, people::People};
 
 fn lang_env() -> Option<String> {
     match std::env::var("LANG") {
         Ok(_l) => _l.find('.').map(|pos| _l[0..pos].to_lowercase()),
         Err(_) => None,
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Accounts {
+    pub key: u32,
+}
+
+impl Accounts {
+    fn new() -> Accounts {
+        Accounts { key: 0 }
+    }
+}
+
+pub struct Account {
+    pub name: String,
+}
+
+impl Iterator for Accounts {
+    type Item = Account;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.key += 1;
+
+        if self.key > 3 {
+            return None;
+        }
+
+        Some(Account {
+            name: format!("generate value : {}", self.key),
+        })
     }
 }
 
@@ -40,10 +74,30 @@ fn main() {
             let nodes = parse(&contents);
 
             let mut nb_peoples = 0;
+            let mut nb_lorems = 0;
+            let mut lorems_words_nb = 0;
+            let mut lorems_sentences_nb = 0;
+            let mut lorems_paragraphs_nb = 0;
             for n in nodes {
                 match n.key.as_str() {
                     "peoples_nb" => {
                         nb_peoples = n.value.parse::<i32>().unwrap_or(0);
+                        contents = contents.replace(&format!("{}\n", &n.tag), "");
+                    }
+                    "lorems_nb" => {
+                        nb_lorems = n.value.parse::<u32>().unwrap_or(0);
+                        contents = contents.replace(&format!("{}\n", &n.tag), "");
+                    }
+                    "lorems_words_nb" => {
+                        lorems_words_nb = n.value.parse::<u32>().unwrap_or(0);
+                        contents = contents.replace(&format!("{}\n", &n.tag), "");
+                    }
+                    "lorems_sentences_nb" => {
+                        lorems_sentences_nb = n.value.parse::<u32>().unwrap_or(0);
+                        contents = contents.replace(&format!("{}\n", &n.tag), "");
+                    }
+                    "lorems_paragraphs_nb" => {
+                        lorems_paragraphs_nb = n.value.parse::<u32>().unwrap_or(0);
                         contents = contents.replace(&format!("{}\n", &n.tag), "");
                     }
                     "lang" => {
@@ -60,9 +114,31 @@ fn main() {
                 }
             }
 
+            let mut lorems = vec![];
+            if nb_lorems > 0 {
+                for _ in 0..nb_lorems {
+                    lorems.push(Lorem::create(
+                        template_m,
+                        lorems_words_nb,
+                        lorems_sentences_nb,
+                        lorems_paragraphs_nb,
+                    ));
+                }
+            }
+
             let mut context = Context::new();
             context.insert("peoples", &peoples);
             context.insert("people", &People::create(template_m));
+            context.insert("lorems", &lorems);
+            context.insert(
+                "lorem",
+                &Lorem::create(
+                    template_m,
+                    lorems_words_nb,
+                    lorems_sentences_nb,
+                    lorems_paragraphs_nb,
+                ),
+            );
 
             let result = Tera::one_off(&contents, &context, true);
 

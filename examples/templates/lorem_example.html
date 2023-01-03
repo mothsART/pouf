@@ -1,0 +1,20 @@
+{% set lorems_nb = 3 %}
+{% set lorems_words_nb = 9 %}
+{% set lorems_sentences_nb = 4 %}
+{% set lorems_paragraphs_nb = 2 %}
+
+<body>
+    {% for lorem in lorems %}
+        <span>
+            {% for word in lorem.words %}{{ word }} {% endfor %}
+        </span>
+        <p>
+            {% for sentence in lorem.sentences %}{{ sentence }}<br />{% endfor %}
+        </p>
+        <div>
+            {% for paragraph in lorem.paragraphs %}
+                <p>{{ paragraph }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</body>
