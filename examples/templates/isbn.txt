@@ -1,0 +1,8 @@
+{% set barecodes_nb = 2 %}
+
+{% for barecode in barecodes %}
+    {{ barecode.isbn }}
+    {{ barecode.isbn10 }}
+    {{ barecode.isbn13 }}
+
+{% endfor %}

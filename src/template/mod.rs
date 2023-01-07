@@ -5,3 +5,4 @@ pub mod automotive;
 pub mod lorem;
 pub mod people;
 pub mod color;
+pub mod barecode;

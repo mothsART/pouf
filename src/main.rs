@@ -24,6 +24,7 @@ mod template;
 
 use crate::template::color::Color;
 use crate::template::lorem::Lorem;
+use crate::template::barecode::BareCode;
 use crate::template::{parser::parse, people::People};
 
 fn lang_env() -> Option<String> {
@@ -80,6 +81,7 @@ fn main() {
             let mut lorems_sentences_nb = 0;
             let mut lorems_paragraphs_nb = 0;
             let mut colors_nb = 0;
+            let mut barecodes_nb = 0;
             for n in nodes {
                 match n.key.as_str() {
                     "peoples_nb" => {
@@ -104,6 +106,10 @@ fn main() {
                     }
                     "colors_nb" => {
                         colors_nb = n.value.parse::<u32>().unwrap_or(0);
+                        contents = contents.replace(&format!("{}\n", &n.tag), "");
+                    }
+                    "barecodes_nb" => {
+                        barecodes_nb = n.value.parse::<u32>().unwrap_or(0);
                         contents = contents.replace(&format!("{}\n", &n.tag), "");
                     }
                     "lang" => {
@@ -139,6 +145,13 @@ fn main() {
                 }
             }
 
+            let mut barecodes = vec![];
+            if barecodes_nb > 0 {
+                for _ in 0..barecodes_nb {
+                    barecodes.push(Color::create(template_m));
+                }
+            }
+
             let mut context = Context::new();
             context.insert("peoples", &peoples);
             context.insert("people", &People::create(template_m));
@@ -154,6 +167,8 @@ fn main() {
             );
             context.insert("colors", &colors);
             context.insert("color", &Color::create(template_m));
+            context.insert("barecodes", &barecodes);
+            context.insert("barecode", &BareCode::create(template_m));
 
             let result = Tera::one_off(&contents, &context, true);
 

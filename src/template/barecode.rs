@@ -1,0 +1,22 @@
+use crate::fake::Fake;
+use clap::ArgMatches;
+use fake::locales::EN;
+use fake::faker::barcode::raw::{Isbn, Isbn10, Isbn13};
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct BareCode {
+    pub isbn: String,
+    pub isbn10: String,
+    pub isbn13: String,
+}
+
+impl BareCode {
+    pub fn create(_arg: &ArgMatches) -> BareCode {
+        BareCode {
+            isbn: Isbn(EN).fake(),
+            isbn10: Isbn10(EN).fake(),
+            isbn13: Isbn13(EN).fake(),
+        }
+    }
+}
