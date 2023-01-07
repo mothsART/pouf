@@ -1,0 +1,19 @@
+{% set colors_nb = 3 %}
+
+:root {
+    --main-bg: {{ colors.0.hex }};
+    --main-color: {{ colors.0.rgb }};
+}
+
+.element {
+    background-color: {{ colors.1.rgba }};
+    color: {{ colors.1.rgba }};
+}
+
+.light {
+    background-color: {{ colors.2.hsl }};
+}
+
+.opacity-light {
+    background-color: {{ color.hsla }};
+}
