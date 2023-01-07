@@ -1,0 +1,5 @@
+{% set autos_nb = 3 %}
+
+{% for auto in autos %}
+    {{ auto.licence_plate }}
+{% endfor %}

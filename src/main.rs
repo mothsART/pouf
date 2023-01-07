@@ -22,10 +22,14 @@ mod macros;
 mod domain;
 mod template;
 
-use crate::template::color::Color;
-use crate::template::lorem::Lorem;
-use crate::template::barecode::BareCode;
-use crate::template::{parser::parse, people::People};
+use crate::template::{
+    automotive::Automotive,
+    color::Color,
+    lorem::Lorem,
+    barecode::BareCode,
+    parser::parse,
+    people::People
+};
 
 fn lang_env() -> Option<String> {
     match std::env::var("LANG") {
@@ -82,6 +86,7 @@ fn main() {
             let mut lorems_paragraphs_nb = 0;
             let mut colors_nb = 0;
             let mut barecodes_nb = 0;
+            let mut autos_nb = 0;
             for n in nodes {
                 match n.key.as_str() {
                     "peoples_nb" => {
@@ -110,6 +115,10 @@ fn main() {
                     }
                     "barecodes_nb" => {
                         barecodes_nb = n.value.parse::<u32>().unwrap_or(0);
+                        contents = contents.replace(&format!("{}\n", &n.tag), "");
+                    }
+                    "autos_nb" => {
+                        autos_nb = n.value.parse::<u32>().unwrap_or(0);
                         contents = contents.replace(&format!("{}\n", &n.tag), "");
                     }
                     "lang" => {
@@ -152,6 +161,13 @@ fn main() {
                 }
             }
 
+            let mut autos = vec![];
+            if autos_nb > 0 {
+                for _ in 0..autos_nb {
+                    autos.push(Automotive::create(template_m));
+                }
+            }
+
             let mut context = Context::new();
             context.insert("peoples", &peoples);
             context.insert("people", &People::create(template_m));
@@ -169,6 +185,8 @@ fn main() {
             context.insert("color", &Color::create(template_m));
             context.insert("barecodes", &barecodes);
             context.insert("barecode", &BareCode::create(template_m));
+            context.insert("autos", &autos);
+            context.insert("auto", &Automotive::create(template_m));
 
             let result = Tera::one_off(&contents, &context, true);
 
