@@ -14,8 +14,6 @@ use std::path::PathBuf;
 
 use tera::{Context, Tera};
 
-use serde::{Deserialize, Serialize};
-
 mod cli;
 #[macro_use]
 mod macros;
@@ -23,6 +21,7 @@ mod domain;
 mod template;
 
 use crate::template::{
+    internet::Internet,
     automotive::Automotive,
     color::Color,
     lorem::Lorem,
@@ -35,37 +34,6 @@ fn lang_env() -> Option<String> {
     match std::env::var("LANG") {
         Ok(_l) => _l.find('.').map(|pos| _l[0..pos].to_lowercase()),
         Err(_) => None,
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Accounts {
-    pub key: u32,
-}
-
-impl Accounts {
-    fn new() -> Accounts {
-        Accounts { key: 0 }
-    }
-}
-
-pub struct Account {
-    pub name: String,
-}
-
-impl Iterator for Accounts {
-    type Item = Account;
-
-    fn next(&mut self) -> Option<Self::Item> {
-        self.key += 1;
-
-        if self.key > 3 {
-            return None;
-        }
-
-        Some(Account {
-            name: format!("generate value : {}", self.key),
-        })
     }
 }
 
@@ -87,6 +55,8 @@ fn main() {
             let mut colors_nb = 0;
             let mut barecodes_nb = 0;
             let mut autos_nb = 0;
+            let mut internets_nb = 0;
+
             for n in nodes {
                 match n.key.as_str() {
                     "peoples_nb" => {
@@ -119,6 +89,10 @@ fn main() {
                     }
                     "autos_nb" => {
                         autos_nb = n.value.parse::<u32>().unwrap_or(0);
+                        contents = contents.replace(&format!("{}\n", &n.tag), "");
+                    }
+                    "internets_nb" => {
+                        internets_nb = n.value.parse::<u32>().unwrap_or(0);
                         contents = contents.replace(&format!("{}\n", &n.tag), "");
                     }
                     "lang" => {
@@ -168,6 +142,13 @@ fn main() {
                 }
             }
 
+            let mut internets = vec![];
+            if internets_nb > 0 {
+                for _ in 0..internets_nb {
+                    internets.push(Internet::create(template_m));
+                }
+            }
+
             let mut context = Context::new();
             context.insert("peoples", &peoples);
             context.insert("people", &People::create(template_m));
@@ -187,6 +168,8 @@ fn main() {
             context.insert("barecode", &BareCode::create(template_m));
             context.insert("autos", &autos);
             context.insert("auto", &Automotive::create(template_m));
+            context.insert("internets", &internets);
+            context.insert("internet", &Internet::create(template_m));
 
             let result = Tera::one_off(&contents, &context, true);
 

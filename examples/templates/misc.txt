@@ -1,5 +1,21 @@
 {% set autos_nb = 3 %}
+{% set internets_nb = 2 %}
 
 {% for auto in autos %}
     {{ auto.licence_plate }}
 {% endfor %}
+
+{% for internet in internets %}
+    {{ internet.free_email_provider }}
+    {{ internet.domain_suffix }}
+    {{ internet.free_email }}
+    {{ internet.safe_email }}
+    {{ internet.username }}
+    {{ internet.password }}
+    {{ internet.ip }}
+    {{ internet.ipv4 }}
+    {{ internet.ipv6 }}
+    {{ internet.mac_address }}
+    {{ internet.useragent }}
+{% endfor %}
+
