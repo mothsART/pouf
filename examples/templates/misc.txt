@@ -49,3 +49,9 @@
 
 {{ currencies.0.name }}
 {{ currencies.0.symbol }}
+
+{% set http_codes_nb = 3 %}
+{% for http in http_codes %}
+    {{ http.rfc_status_code }}
+    {{ http.valid_status_code }}
+{% endfor %}

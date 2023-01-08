@@ -32,6 +32,7 @@ use crate::template::{
     filesystem::FileSystem,
     job::Job,
     currency::Currency,
+    http::Http,
 };
 
 fn lang_env() -> Option<String> {
@@ -64,6 +65,7 @@ fn main() {
             let mut filesystems_nb = 0;
             let mut jobs_nb = 0;
             let mut currencies_nb = 0;
+            let mut http_codes_nb = 0;
 
             for n in nodes {
                 match n.key.as_str() {
@@ -117,6 +119,10 @@ fn main() {
                     }
                     "currencies_nb" => {
                         currencies_nb = n.value.parse::<u32>().unwrap_or(0);
+                        contents = contents.replace(&format!("{}\n", &n.tag), "");
+                    }
+                    "http_codes_nb" => {
+                        http_codes_nb = n.value.parse::<u32>().unwrap_or(0);
                         contents = contents.replace(&format!("{}\n", &n.tag), "");
                     }
                     "lang" => {
@@ -201,6 +207,13 @@ fn main() {
                 }
             }
 
+            let mut http_codes = vec![];
+            if http_codes_nb > 0 {
+                for _ in 0..http_codes_nb {
+                    http_codes.push(Http::create(template_m));
+                }
+            }
+
             let mut context = Context::new();
             context.insert("peoples", &peoples);
             context.insert("people", &People::create(template_m));
@@ -230,6 +243,8 @@ fn main() {
             context.insert("job", &Job::create(template_m));
             context.insert("currencies", &currencies);
             context.insert("currency", &Currency::create(template_m));
+            context.insert("http_codes", &http_codes);
+            context.insert("http_code", &Http::create(template_m));
 
             let result = Tera::one_off(&contents, &context, true);
 
