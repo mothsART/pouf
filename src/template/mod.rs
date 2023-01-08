@@ -8,3 +8,4 @@ pub mod color;
 pub mod barecode;
 pub mod internet;
 pub mod phone;
+pub mod filesystem;

@@ -28,7 +28,8 @@ use crate::template::{
     lorem::Lorem,
     barecode::BareCode,
     parser::parse,
-    people::People
+    people::People,
+    filesystem::FileSystem,
 };
 
 fn lang_env() -> Option<String> {
@@ -58,6 +59,7 @@ fn main() {
             let mut autos_nb = 0;
             let mut internets_nb = 0;
             let mut phones_nb = 0;
+            let mut filesystems_nb = 0;
 
             for n in nodes {
                 match n.key.as_str() {
@@ -99,6 +101,10 @@ fn main() {
                     }
                     "phones_nb" => {
                         phones_nb = n.value.parse::<u32>().unwrap_or(0);
+                        contents = contents.replace(&format!("{}\n", &n.tag), "");
+                    }
+                    "filesystems_nb" => {
+                        filesystems_nb = n.value.parse::<u32>().unwrap_or(0);
                         contents = contents.replace(&format!("{}\n", &n.tag), "");
                     }
                     "lang" => {
@@ -162,6 +168,13 @@ fn main() {
                 }
             }
 
+            let mut filesystems = vec![];
+            if filesystems_nb > 0 {
+                for _ in 0..filesystems_nb {
+                    filesystems.push(FileSystem::create(template_m));
+                }
+            }
+
             let mut context = Context::new();
             context.insert("peoples", &peoples);
             context.insert("people", &People::create(template_m));
@@ -185,6 +198,8 @@ fn main() {
             context.insert("internet", &Internet::create(template_m));
             context.insert("phones", &phones);
             context.insert("phone", &Phone::create(template_m));
+            context.insert("filesystems", &filesystems);
+            context.insert("filesystem", &FileSystem::create(template_m));
 
             let result = Tera::one_off(&contents, &context, true);
 
