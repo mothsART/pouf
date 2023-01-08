@@ -30,6 +30,7 @@ use crate::template::{
     parser::parse,
     people::People,
     filesystem::FileSystem,
+    job::Job,
 };
 
 fn lang_env() -> Option<String> {
@@ -60,6 +61,7 @@ fn main() {
             let mut internets_nb = 0;
             let mut phones_nb = 0;
             let mut filesystems_nb = 0;
+            let mut jobs_nb = 0;
 
             for n in nodes {
                 match n.key.as_str() {
@@ -105,6 +107,10 @@ fn main() {
                     }
                     "filesystems_nb" => {
                         filesystems_nb = n.value.parse::<u32>().unwrap_or(0);
+                        contents = contents.replace(&format!("{}\n", &n.tag), "");
+                    }
+                    "jobs_nb" => {
+                        jobs_nb = n.value.parse::<u32>().unwrap_or(0);
                         contents = contents.replace(&format!("{}\n", &n.tag), "");
                     }
                     "lang" => {
@@ -175,6 +181,13 @@ fn main() {
                 }
             }
 
+            let mut jobs = vec![];
+            if jobs_nb > 0 {
+                for _ in 0..jobs_nb {
+                    jobs.push(Job::create(template_m));
+                }
+            }
+
             let mut context = Context::new();
             context.insert("peoples", &peoples);
             context.insert("people", &People::create(template_m));
@@ -200,6 +213,8 @@ fn main() {
             context.insert("phone", &Phone::create(template_m));
             context.insert("filesystems", &filesystems);
             context.insert("filesystem", &FileSystem::create(template_m));
+            context.insert("jobs", &jobs);
+            context.insert("job", &Job::create(template_m));
 
             let result = Tera::one_off(&contents, &context, true);
 

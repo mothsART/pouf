@@ -12,6 +12,7 @@ use crate::template::{
     address::Address,
     automotive::Automotive,
     phone::Phone,
+    job::Job,
 };
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -27,6 +28,8 @@ pub struct People {
     pub automotive: Automotive,
 
     pub phone: Phone,
+
+    pub job: Job,
 }
 
 impl People {
@@ -52,6 +55,8 @@ impl People {
             automotive: Automotive::create(arg),
 
             phone: Phone::create(arg),
+
+            job: Job::create(arg),
         }
     }
 }

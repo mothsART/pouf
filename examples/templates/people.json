@@ -14,6 +14,12 @@
         "first": "{{ people.first_name }}",
         "last": "{{ people.last_name }}"
       },
+      "job": {
+        "seniority": "{{ people.job.seniority }}",
+        "field": "{{ people.job.field }}",
+        "position": "{{ people.job.position }}",
+        "title": "{{ people.job.title }}"
+      }
       "location": {
         "city": "{{ people.location.city }}",
         "state": "{{ people.location.city }}",
