@@ -3,14 +3,16 @@ use clap::ArgMatches;
 use fake::faker::boolean::raw::Boolean;
 use fake::faker::chrono::raw::DateTimeBetween;
 use fake::faker::name::raw::{FirstName, LastName, Title};
-use fake::faker::phone_number::raw::{CellNumber, PhoneNumber};
 use fake::locales::EN;
 use serde::{Deserialize, Serialize};
 
 use crate::fake::Fake;
 use crate::lang_env;
-use crate::template::address::Address;
-use crate::template::automotive::Automotive;
+use crate::template::{
+    address::Address,
+    automotive::Automotive,
+    phone::Phone,
+};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct People {
@@ -23,6 +25,8 @@ pub struct People {
     pub location: Address,
 
     pub automotive: Automotive,
+
+    pub phone: Phone,
 }
 
 impl People {
@@ -46,6 +50,8 @@ impl People {
             location: Address::create(arg),
 
             automotive: Automotive::create(arg),
+
+            phone: Phone::create(arg),
         }
     }
 }

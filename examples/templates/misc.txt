@@ -1,5 +1,6 @@
 {% set autos_nb = 3 %}
 {% set internets_nb = 2 %}
+{% set phones_nb = 4 %}
 
 {% for auto in autos %}
     {{ auto.licence_plate }}
@@ -19,3 +20,7 @@
     {{ internet.useragent }}
 {% endfor %}
 
+{% for phone in phones %}
+    {{ phone.fix }}
+    {{ phone.cell }}
+{% endfor %}

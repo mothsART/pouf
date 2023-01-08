@@ -7,8 +7,8 @@
     {
       "gender": "{{ people.gender }}",
       "birthday": "{{ people.birthday }}",
-      "phone": "(272) 790-0888",
-      "cell": "(489) 330-2385",
+      "phone": "{{ phone.fix }}",
+      "cell": "{{ phone.cell }}",
       "name": {
         "title": "{{ people.title }}",
         "first": "{{ people.first_name }}",

@@ -21,6 +21,7 @@ mod domain;
 mod template;
 
 use crate::template::{
+    phone::Phone,
     internet::Internet,
     automotive::Automotive,
     color::Color,
@@ -56,6 +57,7 @@ fn main() {
             let mut barecodes_nb = 0;
             let mut autos_nb = 0;
             let mut internets_nb = 0;
+            let mut phones_nb = 0;
 
             for n in nodes {
                 match n.key.as_str() {
@@ -93,6 +95,10 @@ fn main() {
                     }
                     "internets_nb" => {
                         internets_nb = n.value.parse::<u32>().unwrap_or(0);
+                        contents = contents.replace(&format!("{}\n", &n.tag), "");
+                    }
+                    "phones_nb" => {
+                        phones_nb = n.value.parse::<u32>().unwrap_or(0);
                         contents = contents.replace(&format!("{}\n", &n.tag), "");
                     }
                     "lang" => {
@@ -149,6 +155,13 @@ fn main() {
                 }
             }
 
+            let mut phones = vec![];
+            if phones_nb > 0 {
+                for _ in 0..phones_nb {
+                    phones.push(Phone::create(template_m));
+                }
+            }
+
             let mut context = Context::new();
             context.insert("peoples", &peoples);
             context.insert("people", &People::create(template_m));
@@ -170,6 +183,8 @@ fn main() {
             context.insert("auto", &Automotive::create(template_m));
             context.insert("internets", &internets);
             context.insert("internet", &Internet::create(template_m));
+            context.insert("phones", &phones);
+            context.insert("phone", &Phone::create(template_m));
 
             let result = Tera::one_off(&contents, &context, true);
 
