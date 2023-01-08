@@ -41,3 +41,11 @@
     {{ job.position }}
     {{ job.title }}
 {% endfor %}
+
+{% set currencies_nb = 2 %}
+
+{{ currencies.0.code }}
+{{ currencies.1.code }}
+
+{{ currencies.0.name }}
+{{ currencies.0.symbol }}

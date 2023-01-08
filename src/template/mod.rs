@@ -10,3 +10,4 @@ pub mod internet;
 pub mod phone;
 pub mod filesystem;
 pub mod job;
+pub mod currency;

@@ -31,6 +31,7 @@ use crate::template::{
     people::People,
     filesystem::FileSystem,
     job::Job,
+    currency::Currency,
 };
 
 fn lang_env() -> Option<String> {
@@ -62,6 +63,7 @@ fn main() {
             let mut phones_nb = 0;
             let mut filesystems_nb = 0;
             let mut jobs_nb = 0;
+            let mut currencies_nb = 0;
 
             for n in nodes {
                 match n.key.as_str() {
@@ -111,6 +113,10 @@ fn main() {
                     }
                     "jobs_nb" => {
                         jobs_nb = n.value.parse::<u32>().unwrap_or(0);
+                        contents = contents.replace(&format!("{}\n", &n.tag), "");
+                    }
+                    "currencies_nb" => {
+                        currencies_nb = n.value.parse::<u32>().unwrap_or(0);
                         contents = contents.replace(&format!("{}\n", &n.tag), "");
                     }
                     "lang" => {
@@ -188,6 +194,13 @@ fn main() {
                 }
             }
 
+            let mut currencies = vec![];
+            if currencies_nb > 0 {
+                for _ in 0..jobs_nb {
+                    currencies.push(Currency::create(template_m));
+                }
+            }
+
             let mut context = Context::new();
             context.insert("peoples", &peoples);
             context.insert("people", &People::create(template_m));
@@ -215,6 +228,8 @@ fn main() {
             context.insert("filesystem", &FileSystem::create(template_m));
             context.insert("jobs", &jobs);
             context.insert("job", &Job::create(template_m));
+            context.insert("currencies", &currencies);
+            context.insert("currency", &Currency::create(template_m));
 
             let result = Tera::one_off(&contents, &context, true);
 
