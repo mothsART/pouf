@@ -1,8 +1,7 @@
-use random_color::{Luminosity, RandomColor};
+use random_color::RandomColor;
 
 use crate::fake::{Fake, Faker};
 use clap::ArgMatches;
-use fake::locales::EN;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
