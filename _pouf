@@ -15,10 +15,10 @@ _pouf() {
 
     local context curcontext="$curcontext" state line
     _arguments "${_arguments_options[@]}" \
-'-h[Print help information]' \
-'--help[Print help information]' \
-'-V[Print version information]' \
-'--version[Print version information]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
 ":: :_pouf_commands" \
 "*::: :->pouf" \
 && ret=0
@@ -34,56 +34,56 @@ _arguments "${_arguments_options[@]}" \
 '--input=[give an input template file (tera : https://tera.netlify.app/)]: :_files' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (address.city)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (address.country)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (address.street)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (administrative.healthinsurrancecode)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (auto.licenseplate)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (barcode.isbn)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (color)
@@ -100,16 +100,16 @@ _arguments "${_arguments_options[@]}" \
 '--hsl[give a fake hsl (tsl) color]' \
 '-l[give a fake hsla (tsl) color]' \
 '--hsla[give a fake hsla (tsl) color]' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (filesystem.mimetype)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (filesystem.semver)
@@ -120,16 +120,16 @@ _arguments "${_arguments_options[@]}" \
 '--stable[give exclusivly stable semver version (X.Y.Z)]' \
 '-u[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
 '--unstable[give exclusivly unstable semver version (X-Y-Z-V.W)]' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (finance.bic)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (http.code)
@@ -138,8 +138,8 @@ _arguments "${_arguments_options[@]}" \
 '--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (internet.ip)
@@ -150,40 +150,40 @@ _arguments "${_arguments_options[@]}" \
 '--ipv4[give exclusivly IPv4]' \
 '-6[give exclusivly IPv6]' \
 '--ipv6[give exclusivly IPv6]' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (internet.mac)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (internet.mail)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (internet.useragent)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (lorem.word)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (people.name)
@@ -200,24 +200,24 @@ _arguments "${_arguments_options[@]}" \
 '--firstname[give a fake firstname]' \
 '-z[give a fake lastname]' \
 '--lastname[give a fake lastname]' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (time.time)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (time.date)
 _arguments "${_arguments_options[@]}" \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
-'-h[Print help information]' \
-'--help[Print help information]' \
+'-h[Print help]' \
+'--help[Print help]' \
 && ret=0
 ;;
 (help)
@@ -585,4 +585,8 @@ _pouf__time.time_commands() {
     _describe -t commands 'pouf time.time commands' commands "$@"
 }
 
-_pouf "$@"
+if [ "$funcstack[1]" = "_pouf" ]; then
+    _pouf "$@"
+else
+    compdef _pouf pouf
+fi
