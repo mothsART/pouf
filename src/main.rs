@@ -21,18 +21,9 @@ mod domain;
 mod template;
 
 use crate::template::{
-    phone::Phone,
-    internet::Internet,
-    automotive::Automotive,
-    color::Color,
-    lorem::Lorem,
-    barecode::BareCode,
-    parser::parse,
-    people::People,
-    filesystem::FileSystem,
-    job::Job,
-    currency::Currency,
-    http::Http,
+    automotive::Automotive, barecode::BareCode, color::Color, currency::Currency,
+    filesystem::FileSystem, http::Http, internet::Internet, job::Job, lorem::Lorem, parser::parse,
+    people::People, phone::Phone,
 };
 
 fn lang_env() -> Option<String> {

@@ -8,12 +8,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::fake::Fake;
 use crate::lang_env;
-use crate::template::{
-    address::Address,
-    automotive::Automotive,
-    phone::Phone,
-    job::Job,
-};
+use crate::template::{address::Address, automotive::Automotive, job::Job, phone::Phone};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct People {

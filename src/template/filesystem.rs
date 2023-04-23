@@ -1,13 +1,6 @@
 use crate::fake::Fake;
 use clap::ArgMatches;
-use fake::faker::filesystem::raw::{
-    DirPath,
-    FileExtension,
-    FileName,
-    FilePath,
-    MimeType,
-    Semver,
-};
+use fake::faker::filesystem::raw::{DirPath, FileExtension, FileName, FilePath, MimeType, Semver};
 use fake::locales::EN;
 use serde::{Deserialize, Serialize};
 

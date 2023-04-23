@@ -1,7 +1,7 @@
 use crate::fake::Fake;
 use clap::ArgMatches;
-use fake::locales::EN;
 use fake::faker::barcode::raw::{Isbn, Isbn10, Isbn13};
+use fake::locales::EN;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
