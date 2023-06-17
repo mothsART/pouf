@@ -30,8 +30,8 @@ _pouf() {
         case $line[1] in
             (template)
 _arguments "${_arguments_options[@]}" \
-'-i+[give an input template file (tera : https://tera.netlify.app/)]: :_files' \
-'--input=[give an input template file (tera : https://tera.netlify.app/)]: :_files' \
+'-i+[give an input template file (tera \: https\://tera.netlify.app/)]: :_files' \
+'--input=[give an input template file (tera \: https\://tera.netlify.app/)]: :_files' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help]' \
@@ -134,8 +134,8 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (http.code)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-l+[give lang (ie\: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie\: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-h[Print help]' \
@@ -188,8 +188,8 @@ _arguments "${_arguments_options[@]}" \
 ;;
 (people.name)
 _arguments "${_arguments_options[@]}" \
-'-l+[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
-'--lang=[give lang (ie: fr_FR)]: :(fr fr_FR en)' \
+'-l+[give lang (ie\: fr_FR)]: :(fr fr_FR en)' \
+'--lang=[give lang (ie\: fr_FR)]: :(fr fr_FR en)' \
 '-n+[number of values]: : ' \
 '--number=[number of values]: : ' \
 '-t[give a fake name title]' \
