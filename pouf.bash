@@ -933,4 +933,4 @@ _pouf() {
     esac
 }
 
-complete -F _pouf -o bashdefault -o default pouf
+complete -F _pouf -o nosort -o bashdefault -o default pouf

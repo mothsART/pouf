@@ -51,7 +51,7 @@ complete -c pouf -n "__fish_seen_subcommand_from filesystem.semver" -s u -l unst
 complete -c pouf -n "__fish_seen_subcommand_from filesystem.semver" -s h -l help -d 'Print help'
 complete -c pouf -n "__fish_seen_subcommand_from finance.bic" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from finance.bic" -s h -l help -d 'Print help'
-complete -c pouf -n "__fish_seen_subcommand_from http.code" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
+complete -c pouf -n "__fish_seen_subcommand_from http.code" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	'',fr_FR	'',en	''}"
 complete -c pouf -n "__fish_seen_subcommand_from http.code" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from http.code" -s h -l help -d 'Print help'
 complete -c pouf -n "__fish_seen_subcommand_from internet.ip" -s n -l number -d 'number of values' -r
@@ -66,7 +66,7 @@ complete -c pouf -n "__fish_seen_subcommand_from internet.useragent" -s n -l num
 complete -c pouf -n "__fish_seen_subcommand_from internet.useragent" -s h -l help -d 'Print help'
 complete -c pouf -n "__fish_seen_subcommand_from lorem.word" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from lorem.word" -s h -l help -d 'Print help'
-complete -c pouf -n "__fish_seen_subcommand_from people.name" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	,fr_FR	,en	}"
+complete -c pouf -n "__fish_seen_subcommand_from people.name" -s l -l lang -d 'give lang (ie: fr_FR)' -r -f -a "{fr	'',fr_FR	'',en	''}"
 complete -c pouf -n "__fish_seen_subcommand_from people.name" -s n -l number -d 'number of values' -r
 complete -c pouf -n "__fish_seen_subcommand_from people.name" -s t -l title -d 'give a fake name title'
 complete -c pouf -n "__fish_seen_subcommand_from people.name" -s w -l with-title -d 'give a fake name with her title'

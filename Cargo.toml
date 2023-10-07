@@ -13,7 +13,7 @@ edition = "2021"
 build = "build.rs"
 
 [dependencies]
-clap = { version="4.3", features=['cargo'] }
+clap = { version="4.4", features=['cargo'] }
 random_color = "0.6"
 fake = { version="2.5", features=['chrono', 'http', 'semver', 'random_color'] }
 
@@ -28,5 +28,5 @@ pest_derive = "2.5"
 tera = "1.17"
 
 [build-dependencies]
-clap = { version="4.3", features=['cargo']  }
-clap_complete = { version="4.3" }
+clap = { version="4.4", features=['cargo']  }
+clap_complete = { version="4.4" }
