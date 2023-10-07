@@ -27,6 +27,9 @@ pest = "2.5"
 pest_derive = "2.5"
 tera = "1.17"
 
+syn = "^2"
+askama_parser = { git = "https://github.com/djc/askama", rev="a7c01d2e2431b3cef7911f0fbdedd0e2ad3f67c1" }
+
 [build-dependencies]
 clap = { version="4.3", features=['cargo']  }
 clap_complete = { version="4.3" }

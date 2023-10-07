@@ -1,9 +1,6 @@
-{% set peoples_nb = 2 %}
-{% set lang = "fr" %}
-
 {
   "results": [
-    {% for people in peoples %}
+    {% for people in peoples(5) %}
     {
       "gender": "{{ people.gender }}",
       "birthday": "{{ people.birthday }}",

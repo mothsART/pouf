@@ -1,4 +1,5 @@
 pub mod parser;
+pub mod generator;
 
 pub mod address;
 pub mod automotive;

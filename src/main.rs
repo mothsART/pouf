@@ -14,6 +14,8 @@ use std::path::PathBuf;
 
 use tera::{Context, Tera};
 
+use askama_parser::{Ast, Syntax};
+
 mod cli;
 #[macro_use]
 mod macros;
@@ -21,6 +23,7 @@ mod domain;
 mod template;
 
 use crate::template::{
+    generator::Generator,
     automotive::Automotive, barecode::BareCode, color::Color, currency::Currency,
     filesystem::FileSystem, http::Http, internet::Internet, job::Job, lorem::Lorem, parser::parse,
     people::People, phone::Phone,
@@ -40,6 +43,17 @@ fn main() {
         if let Some(input) = template_m.get_one::<PathBuf>("input") {
             let mut contents =
                 fs::read_to_string(input).expect("Should have been able to read the file");
+
+            //let ast = Ast::from_str("{{ function(\"123\", 3) }}", &Syntax::default()).unwrap();
+            let ast = Ast::from_str(&contents, &Syntax::default()).unwrap();
+            //let n = ast.nodes();
+            
+            let mut g = Generator::new();
+            g.handle(ast.nodes());
+
+            println!("==============");
+            println!("{:?}", g.render());
+            return;
 
             let nodes = parse(&contents);
 
