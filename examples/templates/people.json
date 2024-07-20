@@ -16,7 +16,7 @@
         "field": "{{ people.job.field }}",
         "position": "{{ people.job.position }}",
         "title": "{{ people.job.title }}"
-      }
+      },
       "location": {
         "city": "{{ people.location.city }}",
         "state": "{{ people.location.city }}",
@@ -36,5 +36,5 @@
       }
     }
     {% endfor %}
-  ],
+  ]
 }

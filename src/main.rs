@@ -29,6 +29,8 @@ use crate::template::{
     people::People, phone::Phone,
 };
 
+use crate::template::generator::MapChain;
+
 fn lang_env() -> Option<String> {
     match std::env::var("LANG") {
         Ok(_l) => _l.find('.').map(|pos| _l[0..pos].to_lowercase()),
@@ -48,11 +50,12 @@ fn main() {
             let ast = Ast::from_str(&contents, &Syntax::default()).unwrap();
             //let n = ast.nodes();
             
-            let mut g = Generator::new();
+            let mut g = Generator::new(MapChain::default());
             g.handle(ast.nodes());
 
             println!("==============");
-            println!("{:?}", g.render());
+            let r = g.render();
+            //println!("{:?}", g.render());
             return;
 
             let nodes = parse(&contents);
