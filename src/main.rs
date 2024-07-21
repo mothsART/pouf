@@ -24,12 +24,11 @@ mod template;
 
 use crate::template::{
     generator::Generator,
+    generator::AstLevel,
     automotive::Automotive, barecode::BareCode, color::Color, currency::Currency,
     filesystem::FileSystem, http::Http, internet::Internet, job::Job, lorem::Lorem, parser::parse,
     people::People, phone::Phone,
 };
-
-use crate::template::generator::MapChain;
 
 fn lang_env() -> Option<String> {
     match std::env::var("LANG") {
@@ -43,19 +42,22 @@ fn main() {
 
     if let Some(template_m) = matches.subcommand_matches("template") {
         if let Some(input) = template_m.get_one::<PathBuf>("input") {
-            let mut contents =
+            let contents =
                 fs::read_to_string(input).expect("Should have been able to read the file");
 
             //let ast = Ast::from_str("{{ function(\"123\", 3) }}", &Syntax::default()).unwrap();
             let ast = Ast::from_str(&contents, &Syntax::default()).unwrap();
             //let n = ast.nodes();
             
-            let mut g = Generator::new(MapChain::default());
-            g.handle(ast.nodes());
+            let mut g = Generator::new();
+            
+            if let Err(err) = g.handle(ast.nodes(), AstLevel::Top) {
+                eprint!("{}", err);
+                return;
+            }
 
             println!("==============");
-            let r = g.render();
-            //println!("{:?}", g.render());
+            println!("{}", g.render());
             return;
 
             let nodes = parse(&contents);
