@@ -49,7 +49,7 @@ fn main() {
             let ast = Ast::from_str(&contents, &Syntax::default()).unwrap();
             //let n = ast.nodes();
             
-            let mut g = Generator::new();
+            let mut g = Generator::new(&template_m);
             
             if let Err(err) = g.handle(ast.nodes(), AstLevel::Top) {
                 eprint!("{}", err);

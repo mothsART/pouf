@@ -221,3 +221,19 @@ macro_rules! force_each {
         }
     };
 }
+
+macro_rules! create_get_property {
+    ($struct_name:ident, $( $field_name:ident : $field_type:ty ),* ) => {
+        use std::any::Any;
+        impl $struct_name {
+            pub fn get_property(&self, key: &str) -> Option<&dyn Any> {
+                match key {
+                    $(
+                        stringify!($field_name) => Some(&self.$field_name as &dyn Any),
+                    )*
+                    _ => None,
+                }
+            }
+        }
+    }
+}

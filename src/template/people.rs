@@ -55,3 +55,13 @@ impl People {
         }
     }
 }
+
+create_get_property!(
+    People,
+    gender: String,
+    birthday: String,
+    title: String,
+    first_name: String,
+    last_name: String,
+    location: Address
+);

@@ -3,6 +3,7 @@ use std::collections::HashMap;
 use std::{cmp, hash, borrow::Cow};
 use std::borrow::Borrow;
 
+use clap::ArgMatches;
 use proc_macro2::TokenStream;
 use proc_macro2::Span;
 
@@ -94,6 +95,10 @@ impl Default for WhitespaceHandling {
     }
 }
 
+struct LoopObject {
+
+}
+
 pub struct Generator<'a> {
     // Suffix whitespace from the previous literal. Will be flushed to the
     // output buffer unless suppressed by whitespace suppression on the next
@@ -104,18 +109,21 @@ pub struct Generator<'a> {
     skip_ws: WhitespaceHandling,
     whitespace: WhitespaceHandling,
     buf: Buffer,
-
-    last_loop_var: Option<&'a str>
+    last_loop_var: Option<&'a str>,
+    last_loop_object: LoopObject,
+    template_m: &'a ArgMatches,
 }
 
 impl<'a> Generator<'a> {
-    pub fn new<'n>() -> Generator<'n> {
+    pub fn new<'n>(template_m: &'n ArgMatches) -> Generator<'n> {
         Generator {
             next_ws: None,
             skip_ws: WhitespaceHandling::Preserve,
             whitespace: WhitespaceHandling::Preserve,
             buf: Buffer::new(0),
-            last_loop_var: None
+            last_loop_var: None,
+            last_loop_object: LoopObject {},
+            template_m: template_m
         }
     }
 
@@ -146,7 +154,6 @@ impl<'a> Generator<'a> {
             }
         }
         if AstLevel::Top == level {
-            println!("cool\n");
             //self.next_ws = Some(self.skip_ws.into());
         }
         Ok(size_hint)
@@ -229,6 +236,10 @@ impl<'a> Generator<'a> {
         Ok(0)
     }
     
+    fn write_people() -> Result<DisplayWrap, ParsedError> {
+        Ok(DisplayWrap::Unwrapped)
+    }
+
     fn write_expr(&mut self, ws: Ws, val: &'a Expr<'a>) -> Result<DisplayWrap, ParsedError> {
         match val {
             Expr::Attr(attr_one, name_one) => {
@@ -238,7 +249,19 @@ impl<'a> Generator<'a> {
                             if last_loop_var != *name {
                                 return Err(format!("\"{name}.{name_one}\" doesn't exist. Did you mean \"{last_loop_var}.{name_one}\" ?").into());
                             }
-                            self.buf.write("let ");
+                            print!("=> {}\n", name);
+                            //if Some(people)
+                            let mut people = People::create(&self.template_m);
+
+                            if let Some(value) = people.get_property(name_one) {
+                                if let Some(name) = value.downcast_ref::<String>() {
+                                    self.buf.write(&name);
+                                } else {
+                                    return Err(format!("\"{name_one}\" is an object on \"{name}.{name_one}\". You must use properties.").into());
+                                }
+                            } else {
+                                return Err(format!("\"{name_one}\" proprerty on \"{name}.{name_one}\" doesn't exist.").into());
+                            }
                             return Ok(DisplayWrap::Unwrapped);
                         }
                         print!("{name}.{name_one}\n");
@@ -268,6 +291,8 @@ struct Buffer {
 }
 
 use core::fmt::Error;
+
+use crate::template::people::People;
 impl Buffer {
     fn new(indent: u8) -> Self {
         Self {
