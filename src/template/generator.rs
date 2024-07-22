@@ -236,7 +236,26 @@ impl<'a> Generator<'a> {
         Ok(0)
     }
     
-    fn write_people() -> Result<DisplayWrap, ParsedError> {
+    fn write_people(&mut self, name: &str, name_one: &str) -> Result<DisplayWrap, ParsedError> {
+        if let Some(last_loop_var) = self.last_loop_var {
+            if last_loop_var != name {
+                return Err(format!("\"{name}.{name_one}\" doesn't exist. Did you mean \"{last_loop_var}.{name_one}\" ?").into());
+            }
+            print!("=> {}\n", name);
+            let mut people = People::create(&self.template_m);
+
+            if let Some(value) = people.get_property(name_one) {
+                if let Some(name) = value.downcast_ref::<String>() {
+                    self.buf.write(&name);
+                } else {
+                    return Err(format!("\"{name_one}\" is an object on \"{name}.{name_one}\". You must use properties.").into());
+                }
+            } else {
+                return Err(format!("\"{name_one}\" property on \"{name}.{name_one}\" doesn't exist.").into());
+            }
+            return Ok(DisplayWrap::Unwrapped);
+        }
+        print!("{name}.{name_one}\n");
         Ok(DisplayWrap::Unwrapped)
     }
 
@@ -245,27 +264,10 @@ impl<'a> Generator<'a> {
             Expr::Attr(attr_one, name_one) => {
                 match attr_one.borrow() {
                     Expr::Var(name) => {
-                        if let Some(last_loop_var) = self.last_loop_var {
-                            if last_loop_var != *name {
-                                return Err(format!("\"{name}.{name_one}\" doesn't exist. Did you mean \"{last_loop_var}.{name_one}\" ?").into());
-                            }
-                            print!("=> {}\n", name);
-                            //if Some(people)
-                            let mut people = People::create(&self.template_m);
-
-                            if let Some(value) = people.get_property(name_one) {
-                                if let Some(name) = value.downcast_ref::<String>() {
-                                    self.buf.write(&name);
-                                } else {
-                                    return Err(format!("\"{name_one}\" is an object on \"{name}.{name_one}\". You must use properties.").into());
-                                }
-                            } else {
-                                return Err(format!("\"{name_one}\" proprerty on \"{name}.{name_one}\" doesn't exist.").into());
-                            }
-                            return Ok(DisplayWrap::Unwrapped);
+                        match *name {
+                            "people" => Ok(self.write_people(name, &name_one)?),
+                            _ => Err(format!("\"{name}\" in \"{name}.{name_one}\" doesn't exist.").into())
                         }
-                        print!("{name}.{name_one}\n");
-                        Ok(DisplayWrap::Unwrapped)
                     }
                     _val => {
                         print!(">prout {:?}<\n", _val);
