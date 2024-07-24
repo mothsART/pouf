@@ -96,7 +96,7 @@ impl Default for WhitespaceHandling {
 }
 
 struct LoopObject {
-
+    people: People,
 }
 
 pub struct Generator<'a> {
@@ -122,7 +122,9 @@ impl<'a> Generator<'a> {
             whitespace: WhitespaceHandling::Preserve,
             buf: Buffer::new(0),
             last_loop_var: None,
-            last_loop_object: LoopObject {},
+            last_loop_object: LoopObject {
+                people: People::create(template_m),
+            },
             template_m: template_m
         }
     }
@@ -219,6 +221,7 @@ impl<'a> Generator<'a> {
                                 askama_parser::Expr::NumLit(val) => {
                                     if let Ok(len_of_element) = val.parse::<i32>() {
                                         for n in 0..len_of_element {
+                                            self.last_loop_object.people = People::create(&self.template_m);
                                             self.handle(&loop_block.body, AstLevel::Nested)?;
                                         }
                                     }
@@ -241,10 +244,7 @@ impl<'a> Generator<'a> {
             if last_loop_var != name {
                 return Err(format!("\"{name}.{name_one}\" doesn't exist. Did you mean \"{last_loop_var}.{name_one}\" ?").into());
             }
-            print!("=> {}\n", name);
-            let mut people = People::create(&self.template_m);
-
-            if let Some(value) = people.get_property(name_one) {
+            if let Some(value) = self.last_loop_object.people.get_property(name_one) {
                 if let Some(name) = value.downcast_ref::<String>() {
                     self.buf.write(&name);
                 } else {
