@@ -4,8 +4,8 @@
     {
       "gender": "{{ people.gender }}",
       "birthday": "{{ people.birthday }}",
-      "phone": "{{ phone.fix }}",
-      "cell": "{{ phone.cell }}",
+      "phone": "{{ people.phone.fix }}",
+      "cell": "{{ people.phone.cell }}",
       "name": {
         "title": "{{ people.title }}",
         "first": "{{ people.first_name }}",

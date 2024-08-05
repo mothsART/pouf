@@ -1,14 +1,11 @@
 use std::fmt;
-use std::collections::HashMap;
-use std::{cmp, hash, borrow::Cow};
+use std::borrow::Cow;
 use std::borrow::Borrow;
 
 use clap::ArgMatches;
-use proc_macro2::TokenStream;
-use proc_macro2::Span;
 
 use askama_parser::{Node, Expr};
-use askama_parser::node::{Lit, Loop, Whitespace, Ws, Target};
+use askama_parser::node::{Lit, Loop, Whitespace, Target};
 
 #[derive(Clone, Copy, PartialEq)]
 pub enum AstLevel {
@@ -35,7 +32,7 @@ pub struct ParsedError {
 }
 
 impl ParsedError {
-    fn new<S: Into<Cow<'static, str>>>(s: S, span: Span) -> Self {
+    fn new<S: Into<Cow<'static, str>>>(s: S) -> Self {
         Self {
             msg: s.into(),
         }
@@ -54,37 +51,27 @@ impl fmt::Display for ParsedError {
 impl From<&'static str> for ParsedError {
     #[inline]
     fn from(s: &'static str) -> Self {
-        Self::new(s, Span::call_site())
+        Self::new(s)
     }
 }
 
 impl From<String> for ParsedError {
     #[inline]
     fn from(s: String) -> Self {
-        Self::new(s, Span::call_site())
+        Self::new(s)
     }
 }
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
-#[cfg_attr(feature = "serde", derive(Deserialize))]
-#[cfg_attr(feature = "serde", serde(field_identifier, rename_all = "lowercase"))]
 pub(crate) enum WhitespaceHandling {
     /// The default behaviour. It will leave the whitespace characters "as is".
     Preserve,
-    /// It'll remove all the whitespace characters before and after the jinja block.
-    Suppress,
-    /// It'll remove all the whitespace characters except one before and after the jinja blocks.
-    /// If there is a newline character, the preserved character in the trimmed characters, it will
-    /// the one preserved.
-    Minimize,
 }
 
 impl From<WhitespaceHandling> for Whitespace {
     fn from(ws: WhitespaceHandling) -> Self {
         match ws {
-            WhitespaceHandling::Suppress => Whitespace::Suppress,
             WhitespaceHandling::Preserve => Whitespace::Preserve,
-            WhitespaceHandling::Minimize => Whitespace::Minimize,
         }
     }
 }
@@ -97,6 +84,8 @@ impl Default for WhitespaceHandling {
 
 struct LoopObject {
     people: People,
+    job: Job,
+    coordinates: Coordinate,
 }
 
 pub struct Generator<'a> {
@@ -107,7 +96,6 @@ pub struct Generator<'a> {
     // Whitespace suppression from the previous non-literal. Will be used to
     // determine whether to flush prefix whitespace from the next literal.
     skip_ws: WhitespaceHandling,
-    whitespace: WhitespaceHandling,
     buf: Buffer,
     last_loop_var: Option<&'a str>,
     last_loop_object: LoopObject,
@@ -119,11 +107,12 @@ impl<'a> Generator<'a> {
         Generator {
             next_ws: None,
             skip_ws: WhitespaceHandling::Preserve,
-            whitespace: WhitespaceHandling::Preserve,
             buf: Buffer::new(0),
             last_loop_var: None,
             last_loop_object: LoopObject {
                 people: People::create(template_m),
+                job: Job::create(template_m),
+                coordinates: Coordinate::create(&template_m),
             },
             template_m: template_m
         }
@@ -134,16 +123,17 @@ impl<'a> Generator<'a> {
         nodes: &'a [Node<'_>],
         level: AstLevel,
     ) -> Result<usize, ParsedError> {
-        let mut size_hint = 0;
+        let size_hint = 0;
         for n in nodes {
             match *n {
                 Node::Lit(ref lit) => {
                     self.visit_lit(lit);
                 }
-                Node::Expr(ws, ref val) => {
-                    let _ = self.write_expr(ws, val)?;
+                Node::Expr(_ws, ref val) => {
+                    let mut _vec: Vec<&str> = vec![];
+                    let _ = self.write_expr(val, &mut _vec)?;
                 }
-                Node::If(ref i) => {
+                Node::If(ref _i) => {
                     println!("if\n");
                     //size_hint += self.write_if(ctx, buf, i)?;
                 }
@@ -170,14 +160,15 @@ impl<'a> Generator<'a> {
         let Lit { lws, val, rws } = *lit;
         if !lws.is_empty() {
             match self.skip_ws {
+                WhitespaceHandling::Preserve => {
+                    self.buf.write(lws);
+                }
+                /*
                 WhitespaceHandling::Suppress => {}
                 _ if val.is_empty() => {
                     assert!(rws.is_empty());
                     self.next_ws = Some(lws);
                 }
-                WhitespaceHandling::Preserve => {
-                    self.buf.write(lws);
-                },
                 WhitespaceHandling::Minimize => {
                     match lws.contains('\n') {
                         true => {
@@ -188,6 +179,7 @@ impl<'a> Generator<'a> {
                         }
                     };
                 }
+                */
             }
         }
 
@@ -220,7 +212,7 @@ impl<'a> Generator<'a> {
                             match args[0] {
                                 askama_parser::Expr::NumLit(val) => {
                                     if let Ok(len_of_element) = val.parse::<i32>() {
-                                        for n in 0..len_of_element {
+                                        for _n in 0..len_of_element {
                                             self.last_loop_object.people = People::create(&self.template_m);
                                             self.handle(&loop_block.body, AstLevel::Nested)?;
                                         }
@@ -239,39 +231,106 @@ impl<'a> Generator<'a> {
         Ok(0)
     }
     
-    fn write_people(&mut self, name: &str, name_one: &str) -> Result<DisplayWrap, ParsedError> {
+    fn write_people(&mut self, val: &'a Expr<'a>, name: &str, property: &str, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
         if let Some(last_loop_var) = self.last_loop_var {
             if last_loop_var != name {
-                return Err(format!("\"{name}.{name_one}\" doesn't exist. Did you mean \"{last_loop_var}.{name_one}\" ?").into());
+                return Ok(DisplayWrap::Unwrapped);
+                //return Err(format!("\"{name}.{property}\" doesn't exist. Did you mean \"{last_loop_var}.{property}\" ?").into());
             }
-            if let Some(value) = self.last_loop_object.people.get_property(name_one) {
-                if let Some(name) = value.downcast_ref::<String>() {
+            if let Some(property_value) = self.last_loop_object.people.get_property(property) {
+                if let Some(name) = property_value.downcast_ref::<String>() {
                     self.buf.write(&name);
                 } else {
-                    return Err(format!("\"{name_one}\" is an object on \"{name}.{name_one}\". You must use properties.").into());
+                    return Ok(DisplayWrap::Unwrapped);
+                    //return Err(format!("\"{property}\" is an object on \"{name}.{property}\". You must use properties.").into());
                 }
             } else {
-                return Err(format!("\"{name_one}\" property on \"{name}.{name_one}\" doesn't exist.").into());
+                match val {
+                    Expr::Attr(attr, name_one) => {
+                        match attr.borrow() {
+                            Expr::Var(parent_name) => {
+                                println!("&> {parent_name}");
+                                return Ok(DisplayWrap::Unwrapped);
+                            }
+                            _val_two => {
+                                return Ok(DisplayWrap::Unwrapped);
+                            }
+                        }
+                    }
+                    _ => { return Ok(DisplayWrap::Unwrapped); }
+                }
             }
             return Ok(DisplayWrap::Unwrapped);
         }
-        print!("{name}.{name_one}\n");
         Ok(DisplayWrap::Unwrapped)
     }
 
-    fn write_expr(&mut self, ws: Ws, val: &'a Expr<'a>) -> Result<DisplayWrap, ParsedError> {
+    fn write_job(&mut self, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
+        if let Some(name) = attrs.last() {
+            if let Some(parent_name) = attrs.get(attrs.len().checked_sub(2).unwrap_or(0)) {
+                if let Some(property_value) = self.last_loop_object.job.get_property(name) {
+                    if let Some(name) = property_value.downcast_ref::<String>() {
+                        self.buf.write(&name);
+                    } else {
+                        return Ok(DisplayWrap::Unwrapped);
+                        //return Err(format!("\"{property}\" is an object on \"{name}.{property}\". You must use properties.").into());
+                    }
+                }
+            }       
+        }
+        Ok(DisplayWrap::Unwrapped)
+    }
+
+    fn write_coordinates(&mut self, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
+        if let Some(name) = attrs.last() {
+            if let Some(parent_name) = attrs.get(attrs.len().checked_sub(2).unwrap_or(0)) {
+                if let Some(property_value) = self.last_loop_object.coordinates.get_property(name) {
+                    if let Some(name) = property_value.downcast_ref::<String>() {
+                        self.buf.write(&name);
+                    } else {
+                        return Ok(DisplayWrap::Unwrapped);
+                        //return Err(format!("\"{property}\" is an object on \"{name}.{property}\". You must use properties.").into());
+                    }
+                }
+            }       
+        }
+        Ok(DisplayWrap::Unwrapped)
+    }
+
+    fn write_phone(&mut self, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
+        Ok(DisplayWrap::Unwrapped)
+    }
+
+    fn dispatch(&mut self, val: &'a Expr<'a>, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
+        if let Some(name) = attrs.last() {
+            if let Some(parent_name) = attrs.get(attrs.len().checked_sub(2).unwrap_or(0)) {
+                match *parent_name {
+                    "people" => { return Ok(self.write_people(val, parent_name, &name, attrs)?); },
+                    "job" => { return Ok(self.write_job(attrs)?); },
+                    "phone" => { return Ok(self.write_phone(attrs)?); },
+                    "coordinates" => { return Ok(self.write_coordinates(attrs)?); },
+                    _ => {
+                        let attrs_str = attrs.join(".");
+                        return Err(format!("\"{name}\" in \"{attrs_str}\" doesn't exist.").into())
+                    }
+                }
+            }
+        }
+        return Ok(DisplayWrap::Unwrapped);
+    }
+
+    fn write_expr(&mut self, val: &'a Expr<'a>, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
         match val {
-            Expr::Attr(attr_one, name_one) => {
-                match attr_one.borrow() {
-                    Expr::Var(name) => {
-                        match *name {
-                            "people" => Ok(self.write_people(name, &name_one)?),
-                            _ => Err(format!("\"{name}\" in \"{name}.{name_one}\" doesn't exist.").into())
-                        }
+            Expr::Attr(attr, name) => {
+                match attr.borrow() {
+                    Expr::Var(parent_name) => {
+                        attrs.insert(0, *name);
+                        attrs.insert(0, *parent_name);
+                        return Ok(self.dispatch(val, attrs)?);
                     }
                     _val => {
-                        print!(">prout {:?}<\n", _val);
-                        Ok(DisplayWrap::Unwrapped)
+                        attrs.insert(0, *name);
+                        return Ok(self.write_expr(_val, attrs)?);
                     }
                 }
             }
@@ -292,9 +351,10 @@ struct Buffer {
     discard: bool,
 }
 
-use core::fmt::Error;
-
 use crate::template::people::People;
+
+use super::address::Coordinate;
+use super::job::Job;
 impl Buffer {
     fn new(indent: u8) -> Self {
         Self {
@@ -303,20 +363,6 @@ impl Buffer {
             start: true,
             discard: false,
         }
-    }
-
-    fn writeln(&mut self, s: &str) -> Result<(), Error> {
-        if self.discard {
-            return Ok(());
-        }
-        if !s.is_empty() {
-            print!("salut {s}\n");
-            self.write(s);
-        }
-        self.buf.push('\n');
-
-        self.start = true;
-        Ok(())
     }
 
     fn write(&mut self, s: &str) {
@@ -330,9 +376,5 @@ impl Buffer {
             self.start = false;
         }
         self.buf.push_str(s);
-    }
-
-    fn indent(&mut self) {
-        self.indent += 1;
     }
 }

@@ -23,3 +23,11 @@ impl Job {
         }
     }
 }
+
+create_get_property!(
+    Job,
+    seniority: String,
+    field: String,
+    position: String,
+    title: String
+);

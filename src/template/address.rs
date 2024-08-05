@@ -38,6 +38,13 @@ impl Coordinate {
     }
 }
 
+create_get_property!(
+    Coordinate,
+    latitude: String,
+    longitude: String,
+    geohash: String
+);
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Address {
     pub city: String,

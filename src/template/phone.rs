@@ -19,3 +19,9 @@ impl Phone {
         }
     }
 }
+
+create_get_property!(
+    Phone,
+    fix: String,
+    cell: String
+);
