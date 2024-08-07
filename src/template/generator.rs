@@ -1,29 +1,24 @@
 use std::fmt;
 use std::borrow::Cow;
 use std::borrow::Borrow;
+use std::ops::Add;
 
 use clap::ArgMatches;
 
 use askama_parser::{Node, Expr};
 use askama_parser::node::{Lit, Loop, Whitespace, Target};
 
+use crate::template::template_trait::TemplateObject;
+
 #[derive(Clone, Copy, PartialEq)]
 pub enum AstLevel {
     Top,
-    Block,
     Nested,
 }
 
 #[derive(Clone, Copy)]
 enum DisplayWrap {
-    Wrapped,
     Unwrapped,
-}
-
-#[derive(Debug)]
-enum Writable<'a> {
-    Lit(&'a str),
-    Expr(&'a Expr<'a>),
 }
 
 #[derive(Debug, Clone)]
@@ -86,6 +81,8 @@ struct LoopObject {
     people: People,
     job: Job,
     coordinates: Coordinate,
+    phone: Phone,
+    location: Address,
 }
 
 pub struct Generator<'a> {
@@ -113,6 +110,8 @@ impl<'a> Generator<'a> {
                 people: People::create(template_m),
                 job: Job::create(template_m),
                 coordinates: Coordinate::create(&template_m),
+                phone: Phone::create(&template_m),
+                location: Address::create(&template_m),
             },
             template_m: template_m
         }
@@ -163,23 +162,6 @@ impl<'a> Generator<'a> {
                 WhitespaceHandling::Preserve => {
                     self.buf.write(lws);
                 }
-                /*
-                WhitespaceHandling::Suppress => {}
-                _ if val.is_empty() => {
-                    assert!(rws.is_empty());
-                    self.next_ws = Some(lws);
-                }
-                WhitespaceHandling::Minimize => {
-                    match lws.contains('\n') {
-                        true => {
-                            self.buf.write("\n");
-                        }
-                        false => {
-                            self.buf.write(" ");
-                        }
-                    };
-                }
-                */
             }
         }
 
@@ -231,84 +213,25 @@ impl<'a> Generator<'a> {
         Ok(0)
     }
     
-    fn write_people(&mut self, val: &'a Expr<'a>, name: &str, property: &str, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
-        if let Some(last_loop_var) = self.last_loop_var {
-            if last_loop_var != name {
-                return Ok(DisplayWrap::Unwrapped);
-                //return Err(format!("\"{name}.{property}\" doesn't exist. Did you mean \"{last_loop_var}.{property}\" ?").into());
-            }
-            if let Some(property_value) = self.last_loop_object.people.get_property(property) {
-                if let Some(name) = property_value.downcast_ref::<String>() {
-                    self.buf.write(&name);
-                } else {
-                    return Ok(DisplayWrap::Unwrapped);
-                    //return Err(format!("\"{property}\" is an object on \"{name}.{property}\". You must use properties.").into());
-                }
-            } else {
-                match val {
-                    Expr::Attr(attr, name_one) => {
-                        match attr.borrow() {
-                            Expr::Var(parent_name) => {
-                                println!("&> {parent_name}");
-                                return Ok(DisplayWrap::Unwrapped);
-                            }
-                            _val_two => {
-                                return Ok(DisplayWrap::Unwrapped);
-                            }
-                        }
-                    }
-                    _ => { return Ok(DisplayWrap::Unwrapped); }
-                }
-            }
-            return Ok(DisplayWrap::Unwrapped);
-        }
-        Ok(DisplayWrap::Unwrapped)
-    }
-
-    fn write_job(&mut self, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
-        if let Some(name) = attrs.last() {
-            if let Some(parent_name) = attrs.get(attrs.len().checked_sub(2).unwrap_or(0)) {
-                if let Some(property_value) = self.last_loop_object.job.get_property(name) {
-                    if let Some(name) = property_value.downcast_ref::<String>() {
-                        self.buf.write(&name);
-                    } else {
-                        return Ok(DisplayWrap::Unwrapped);
-                        //return Err(format!("\"{property}\" is an object on \"{name}.{property}\". You must use properties.").into());
-                    }
-                }
-            }       
-        }
-        Ok(DisplayWrap::Unwrapped)
-    }
-
-    fn write_coordinates(&mut self, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
-        if let Some(name) = attrs.last() {
-            if let Some(parent_name) = attrs.get(attrs.len().checked_sub(2).unwrap_or(0)) {
-                if let Some(property_value) = self.last_loop_object.coordinates.get_property(name) {
-                    if let Some(name) = property_value.downcast_ref::<String>() {
-                        self.buf.write(&name);
-                    } else {
-                        return Ok(DisplayWrap::Unwrapped);
-                        //return Err(format!("\"{property}\" is an object on \"{name}.{property}\". You must use properties.").into());
-                    }
-                }
-            }       
-        }
-        Ok(DisplayWrap::Unwrapped)
-    }
-
-    fn write_phone(&mut self, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
-        Ok(DisplayWrap::Unwrapped)
-    }
-
     fn dispatch(&mut self, val: &'a Expr<'a>, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
         if let Some(name) = attrs.last() {
             if let Some(parent_name) = attrs.get(attrs.len().checked_sub(2).unwrap_or(0)) {
                 match *parent_name {
-                    "people" => { return Ok(self.write_people(val, parent_name, &name, attrs)?); },
-                    "job" => { return Ok(self.write_job(attrs)?); },
-                    "phone" => { return Ok(self.write_phone(attrs)?); },
-                    "coordinates" => { return Ok(self.write_coordinates(attrs)?); },
+                    "people" => {
+                        return Ok(write_object(&self.last_loop_object.people, attrs, &mut self.buf)?);
+                    },
+                    "job" => {
+                        return Ok(write_object(&self.last_loop_object.job, attrs, &mut self.buf)?);
+                    },
+                    "phone" => {
+                        return Ok(write_object(&self.last_loop_object.phone, attrs, &mut self.buf)?);
+                    },
+                    "coordinates" => {
+                        return Ok(write_object(&self.last_loop_object.coordinates, attrs, &mut self.buf)?);
+                    },
+                    "location" => {
+                        return Ok(write_object(&self.last_loop_object.location, attrs, &mut self.buf)?);
+                    },
                     _ => {
                         let attrs_str = attrs.join(".");
                         return Err(format!("\"{name}\" in \"{attrs_str}\" doesn't exist.").into())
@@ -341,6 +264,19 @@ impl<'a> Generator<'a> {
     }
 }
 
+fn write_object<'a, T: TemplateObject>(object: &T, attrs: &mut Vec<&'a str>, buf: &mut Buffer) -> Result<DisplayWrap, ParsedError> {
+    if let Some(name) = attrs.last() {
+        if let Some(property_value) = object.get_property(name) {
+            if let Some(value) = property_value.downcast_ref::<String>() {
+                buf.write(&value);
+            } else {
+                return Ok(DisplayWrap::Unwrapped);
+            }
+        }
+    }
+    Ok(DisplayWrap::Unwrapped)
+}
+
 struct Buffer {
     // The buffer to generate the code into
     buf: String,
@@ -353,8 +289,10 @@ struct Buffer {
 
 use crate::template::people::People;
 
-use super::address::Coordinate;
+use super::address::Address;
+use super::coordinates::Coordinate;
 use super::job::Job;
+use super::phone::Phone;
 impl Buffer {
     fn new(indent: u8) -> Self {
         Self {

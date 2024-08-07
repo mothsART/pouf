@@ -1,10 +1,12 @@
-pub mod parser;
 pub mod generator;
+
+pub mod template_trait;
 
 pub mod address;
 pub mod automotive;
 pub mod barecode;
 pub mod color;
+pub mod coordinates;
 pub mod currency;
 pub mod filesystem;
 pub mod http;
