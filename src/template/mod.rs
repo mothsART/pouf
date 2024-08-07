@@ -15,3 +15,4 @@ pub mod job;
 pub mod lorem;
 pub mod people;
 pub mod phone;
+pub mod timezone;

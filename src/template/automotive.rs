@@ -16,3 +16,8 @@ impl Automotive {
         }
     }
 }
+
+create_get_property!(
+    Automotive,
+    licence_plate: String
+);

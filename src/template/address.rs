@@ -1,29 +1,14 @@
-use std::ops::Add;
-
 use serde::{Deserialize, Serialize};
 
 use crate::fake::Fake;
 use clap::ArgMatches;
 use fake::faker::address::raw::{
-    CityName, CountryName, StateName, TimeZone, ZipCode,
+    CityName, CountryName, StateName, ZipCode,
 };
-use fake::locales::EN;
 
 use crate::lang_env;
 use crate::template::coordinates::Coordinate;
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Timezone {
-    pub description: String,
-}
-
-impl Timezone {
-    pub fn create(_arg: &ArgMatches) -> Timezone {
-        Timezone {
-            description: TimeZone(EN).fake::<String>(),
-        }
-    }
-}
+use crate::template::timezone::Timezone;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Address {

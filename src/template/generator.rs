@@ -1,7 +1,6 @@
 use std::fmt;
 use std::borrow::Cow;
 use std::borrow::Borrow;
-use std::ops::Add;
 
 use clap::ArgMatches;
 
@@ -83,6 +82,8 @@ struct LoopObject {
     coordinates: Coordinate,
     phone: Phone,
     location: Address,
+    timezone: Timezone,
+    automotive: Automotive,
 }
 
 pub struct Generator<'a> {
@@ -112,6 +113,8 @@ impl<'a> Generator<'a> {
                 coordinates: Coordinate::create(&template_m),
                 phone: Phone::create(&template_m),
                 location: Address::create(&template_m),
+                timezone: Timezone::create(&template_m),
+                automotive: Automotive::create(&template_m),
             },
             template_m: template_m
         }
@@ -213,7 +216,7 @@ impl<'a> Generator<'a> {
         Ok(0)
     }
     
-    fn dispatch(&mut self, val: &'a Expr<'a>, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
+    fn dispatch(&mut self, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
         if let Some(name) = attrs.last() {
             if let Some(parent_name) = attrs.get(attrs.len().checked_sub(2).unwrap_or(0)) {
                 match *parent_name {
@@ -232,6 +235,12 @@ impl<'a> Generator<'a> {
                     "location" => {
                         return Ok(write_object(&self.last_loop_object.location, attrs, &mut self.buf)?);
                     },
+                    "timezone" => {
+                        return Ok(write_object(&self.last_loop_object.timezone, attrs, &mut self.buf)?);
+                    },
+                    "automotive" => {
+                        return Ok(write_object(&self.last_loop_object.automotive, attrs, &mut self.buf)?);
+                    },
                     _ => {
                         let attrs_str = attrs.join(".");
                         return Err(format!("\"{name}\" in \"{attrs_str}\" doesn't exist.").into())
@@ -249,7 +258,7 @@ impl<'a> Generator<'a> {
                     Expr::Var(parent_name) => {
                         attrs.insert(0, *name);
                         attrs.insert(0, *parent_name);
-                        return Ok(self.dispatch(val, attrs)?);
+                        return Ok(self.dispatch(attrs)?);
                     }
                     _val => {
                         attrs.insert(0, *name);
@@ -290,9 +299,11 @@ struct Buffer {
 use crate::template::people::People;
 
 use super::address::Address;
+use super::automotive::Automotive;
 use super::coordinates::Coordinate;
 use super::job::Job;
 use super::phone::Phone;
+use super::timezone::Timezone;
 impl Buffer {
     fn new(indent: u8) -> Self {
         Self {
