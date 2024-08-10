@@ -7,7 +7,16 @@ use clap::ArgMatches;
 use askama_parser::{Node, Expr};
 use askama_parser::node::{Lit, Loop, Whitespace, Target};
 
+use super::address::Address;
+use super::automotive::Automotive;
+use super::coordinates::Coordinate;
+use super::color::Color;
+use super::job::Job;
+use super::phone::Phone;
+use super::timezone::Timezone;
+
 use crate::template::template_trait::TemplateObject;
+use crate::template::people::People;
 
 #[derive(Clone, Copy, PartialEq)]
 pub enum AstLevel {
@@ -84,6 +93,7 @@ struct LoopObject {
     location: Address,
     timezone: Timezone,
     automotive: Automotive,
+    color: Color,
 }
 
 pub struct Generator<'a> {
@@ -115,6 +125,7 @@ impl<'a> Generator<'a> {
                 location: Address::create(&template_m),
                 timezone: Timezone::create(&template_m),
                 automotive: Automotive::create(&template_m),
+                color: Color::create(&template_m),
             },
             template_m: template_m
         }
@@ -135,16 +146,10 @@ impl<'a> Generator<'a> {
                     let mut _vec: Vec<&str> = vec![];
                     let _ = self.write_expr(val, &mut _vec)?;
                 }
-                Node::If(ref _i) => {
-                    println!("if\n");
-                    //size_hint += self.write_if(ctx, buf, i)?;
-                }
                 Node::Loop(ref loop_block) => {
                     self.write_loop(loop_block)?;
                 }
-                _ => {
-                    println!("find\n");
-                }
+                _ => {}
             }
         }
         if AstLevel::Top == level {
@@ -158,7 +163,6 @@ impl<'a> Generator<'a> {
     }
 
     fn visit_lit(&mut self, lit: &'a Lit<'_>) {
-        //assert!(self.next_ws.is_none());
         let Lit { lws, val, rws } = *lit;
         if !lws.is_empty() {
             match self.skip_ws {
@@ -220,26 +224,29 @@ impl<'a> Generator<'a> {
         if let Some(name) = attrs.last() {
             if let Some(parent_name) = attrs.get(attrs.len().checked_sub(2).unwrap_or(0)) {
                 match *parent_name {
-                    "people" => {
-                        return Ok(write_object(&self.last_loop_object.people, attrs, &mut self.buf)?);
-                    },
-                    "job" => {
-                        return Ok(write_object(&self.last_loop_object.job, attrs, &mut self.buf)?);
-                    },
-                    "phone" => {
-                        return Ok(write_object(&self.last_loop_object.phone, attrs, &mut self.buf)?);
+                    "automotive" => {
+                        return Ok(write_object(&self.last_loop_object.automotive, attrs, &mut self.buf)?);
                     },
                     "coordinates" => {
                         return Ok(write_object(&self.last_loop_object.coordinates, attrs, &mut self.buf)?);
                     },
+                    "color" => {
+                        return Ok(write_object(&self.last_loop_object.color, attrs, &mut self.buf)?);
+                    },
+                    "job" => {
+                        return Ok(write_object(&self.last_loop_object.job, attrs, &mut self.buf)?);
+                    },
                     "location" => {
                         return Ok(write_object(&self.last_loop_object.location, attrs, &mut self.buf)?);
                     },
+                    "people" => {
+                        return Ok(write_object(&self.last_loop_object.people, attrs, &mut self.buf)?);
+                    },
+                    "phone" => {
+                        return Ok(write_object(&self.last_loop_object.phone, attrs, &mut self.buf)?);
+                    },
                     "timezone" => {
                         return Ok(write_object(&self.last_loop_object.timezone, attrs, &mut self.buf)?);
-                    },
-                    "automotive" => {
-                        return Ok(write_object(&self.last_loop_object.automotive, attrs, &mut self.buf)?);
                     },
                     _ => {
                         let attrs_str = attrs.join(".");
@@ -296,14 +303,6 @@ struct Buffer {
     discard: bool,
 }
 
-use crate::template::people::People;
-
-use super::address::Address;
-use super::automotive::Automotive;
-use super::coordinates::Coordinate;
-use super::job::Job;
-use super::phone::Phone;
-use super::timezone::Timezone;
 impl Buffer {
     fn new(indent: u8) -> Self {
         Self {
