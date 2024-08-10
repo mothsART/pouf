@@ -18,3 +18,9 @@ impl Http {
         }
     }
 }
+
+create_get_property!(
+    Http,
+    rfc_status_code: String,
+    valid_status_code: String
+);

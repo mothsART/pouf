@@ -2,6 +2,14 @@
   "results": [
     {% for people in peoples(5) %}
     {
+      "color": "{{ color.hex }}",
+      "isbn13": "{{ barecode.isbn13 }}",
+      "semver": "{{ filesystem.semver }}",
+      "currency_code": "{{ currency.code }}",
+      "currency_name": "{{ currency.name }}",
+      "currency_symbol": "{{ currency.symbol }}",
+      "http_rfc_code": "{{ http.rfc_status_code }}",
+      "http_valid_code": "{{ http.valid_status_code }}",
       "gender": "{{ people.gender }}",
       "birthday": "{{ people.birthday }}",
       "phone": "{{ people.phone.fix }}",
