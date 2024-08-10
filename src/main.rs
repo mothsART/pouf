@@ -39,9 +39,7 @@ fn main() {
             let contents =
                 fs::read_to_string(input).expect("Should have been able to read the file");
 
-            //let ast = Ast::from_str("{{ function(\"123\", 3) }}", &Syntax::default()).unwrap();
             let ast = Ast::from_str(&contents, &Syntax::default()).unwrap();
-            //let n = ast.nodes();
             
             let mut g = Generator::new(&template_m);
             
