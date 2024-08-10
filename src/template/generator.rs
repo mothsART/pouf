@@ -9,6 +9,7 @@ use askama_parser::node::{Lit, Loop, Whitespace, Target};
 
 use super::address::Address;
 use super::automotive::Automotive;
+use super::barecode::BareCode;
 use super::coordinates::Coordinate;
 use super::color::Color;
 use super::job::Job;
@@ -86,14 +87,15 @@ impl Default for WhitespaceHandling {
 }
 
 struct LoopObject {
-    people: People,
-    job: Job,
-    coordinates: Coordinate,
-    phone: Phone,
-    location: Address,
-    timezone: Timezone,
     automotive: Automotive,
+    barecode: BareCode,
+    coordinates: Coordinate,
     color: Color,
+    job: Job,
+    location: Address,
+    people: People,
+    phone: Phone,
+    timezone: Timezone,
 }
 
 pub struct Generator<'a> {
@@ -118,14 +120,15 @@ impl<'a> Generator<'a> {
             buf: Buffer::new(0),
             last_loop_var: None,
             last_loop_object: LoopObject {
-                people: People::create(template_m),
-                job: Job::create(template_m),
-                coordinates: Coordinate::create(&template_m),
-                phone: Phone::create(&template_m),
-                location: Address::create(&template_m),
-                timezone: Timezone::create(&template_m),
                 automotive: Automotive::create(&template_m),
+                coordinates: Coordinate::create(&template_m),
+                barecode: BareCode::create(&template_m),
                 color: Color::create(&template_m),
+                job: Job::create(template_m),
+                location: Address::create(&template_m),
+                people: People::create(template_m),
+                phone: Phone::create(&template_m),
+                timezone: Timezone::create(&template_m),
             },
             template_m: template_m
         }
@@ -226,6 +229,9 @@ impl<'a> Generator<'a> {
                 match *parent_name {
                     "automotive" => {
                         return Ok(write_object(&self.last_loop_object.automotive, attrs, &mut self.buf)?);
+                    },
+                    "barecode" => {
+                        return Ok(write_object(&self.last_loop_object.barecode, attrs, &mut self.buf)?);
                     },
                     "coordinates" => {
                         return Ok(write_object(&self.last_loop_object.coordinates, attrs, &mut self.buf)?);

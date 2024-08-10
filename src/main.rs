@@ -49,8 +49,6 @@ fn main() {
                 eprint!("{}", err);
                 return;
             }
-
-            println!("==============");
             println!("{}", g.render());
         }
         return;

@@ -20,3 +20,10 @@ impl BareCode {
         }
     }
 }
+
+create_get_property!(
+    BareCode,
+    isbn: String,
+    isbn10: String,
+    isbn13: String
+);
