@@ -15,6 +15,7 @@ use super::color::Color;
 use super::currency::Currency;
 use super::filesystem::FileSystem;
 use super::http::Http;
+use super::internet::Internet;
 use super::job::Job;
 use super::phone::Phone;
 use super::timezone::Timezone;
@@ -92,6 +93,7 @@ struct LoopObject {
     currency: Currency,
     filesystem: FileSystem,
     http: Http,
+    internet: Internet,
     job: Job,
     location: Address,
     people: People,
@@ -128,6 +130,7 @@ impl<'a> Generator<'a> {
                 currency: Currency::create(template_m),
                 filesystem: FileSystem::create(template_m),
                 http: Http::create(template_m),
+                internet: Internet::create(template_m),
                 job: Job::create(template_m),
                 location: Address::create(template_m),
                 people: People::create(template_m),
@@ -239,6 +242,9 @@ impl<'a> Generator<'a> {
                     },
                     "http" => {
                         return write_object(&self.last_loop_object.http, attrs, &mut self.buf);
+                    },
+                    "internet" => {
+                        return write_object(&self.last_loop_object.internet, attrs, &mut self.buf);
                     },
                     "job" => {
                         return write_object(&self.last_loop_object.job, attrs, &mut self.buf);
