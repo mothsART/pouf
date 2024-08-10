@@ -66,9 +66,10 @@ impl From<String> for ParsedError {
     }
 }
 
-#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+#[derive(Clone, Copy, PartialEq, Eq, Debug, Default)]
 pub(crate) enum WhitespaceHandling {
     /// The default behaviour. It will leave the whitespace characters "as is".
+    #[default]
     Preserve,
 }
 
@@ -77,12 +78,6 @@ impl From<WhitespaceHandling> for Whitespace {
         match ws {
             WhitespaceHandling::Preserve => Whitespace::Preserve,
         }
-    }
-}
-
-impl Default for WhitespaceHandling {
-    fn default() -> Self {
-        WhitespaceHandling::Preserve
     }
 }
 
@@ -113,24 +108,24 @@ pub struct Generator<'a> {
 }
 
 impl<'a> Generator<'a> {
-    pub fn new<'n>(template_m: &'n ArgMatches) -> Generator<'n> {
+    pub fn new(template_m: &ArgMatches) -> Generator<'_> {
         Generator {
             next_ws: None,
             skip_ws: WhitespaceHandling::Preserve,
             buf: Buffer::new(0),
             last_loop_var: None,
             last_loop_object: LoopObject {
-                automotive: Automotive::create(&template_m),
-                coordinates: Coordinate::create(&template_m),
-                barecode: BareCode::create(&template_m),
-                color: Color::create(&template_m),
+                automotive: Automotive::create(template_m),
+                coordinates: Coordinate::create(template_m),
+                barecode: BareCode::create(template_m),
+                color: Color::create(template_m),
                 job: Job::create(template_m),
-                location: Address::create(&template_m),
+                location: Address::create(template_m),
                 people: People::create(template_m),
-                phone: Phone::create(&template_m),
-                timezone: Timezone::create(&template_m),
+                phone: Phone::create(template_m),
+                timezone: Timezone::create(template_m),
             },
-            template_m: template_m
+            template_m
         }
     }
 
@@ -189,70 +184,58 @@ impl<'a> Generator<'a> {
         &mut self,
         loop_block: &'a Loop<'_>,
     ) -> Result<usize, ParsedError> {
-        match loop_block.var {
-            Target::Name(val) => {
-                self.last_loop_var = Some(val);
-            }
-            _ => {}
+        if let Target::Name(val) = loop_block.var {
+            self.last_loop_var = Some(val);
         }
 
-        match &loop_block.iter {
-            Expr::Call(r#box, args) => {
-                match r#box.borrow() {
-                    Expr::Var(value) => {
-                        if *value == "peoples" && args.len() >= 1 {
-                            match args[0] {
-                                askama_parser::Expr::NumLit(val) => {
-                                    if let Ok(len_of_element) = val.parse::<i32>() {
-                                        for _n in 0..len_of_element {
-                                            self.last_loop_object.people = People::create(&self.template_m);
-                                            self.handle(&loop_block.body, AstLevel::Nested)?;
-                                        }
-                                    }
-                                },
-                                _ => {}
+        if let Expr::Call(r#box, args) = &loop_block.iter {
+            if let Expr::Var(value) = r#box.borrow() {
+                if *value == "peoples" && !args.is_empty() {
+                    if let askama_parser::Expr::NumLit(val) = args[0] {
+                        if let Ok(len_of_element) = val.parse::<i32>() {
+                            for _n in 0..len_of_element {
+                                self.last_loop_object.people = People::create(self.template_m);
+                                self.handle(&loop_block.body, AstLevel::Nested)?;
                             }
                         }
                     }
-                    _ => {}
                 }
             }
-            _ => {}
         }
 
         Ok(0)
     }
     
-    fn dispatch(&mut self, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
+    fn dispatch(&mut self, attrs: &mut [&'a str]) -> Result<DisplayWrap, ParsedError> {
         if let Some(name) = attrs.last() {
-            if let Some(parent_name) = attrs.get(attrs.len().checked_sub(2).unwrap_or(0)) {
+            if let Some(parent_name) = attrs.get(attrs.len().saturating_sub(2)) {
                 match *parent_name {
                     "automotive" => {
-                        return Ok(write_object(&self.last_loop_object.automotive, attrs, &mut self.buf)?);
+                        return write_object(&self.last_loop_object.automotive, attrs, &mut self.buf);
                     },
                     "barecode" => {
-                        return Ok(write_object(&self.last_loop_object.barecode, attrs, &mut self.buf)?);
+                        return write_object(&self.last_loop_object.barecode, attrs, &mut self.buf);
                     },
                     "coordinates" => {
-                        return Ok(write_object(&self.last_loop_object.coordinates, attrs, &mut self.buf)?);
+                        return write_object(&self.last_loop_object.coordinates, attrs, &mut self.buf);
                     },
                     "color" => {
-                        return Ok(write_object(&self.last_loop_object.color, attrs, &mut self.buf)?);
+                        return write_object(&self.last_loop_object.color, attrs, &mut self.buf);
                     },
                     "job" => {
-                        return Ok(write_object(&self.last_loop_object.job, attrs, &mut self.buf)?);
+                        return write_object(&self.last_loop_object.job, attrs, &mut self.buf);
                     },
                     "location" => {
-                        return Ok(write_object(&self.last_loop_object.location, attrs, &mut self.buf)?);
+                        return write_object(&self.last_loop_object.location, attrs, &mut self.buf);
                     },
                     "people" => {
-                        return Ok(write_object(&self.last_loop_object.people, attrs, &mut self.buf)?);
+                        return write_object(&self.last_loop_object.people, attrs, &mut self.buf);
                     },
                     "phone" => {
-                        return Ok(write_object(&self.last_loop_object.phone, attrs, &mut self.buf)?);
+                        return write_object(&self.last_loop_object.phone, attrs, &mut self.buf);
                     },
                     "timezone" => {
-                        return Ok(write_object(&self.last_loop_object.timezone, attrs, &mut self.buf)?);
+                        return write_object(&self.last_loop_object.timezone, attrs, &mut self.buf);
                     },
                     _ => {
                         let attrs_str = attrs.join(".");
@@ -261,7 +244,7 @@ impl<'a> Generator<'a> {
                 }
             }
         }
-        return Ok(DisplayWrap::Unwrapped);
+        Ok(DisplayWrap::Unwrapped)
     }
 
     fn write_expr(&mut self, val: &'a Expr<'a>, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
@@ -271,11 +254,11 @@ impl<'a> Generator<'a> {
                     Expr::Var(parent_name) => {
                         attrs.insert(0, *name);
                         attrs.insert(0, *parent_name);
-                        return Ok(self.dispatch(attrs)?);
+                        Ok(self.dispatch(attrs)?)
                     }
                     _val => {
                         attrs.insert(0, *name);
-                        return Ok(self.write_expr(_val, attrs)?);
+                        self.write_expr(_val, attrs)
                     }
                 }
             }
@@ -286,11 +269,11 @@ impl<'a> Generator<'a> {
     }
 }
 
-fn write_object<'a, T: TemplateObject>(object: &T, attrs: &mut Vec<&'a str>, buf: &mut Buffer) -> Result<DisplayWrap, ParsedError> {
+fn write_object<T: TemplateObject>(object: &T, attrs: &mut [&str], buf: &mut Buffer) -> Result<DisplayWrap, ParsedError> {
     if let Some(name) = attrs.last() {
         if let Some(property_value) = object.get_property(name) {
             if let Some(value) = property_value.downcast_ref::<String>() {
-                buf.write(&value);
+                buf.write(value);
             } else {
                 return Ok(DisplayWrap::Unwrapped);
             }
