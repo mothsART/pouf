@@ -21,3 +21,10 @@ impl Currency {
         }
     }
 }
+
+create_get_property!(
+    Currency,
+    code: String,
+    name: String,
+    symbol: String
+);

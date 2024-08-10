@@ -1,7 +1,6 @@
 use std::fmt;
 use std::borrow::Cow;
 use std::borrow::Borrow;
-use std::fs::File;
 
 use clap::ArgMatches;
 
@@ -13,6 +12,7 @@ use super::automotive::Automotive;
 use super::barecode::BareCode;
 use super::coordinates::Coordinate;
 use super::color::Color;
+use super::currency::Currency;
 use super::filesystem::FileSystem;
 use super::job::Job;
 use super::phone::Phone;
@@ -88,6 +88,7 @@ struct LoopObject {
     barecode: BareCode,
     coordinates: Coordinate,
     color: Color,
+    currency: Currency,
     filesystem: FileSystem,
     job: Job,
     location: Address,
@@ -122,6 +123,7 @@ impl<'a> Generator<'a> {
                 coordinates: Coordinate::create(template_m),
                 barecode: BareCode::create(template_m),
                 color: Color::create(template_m),
+                currency: Currency::create(template_m),
                 filesystem: FileSystem::create(template_m),
                 job: Job::create(template_m),
                 location: Address::create(template_m),
@@ -225,6 +227,9 @@ impl<'a> Generator<'a> {
                     },
                     "color" => {
                         return write_object(&self.last_loop_object.color, attrs, &mut self.buf);
+                    },
+                    "currency" => {
+                        return write_object(&self.last_loop_object.currency, attrs, &mut self.buf);
                     },
                     "filesystem" => {
                         return write_object(&self.last_loop_object.filesystem, attrs, &mut self.buf);
