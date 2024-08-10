@@ -28,3 +28,13 @@ impl FileSystem {
         }
     }
 }
+
+create_get_property!(
+    FileSystem,
+    dir_path: String,
+    file_extension: String,
+    file_name: String,
+    file_path: String,
+    mime_type: String,
+    semver: String
+);
