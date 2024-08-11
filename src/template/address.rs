@@ -2,9 +2,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::fake::Fake;
 use clap::ArgMatches;
-use fake::faker::address::raw::{
-    CityName, CountryName, StateName, ZipCode,
-};
+use fake::faker::address::raw::{CityName, CountryName, StateName, ZipCode};
 
 use crate::lang_env;
 use crate::template::coordinates::Coordinate;

@@ -19,10 +19,7 @@ mod macros;
 mod domain;
 mod template;
 
-use crate::template::{
-    generator::Generator,
-    generator::AstLevel,
-};
+use crate::template::{generator::AstLevel, generator::Generator};
 
 fn lang_env() -> Option<String> {
     match std::env::var("LANG") {
@@ -40,9 +37,9 @@ fn main() {
                 fs::read_to_string(input).expect("Should have been able to read the file");
 
             let ast = Ast::from_str(&contents, &Syntax::default()).unwrap();
-            
+
             let mut g = Generator::new(template_m);
-            
+
             if let Err(err) = g.handle(ast.nodes(), AstLevel::Top) {
                 eprint!("{}", err);
                 return;

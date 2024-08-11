@@ -1,17 +1,17 @@
-use std::fmt;
-use std::borrow::Cow;
 use std::borrow::Borrow;
+use std::borrow::Cow;
+use std::fmt;
 
 use clap::ArgMatches;
 
-use askama_parser::{Node, Expr};
-use askama_parser::node::{Lit, Loop, Whitespace, Target};
+use askama_parser::node::{Lit, Loop, Target, Whitespace};
+use askama_parser::{Expr, Node};
 
 use super::address::Address;
 use super::automotive::Automotive;
 use super::barecode::BareCode;
-use super::coordinates::Coordinate;
 use super::color::Color;
+use super::coordinates::Coordinate;
 use super::currency::Currency;
 use super::filesystem::FileSystem;
 use super::http::Http;
@@ -20,8 +20,8 @@ use super::job::Job;
 use super::phone::Phone;
 use super::timezone::Timezone;
 
-use crate::template::template_trait::TemplateObject;
 use crate::template::people::People;
+use crate::template::template_trait::TemplateObject;
 
 #[derive(Clone, Copy, PartialEq)]
 pub enum AstLevel {
@@ -41,9 +41,7 @@ pub struct ParsedError {
 
 impl ParsedError {
     fn new<S: Into<Cow<'static, str>>>(s: S) -> Self {
-        Self {
-            msg: s.into(),
-        }
+        Self { msg: s.into() }
     }
 }
 
@@ -137,15 +135,11 @@ impl<'a> Generator<'a> {
                 phone: Phone::create(template_m),
                 timezone: Timezone::create(template_m),
             },
-            template_m
+            template_m,
         }
     }
 
-    pub fn handle(
-        &mut self,
-        nodes: &'a [Node<'_>],
-        level: AstLevel,
-    ) -> Result<usize, ParsedError> {
+    pub fn handle(&mut self, nodes: &'a [Node<'_>], level: AstLevel) -> Result<usize, ParsedError> {
         let size_hint = 0;
         for n in nodes {
             match *n {
@@ -192,10 +186,7 @@ impl<'a> Generator<'a> {
         }
     }
 
-    fn write_loop(
-        &mut self,
-        loop_block: &'a Loop<'_>,
-    ) -> Result<usize, ParsedError> {
+    fn write_loop(&mut self, loop_block: &'a Loop<'_>) -> Result<usize, ParsedError> {
         if let Target::Name(val) = loop_block.var {
             self.last_loop_var = Some(val);
         }
@@ -217,53 +208,65 @@ impl<'a> Generator<'a> {
 
         Ok(0)
     }
-    
+
     fn dispatch(&mut self, attrs: &mut [&'a str]) -> Result<DisplayWrap, ParsedError> {
         if let Some(name) = attrs.last() {
             if let Some(parent_name) = attrs.get(attrs.len().saturating_sub(2)) {
                 match *parent_name {
                     "automotive" => {
-                        return write_object(&self.last_loop_object.automotive, attrs, &mut self.buf);
-                    },
+                        return write_object(
+                            &self.last_loop_object.automotive,
+                            attrs,
+                            &mut self.buf,
+                        );
+                    }
                     "barecode" => {
                         return write_object(&self.last_loop_object.barecode, attrs, &mut self.buf);
-                    },
+                    }
                     "coordinates" => {
-                        return write_object(&self.last_loop_object.coordinates, attrs, &mut self.buf);
-                    },
+                        return write_object(
+                            &self.last_loop_object.coordinates,
+                            attrs,
+                            &mut self.buf,
+                        );
+                    }
                     "color" => {
                         return write_object(&self.last_loop_object.color, attrs, &mut self.buf);
-                    },
+                    }
                     "currency" => {
                         return write_object(&self.last_loop_object.currency, attrs, &mut self.buf);
-                    },
+                    }
                     "filesystem" => {
-                        return write_object(&self.last_loop_object.filesystem, attrs, &mut self.buf);
-                    },
+                        return write_object(
+                            &self.last_loop_object.filesystem,
+                            attrs,
+                            &mut self.buf,
+                        );
+                    }
                     "http" => {
                         return write_object(&self.last_loop_object.http, attrs, &mut self.buf);
-                    },
+                    }
                     "internet" => {
                         return write_object(&self.last_loop_object.internet, attrs, &mut self.buf);
-                    },
+                    }
                     "job" => {
                         return write_object(&self.last_loop_object.job, attrs, &mut self.buf);
-                    },
+                    }
                     "location" => {
                         return write_object(&self.last_loop_object.location, attrs, &mut self.buf);
-                    },
+                    }
                     "people" => {
                         return write_object(&self.last_loop_object.people, attrs, &mut self.buf);
-                    },
+                    }
                     "phone" => {
                         return write_object(&self.last_loop_object.phone, attrs, &mut self.buf);
-                    },
+                    }
                     "timezone" => {
                         return write_object(&self.last_loop_object.timezone, attrs, &mut self.buf);
-                    },
+                    }
                     _ => {
                         let attrs_str = attrs.join(".");
-                        return Err(format!("\"{name}\" in \"{attrs_str}\" doesn't exist.").into())
+                        return Err(format!("\"{name}\" in \"{attrs_str}\" doesn't exist.").into());
                     }
                 }
             }
@@ -271,29 +274,33 @@ impl<'a> Generator<'a> {
         Ok(DisplayWrap::Unwrapped)
     }
 
-    fn write_expr(&mut self, val: &'a Expr<'a>, attrs: &mut Vec<&'a str>) -> Result<DisplayWrap, ParsedError> {
+    fn write_expr(
+        &mut self,
+        val: &'a Expr<'a>,
+        attrs: &mut Vec<&'a str>,
+    ) -> Result<DisplayWrap, ParsedError> {
         match val {
-            Expr::Attr(attr, name) => {
-                match attr.borrow() {
-                    Expr::Var(parent_name) => {
-                        attrs.insert(0, *name);
-                        attrs.insert(0, *parent_name);
-                        Ok(self.dispatch(attrs)?)
-                    }
-                    _val => {
-                        attrs.insert(0, *name);
-                        self.write_expr(_val, attrs)
-                    }
+            Expr::Attr(attr, name) => match attr.borrow() {
+                Expr::Var(parent_name) => {
+                    attrs.insert(0, *name);
+                    attrs.insert(0, *parent_name);
+                    Ok(self.dispatch(attrs)?)
                 }
-            }
-            _ => {
-                Ok(DisplayWrap::Unwrapped)
-            }
+                _val => {
+                    attrs.insert(0, *name);
+                    self.write_expr(_val, attrs)
+                }
+            },
+            _ => Ok(DisplayWrap::Unwrapped),
         }
     }
 }
 
-fn write_object<T: TemplateObject>(object: &T, attrs: &mut [&str], buf: &mut Buffer) -> Result<DisplayWrap, ParsedError> {
+fn write_object<T: TemplateObject>(
+    object: &T,
+    attrs: &mut [&str],
+    buf: &mut Buffer,
+) -> Result<DisplayWrap, ParsedError> {
     if let Some(name) = attrs.last() {
         if let Some(property_value) = object.get_property(name) {
             if let Some(value) = property_value.downcast_ref::<String>() {

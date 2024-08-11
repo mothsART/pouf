@@ -2,9 +2,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::fake::Fake;
 use clap::ArgMatches;
-use fake::faker::address::raw::{
-    Geohash, Latitude, Longitude,
-};
+use fake::faker::address::raw::{Geohash, Latitude, Longitude};
 use fake::locales::EN;
 
 use crate::lang_env;
