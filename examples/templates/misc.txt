@@ -1,10 +1,8 @@
-{% set autos_nb = 3 %}
-{% for auto in autos %}
+{% for auto in autos(2) %}
     {{ auto.licence_plate }}
 {% endfor %}
 
-{% set internets_nb = 2 %}
-{% for internet in internets %}
+{% for internet in internets(3) %}
     {{ internet.free_email_provider }}
     {{ internet.domain_suffix }}
     {{ internet.free_email }}
@@ -18,14 +16,12 @@
     {{ internet.useragent }}
 {% endfor %}
 
-{% set phones_nb = 4 %}
-{% for phone in phones %}
+{% for phone in phones(4) %}
     {{ phone.fix }}
     {{ phone.cell }}
 {% endfor %}
 
-{% set filesystems_nb = 2 %}
-{% for filesystem in filesystems %}
+{% for filesystem in filesystems(2) %}
     {{ filesystem.dir_path }}
     {{ filesystem.file_extension }}
     {{ filesystem.file_name }}
@@ -34,8 +30,7 @@
     {{ filesystem.semver }}
 {% endfor %}
 
-{% set jobs_nb = 2 %}
-{% for job in jobs %}
+{% for job in jobs(2) %}
     {{ job.seniority }}
     {{ job.field }}
     {{ job.position }}
@@ -50,8 +45,7 @@
 {{ currencies.0.name }}
 {{ currencies.0.symbol }}
 
-{% set http_codes_nb = 3 %}
-{% for http in http_codes %}
+{% for http in http_codes(3) %}
     {{ http.rfc_status_code }}
     {{ http.valid_status_code }}
 {% endfor %}

@@ -2,14 +2,28 @@
   "results": [
     {% for people in peoples(5) %}
     {
-      "color": "{{ color.hex }}",
-      "isbn13": "{{ barecode.isbn13 }}",
+      "color": {
+        "hex": "{{ color.hex }}",
+        "rgb": "{{ color.rgb }}",
+        "rgba": "{{ color.rgba }}",
+        "hsl": "{{ color.hsl }}",
+        "hsla": "{{ color.hsla }}"
+      },
+      "barecode": {
+        "isbn": "{{ barecode.isbn }}",
+        "isbn10": "{{ barecode.isbn10 }}",
+        "isbn13": "{{ barecode.isbn13 }}"
+      },
+      "currency": {
+        "code": "{{ currency.code }}",
+        "name": "{{ currency.name }}",
+        "symbol": "{{ currency.symbol }}"
+      },
       "semver": "{{ filesystem.semver }}",
-      "currency_code": "{{ currency.code }}",
-      "currency_name": "{{ currency.name }}",
-      "currency_symbol": "{{ currency.symbol }}",
-      "http_rfc_code": "{{ http.rfc_status_code }}",
-      "http_valid_code": "{{ http.valid_status_code }}",
+      "http": {
+        "rfc_code": "{{ http.rfc_status_code }}",
+        "valid_code": "{{ http.valid_status_code }}"
+      },
       "gender": "{{ people.gender }}",
       "birthday": "{{ people.birthday }}",
       "phone": "{{ people.phone.fix }}",
@@ -46,14 +60,14 @@
         "coordinates": {
           "latitude": "{{ people.location.coordinates.latitude }}",
           "longitude": "{{ people.location.coordinates.longitude }}",
-          "geohash": "{{ people.location.coordinates.geohash }}",
+          "geohash": "{{ people.location.coordinates.geohash }}"
         },
         "timezone": {
-            "description": "{{ people.location.timezone.description }}",
+            "description": "{{ people.location.timezone.description }}"
         }
       },
       "automotive": {
-        "licenceplate": "{{ people.automotive.licence_plate }}",
+        "licenceplate": "{{ people.automotive.licence_plate }}"
       }
     }
     {% endfor %}
