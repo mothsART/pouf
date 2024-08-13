@@ -1,4 +1,4 @@
-use crate::fake::Fake;
+use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::http::raw::{RfcStatusCode, ValidStatusCode};
 use fake::locales::EN;

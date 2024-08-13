@@ -17,11 +17,11 @@ use super::filesystem::FileSystem;
 use super::http::Http;
 use super::internet::Internet;
 use super::job::Job;
+use super::people::People;
 use super::phone::Phone;
 use super::timezone::Timezone;
 
-use crate::template::people::People;
-use crate::template::template_trait::TemplateObject;
+use super::template_trait::TemplateObject;
 
 #[derive(Clone, Copy, PartialEq)]
 pub enum AstLevel {
@@ -84,16 +84,16 @@ impl From<WhitespaceHandling> for Whitespace {
 }
 
 struct LoopObject {
+    address: Address,
     automotive: Automotive,
     barecode: BareCode,
-    coordinates: Coordinate,
     color: Color,
+    coordinates: Coordinate,
     currency: Currency,
     filesystem: FileSystem,
     http: Http,
     internet: Internet,
     job: Job,
-    location: Address,
     people: People,
     phone: Phone,
     timezone: Timezone,
@@ -121,16 +121,16 @@ impl<'a> Generator<'a> {
             buf: Buffer::new(0),
             last_loop_var: None,
             last_loop_object: LoopObject {
+                address: Address::create(template_m),
                 automotive: Automotive::create(template_m),
-                coordinates: Coordinate::create(template_m),
                 barecode: BareCode::create(template_m),
                 color: Color::create(template_m),
+                coordinates: Coordinate::create(template_m),
                 currency: Currency::create(template_m),
                 filesystem: FileSystem::create(template_m),
                 http: Http::create(template_m),
                 internet: Internet::create(template_m),
                 job: Job::create(template_m),
-                location: Address::create(template_m),
                 people: People::create(template_m),
                 phone: Phone::create(template_m),
                 timezone: Timezone::create(template_m),
@@ -197,7 +197,7 @@ impl<'a> Generator<'a> {
                     if let askama_parser::Expr::NumLit(val) = args[0] {
                         if let Ok(len_of_element) = val.parse::<i32>() {
                             for _n in 0..len_of_element {
-                                self.last_loop_object.people = People::create(self.template_m);
+                                //self.last_loop_object.people = People::create(self.template_m);
                                 self.handle(&loop_block.body, AstLevel::Nested)?;
                             }
                         }
@@ -213,6 +213,9 @@ impl<'a> Generator<'a> {
         if let Some(name) = attrs.last() {
             if let Some(parent_name) = attrs.get(attrs.len().saturating_sub(2)) {
                 match *parent_name {
+                    "address" => {
+                        return write_object(&self.last_loop_object.address, attrs, &mut self.buf);
+                    }
                     "automotive" => {
                         return write_object(
                             &self.last_loop_object.automotive,
@@ -223,15 +226,15 @@ impl<'a> Generator<'a> {
                     "barecode" => {
                         return write_object(&self.last_loop_object.barecode, attrs, &mut self.buf);
                     }
+                    "color" => {
+                        return write_object(&self.last_loop_object.color, attrs, &mut self.buf);
+                    }
                     "coordinates" => {
                         return write_object(
                             &self.last_loop_object.coordinates,
                             attrs,
                             &mut self.buf,
                         );
-                    }
-                    "color" => {
-                        return write_object(&self.last_loop_object.color, attrs, &mut self.buf);
                     }
                     "currency" => {
                         return write_object(&self.last_loop_object.currency, attrs, &mut self.buf);
@@ -251,9 +254,6 @@ impl<'a> Generator<'a> {
                     }
                     "job" => {
                         return write_object(&self.last_loop_object.job, attrs, &mut self.buf);
-                    }
-                    "location" => {
-                        return write_object(&self.last_loop_object.location, attrs, &mut self.buf);
                     }
                     "people" => {
                         return write_object(&self.last_loop_object.people, attrs, &mut self.buf);

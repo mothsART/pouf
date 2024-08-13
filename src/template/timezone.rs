@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::fake::Fake;
+use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::address::raw::TimeZone;
 use fake::locales::EN;

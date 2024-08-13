@@ -1,4 +1,4 @@
-use crate::fake::Fake;
+use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::currency::raw::{CurrencyCode, CurrencyName, CurrencySymbol};
 use serde::{Deserialize, Serialize};

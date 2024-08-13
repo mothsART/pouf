@@ -1,4 +1,4 @@
-use crate::fake::Fake;
+use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::lorem::raw::{Paragraphs, Sentences, Words};
 use fake::locales::EN;

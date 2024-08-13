@@ -20,13 +20,7 @@ mod domain;
 mod template;
 
 use crate::template::{generator::AstLevel, generator::Generator};
-
-fn lang_env() -> Option<String> {
-    match std::env::var("LANG") {
-        Ok(_l) => _l.find('.').map(|pos| _l[0..pos].to_lowercase()),
-        Err(_) => None,
-    }
-}
+use pouf::lang_env;
 
 fn main() {
     let matches = cli::build_cli(crate_name!(), crate_version!()).get_matches();
