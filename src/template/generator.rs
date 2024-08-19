@@ -203,6 +203,15 @@ impl<'a> Generator<'a> {
                         }
                     }
                 }
+                if *value == "barecodes" && !args.is_empty() {
+                    if let askama_parser::Expr::NumLit(val) = args[0] {
+                        if let Ok(len_of_element) = val.parse::<i32>() {
+                            for _n in 0..len_of_element {
+                                self.handle(&loop_block.body, AstLevel::Nested)?;
+                            }
+                        }
+                    }
+                }
             }
         }
 
