@@ -1,4 +1,4 @@
-use crate::fake::Fake;
+use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::barcode::raw::{Isbn, Isbn10, Isbn13};
 use fake::locales::EN;
@@ -20,3 +20,10 @@ impl BareCode {
         }
     }
 }
+
+create_get_property!(
+    BareCode,
+    isbn: String,
+    isbn10: String,
+    isbn13: String
+);

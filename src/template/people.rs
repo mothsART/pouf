@@ -6,9 +6,10 @@ use fake::faker::name::raw::{FirstName, LastName, Title};
 use fake::locales::EN;
 use serde::{Deserialize, Serialize};
 
-use crate::fake::Fake;
-use crate::lang_env;
+use fake::Fake;
 use crate::template::{address::Address, automotive::Automotive, job::Job, phone::Phone};
+
+use crate::lang_env;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct People {
@@ -55,3 +56,13 @@ impl People {
         }
     }
 }
+
+create_get_property!(
+    People,
+    gender: String,
+    birthday: String,
+    title: String,
+    first_name: String,
+    last_name: String,
+    location: Address
+);

@@ -1,4 +1,4 @@
-use crate::fake::Fake;
+use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::internet::raw::*;
 use fake::locales::EN;
@@ -38,3 +38,18 @@ impl Internet {
         }
     }
 }
+
+create_get_property!(
+    Internet,
+    free_email_provider: String,
+    domain_suffix: String,
+    free_email: String,
+    safe_email: String,
+    username: String,
+    password: String,
+    ip: String,
+    ipv4: String,
+    ipv6: String,
+    mac_address: String,
+    useragent: String
+);

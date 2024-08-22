@@ -1,42 +1,12 @@
-use crate::fake::Fake;
-use clap::ArgMatches;
-use fake::faker::address::raw::{
-    CityName, CountryName, Geohash, Latitude, Longitude, StateName, TimeZone, ZipCode,
-};
-use fake::locales::EN;
 use serde::{Deserialize, Serialize};
 
+use fake::Fake;
+use clap::ArgMatches;
+use fake::faker::address::raw::{CityName, CountryName, StateName, ZipCode};
+
+use crate::template::coordinates::Coordinate;
+use crate::template::timezone::Timezone;
 use crate::lang_env;
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Timezone {
-    pub description: String,
-}
-
-impl Timezone {
-    pub fn create(_arg: &ArgMatches) -> Timezone {
-        Timezone {
-            description: TimeZone(EN).fake::<String>(),
-        }
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Coordinate {
-    pub latitude: String,
-    pub longitude: String,
-    pub geohash: String,
-}
-
-impl Coordinate {
-    pub fn create(arg: &ArgMatches) -> Coordinate {
-        Coordinate {
-            latitude: lang_return!(Latitude, arg),
-            longitude: lang_return!(Longitude, arg),
-            geohash: Geohash(EN, 11).fake::<String>(),
-        }
-    }
-}
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Address {
@@ -64,3 +34,11 @@ impl Address {
         }
     }
 }
+
+create_get_property!(
+    Address,
+    city: String,
+    state: String,
+    country: String,
+    zipcode: String
+);

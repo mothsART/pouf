@@ -1,6 +1,6 @@
 use random_color::RandomColor;
 
-use crate::fake::{Fake, Faker};
+use fake::{Fake, Faker};
 use clap::ArgMatches;
 use serde::{Deserialize, Serialize};
 
@@ -25,3 +25,12 @@ impl Color {
         }
     }
 }
+
+create_get_property!(
+    Color,
+    hex: String,
+    rgb: String,
+    rgba: String,
+    hsl: String,
+    hsla: String
+);

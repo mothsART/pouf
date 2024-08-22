@@ -42,7 +42,6 @@ macro_rules! lang_return {
 
 macro_rules! lang_struct {
     ($struct_name:ident) => {
-        use crate::lang_env;
         match lang_env() {
             Some(lang) => {
                 lang_struct!($struct_name, &*lang);
@@ -103,7 +102,6 @@ macro_rules! each {
 
 macro_rules! force_lang_struct {
     ($struct_name:ident, $force_lang:ident, $has_user_lang:expr) => {
-        use crate::lang_env;
         use clap::error::ErrorKind;
         use clap::{Command, Error};
 
@@ -220,4 +218,22 @@ macro_rules! force_each {
             }
         }
     };
+}
+
+macro_rules! create_get_property {
+    ($struct_name:ident, $( $field_name:ident : $field_type:ty ),* ) => {
+        use std::any::Any;
+        use crate::template::template_trait::TemplateObject;
+
+        impl TemplateObject for $struct_name {
+            fn get_property(&self, key: &str) -> Option<&dyn Any> {
+                match key {
+                    $(
+                        stringify!($field_name) => Some(&self.$field_name as &dyn Any),
+                    )*
+                    _ => None,
+                }
+            }
+        }
+    }
 }

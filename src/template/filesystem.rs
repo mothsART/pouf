@@ -1,4 +1,4 @@
-use crate::fake::Fake;
+use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::filesystem::raw::{DirPath, FileExtension, FileName, FilePath, MimeType, Semver};
 use fake::locales::EN;
@@ -28,3 +28,13 @@ impl FileSystem {
         }
     }
 }
+
+create_get_property!(
+    FileSystem,
+    dir_path: String,
+    file_extension: String,
+    file_name: String,
+    file_path: String,
+    mime_type: String,
+    semver: String
+);

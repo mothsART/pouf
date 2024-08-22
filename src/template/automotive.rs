@@ -1,4 +1,4 @@
-use crate::fake::Fake;
+use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::automotive::raw::LicencePlate;
 use fake::locales::FR_FR;
@@ -16,3 +16,8 @@ impl Automotive {
         }
     }
 }
+
+create_get_property!(
+    Automotive,
+    licence_plate: String
+);

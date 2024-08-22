@@ -1,6 +1,8 @@
 use clap::ArgMatches;
 use fake::Fake;
 
+use pouf::lang_env;
+
 pub fn run(matches: &ArgMatches) {
     if let Some(date) = matches.subcommand_matches("time.date") {
         use fake::faker::chrono::raw::DateTime;

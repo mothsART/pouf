@@ -1,6 +1,8 @@
 use clap::ArgMatches;
 use fake::Fake;
 
+use pouf::lang_env;
+
 pub fn run(matches: &ArgMatches) {
     if let Some(mimetype) = matches.subcommand_matches("filesystem.mimetype") {
         use fake::faker::filesystem::raw::MimeType;

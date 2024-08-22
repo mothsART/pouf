@@ -1,37 +1,67 @@
-{% set peoples_nb = 2 %}
-{% set lang = "fr" %}
-
 {
   "results": [
-    {% for people in peoples %}
+    {% for people in peoples(5) %}
     {
+      "color": {
+        "hex": "{{ color.hex }}",
+        "rgb": "{{ color.rgb }}",
+        "rgba": "{{ color.rgba }}",
+        "hsl": "{{ color.hsl }}",
+        "hsla": "{{ color.hsla }}"
+      },
+      "barecode": {
+        "isbn": "{{ barecode.isbn }}",
+        "isbn10": "{{ barecode.isbn10 }}",
+        "isbn13": "{{ barecode.isbn13 }}"
+      },
+      "currency": {
+        "code": "{{ currency.code }}",
+        "name": "{{ currency.name }}",
+        "symbol": "{{ currency.symbol }}"
+      },
+      "semver": "{{ filesystem.semver }}",
+      "http_rfc_code": "{{ http.rfc_status_code }}",
+      "http_valid_code": "{{ http.valid_status_code }}",
       "gender": "{{ people.gender }}",
       "birthday": "{{ people.birthday }}",
-      "phone": "{{ phone.fix }}",
-      "cell": "{{ phone.cell }}",
+      "phone": "{{ people.phone.fix }}",
+      "cell": "{{ people.phone.cell }}",
       "name": {
         "title": "{{ people.title }}",
         "first": "{{ people.first_name }}",
         "last": "{{ people.last_name }}"
+      },
+      "internet": {
+        "free_email_provider": "{{ internet.free_email_provider }}",
+        "domain_suffix": "{{ internet.domain_suffix }}",
+        "free_email": "{{ internet.free_email }}",
+        "safe_email": "{{ internet.safe_email }}",
+        "username": "{{ internet.username }}",
+        "password": "{{ internet.password }}",
+        "ip": "{{ internet.ip }}",
+        "ipv4": "{{ internet.ipv4 }}",
+        "ipv6": "{{ internet.ipv6 }}",
+        "mac_address": "{{ internet.mac_address }}",
+        "useragent": "{{ internet.useragent }}"
       },
       "job": {
         "seniority": "{{ people.job.seniority }}",
         "field": "{{ people.job.field }}",
         "position": "{{ people.job.position }}",
         "title": "{{ people.job.title }}"
-      }
+      },
       "location": {
-        "city": "{{ people.location.city }}",
-        "state": "{{ people.location.city }}",
-        "country": "{{ people.location.country }}",
-        "zipcode": "{{ people.location.zipcode }}",
+        "city": "{{ people.address.city }}",
+        "state": "{{ people.address.city }}",
+        "country": "{{ people.address.country }}",
+        "zipcode": "{{ people.address.zipcode }}",
         "coordinates": {
-          "latitude": "{{ people.location.coordinates.latitude }}",
-          "longitude": "{{ people.location.coordinates.longitude }}",
-          "geohash": "{{ people.location.coordinates.geohash }}",
+          "latitude": "{{ people.address.coordinates.latitude }}",
+          "longitude": "{{ people.address.coordinates.longitude }}",
+          "geohash": "{{ people.address.coordinates.geohash }}",
         },
         "timezone": {
-            "description": "{{ people.location.timezone.description }}",
+            "description": "{{ people.address.timezone.description }}",
         }
       },
       "automotive": {
@@ -39,5 +69,5 @@
       }
     }
     {% endfor %}
-  ],
+  ]
 }

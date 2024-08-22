@@ -1,4 +1,4 @@
-use crate::fake::Fake;
+use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::job::raw::{Field, Position, Seniority, Title};
 use serde::{Deserialize, Serialize};
@@ -23,3 +23,11 @@ impl Job {
         }
     }
 }
+
+create_get_property!(
+    Job,
+    seniority: String,
+    field: String,
+    position: String,
+    title: String
+);

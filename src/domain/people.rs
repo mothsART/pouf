@@ -1,6 +1,8 @@
 use clap::ArgMatches;
 use fake::Fake;
 
+use pouf::lang_env;
+
 pub fn run(matches: &ArgMatches) {
     if let Some(name) = matches.subcommand_matches("people.name") {
         use fake::faker::name::raw::{FirstName, LastName, Name, NameWithTitle, Title};

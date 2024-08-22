@@ -3,6 +3,8 @@ use fake::locales::Data;
 use fake::{Dummy, Fake};
 use rand::Rng;
 
+use pouf::lang_env;
+
 struct UnidecodeFreeEmail<L>(L);
 
 impl<L: Data + Copy> Dummy<UnidecodeFreeEmail<L>> for String {

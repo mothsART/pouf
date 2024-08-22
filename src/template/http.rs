@@ -1,4 +1,4 @@
-use crate::fake::Fake;
+use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::http::raw::{RfcStatusCode, ValidStatusCode};
 use fake::locales::EN;
@@ -18,3 +18,9 @@ impl Http {
         }
     }
 }
+
+create_get_property!(
+    Http,
+    rfc_status_code: String,
+    valid_status_code: String
+);
