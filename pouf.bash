@@ -933,4 +933,8 @@ _pouf() {
     esac
 }
 
-complete -F _pouf -o bashdefault -o default pouf
+if [[ "${BASH_VERSINFO[0]}" -eq 4 && "${BASH_VERSINFO[1]}" -ge 4 || "${BASH_VERSINFO[0]}" -gt 4 ]]; then
+    complete -F _pouf -o nosort -o bashdefault -o default pouf
+else
+    complete -F _pouf -o bashdefault -o default pouf
+fi
