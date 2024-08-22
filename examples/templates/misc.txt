@@ -1,5 +1,5 @@
-{% for auto in autos(2) %}
-    {{ auto.licence_plate }}
+{% for automotive in autos(2) %}
+    {{ automotive.licence_plate }}
 {% endfor %}
 
 {% for internet in internets(3) %}

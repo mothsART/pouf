@@ -84,8 +84,14 @@ impl From<WhitespaceHandling> for Whitespace {
 }
 
 const LOOP_NAMES: &'static [&'static str] = &[
-    "peoples",
+    "autos",
     "barecodes",
+    "filesystems",
+    "http_codes",
+    "internets",
+    "jobs",
+    "peoples",
+    "phones",
 ];
 
 struct LoopObject {

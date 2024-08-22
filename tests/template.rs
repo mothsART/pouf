@@ -34,3 +34,14 @@ fn test_rated_example_people() {
         assert!(true);
     }
 }
+
+#[test]
+fn test_rated_example_misc() {
+    let r = sample_to_parse("examples/templates/misc.txt");
+    if let Err(_err) = r {
+        assert!(false);
+    }
+    else {
+        assert!(true);
+    }
+}
