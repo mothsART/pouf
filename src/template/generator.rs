@@ -83,6 +83,11 @@ impl From<WhitespaceHandling> for Whitespace {
     }
 }
 
+const LOOP_NAMES: &'static [&'static str] = &[
+    "peoples",
+    "barecodes",
+];
+
 struct LoopObject {
     address: Address,
     automotive: Automotive,
@@ -186,6 +191,19 @@ impl<'a> Generator<'a> {
         }
     }
 
+    fn w_loop(&mut self, value: &str, loop_block: &'a Loop<'_>, args: &Vec<Expr>) -> Result<usize, ParsedError> {
+        if LOOP_NAMES.contains(&value) && !args.is_empty() {
+            if let askama_parser::Expr::NumLit(val) = args[0] {
+                if let Ok(len_of_element) = val.parse::<i32>() {
+                    for _n in 0..len_of_element {
+                        self.handle(&loop_block.body, AstLevel::Nested)?;
+                    }
+                }
+            }
+        }
+        Ok(0)
+    }
+
     fn write_loop(&mut self, loop_block: &'a Loop<'_>) -> Result<usize, ParsedError> {
         if let Target::Name(val) = loop_block.var {
             self.last_loop_var = Some(val);
@@ -193,25 +211,7 @@ impl<'a> Generator<'a> {
 
         if let Expr::Call(r#box, args) = &loop_block.iter {
             if let Expr::Var(value) = r#box.borrow() {
-                if *value == "peoples" && !args.is_empty() {
-                    if let askama_parser::Expr::NumLit(val) = args[0] {
-                        if let Ok(len_of_element) = val.parse::<i32>() {
-                            for _n in 0..len_of_element {
-                                //self.last_loop_object.people = People::create(self.template_m);
-                                self.handle(&loop_block.body, AstLevel::Nested)?;
-                            }
-                        }
-                    }
-                }
-                if *value == "barecodes" && !args.is_empty() {
-                    if let askama_parser::Expr::NumLit(val) = args[0] {
-                        if let Ok(len_of_element) = val.parse::<i32>() {
-                            for _n in 0..len_of_element {
-                                self.handle(&loop_block.body, AstLevel::Nested)?;
-                            }
-                        }
-                    }
-                }
+                self.w_loop(*value, &loop_block, args)?;
             }
         }
 
