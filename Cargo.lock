@@ -356,12 +356,10 @@ dependencies = [
  "clap_complete",
  "fake",
  "http 0.2.12",
- "proc-macro2",
  "rand 0.8.5",
  "random_color",
  "semver",
  "serde",
- "syn",
  "unidecode",
 ]
 
