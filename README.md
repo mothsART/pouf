@@ -1,6 +1,8 @@
 # Pouf
 
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Build Status](https://github.com/mothsART/pouf/actions/workflows/ci.yml/badge.svg)](https://github.com/mothsART/pouf/actions/workflows/ci.yml)
+[![Coverage Status](https://coveralls.io/repos/github/mothsART/pouf/badge.svg?branch=master)](https://coveralls.io/github/mothsART/pouf?branch=master)
 [![Crates.io Version](https://img.shields.io/crates/v/pouf.svg)](https://crates.io/crates/pouf)
 [![Minimum rustc version](https://img.shields.io/badge/rustc-1.60.0+-lightgray.svg)](#rust-version-requirements)
 
