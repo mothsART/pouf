@@ -1,0 +1,9 @@
+{
+    "results": [
+      {% for people in peoples(5) %}
+      {
+        "gender": "{{ people.g.ok }}"
+      {% endfor %}
+    ]
+  }
+  

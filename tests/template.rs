@@ -45,3 +45,15 @@ fn test_rated_example_misc() {
         assert!(true);
     }
 }
+
+#[test]
+fn test_error_example_people() {
+    let r = sample_to_parse("tests/errors/people_one.json");
+    if let Err(err) = r {
+        assert!(true);
+        assert_eq!("\"ok\" in \"people.g.ok\" doesn't exist.", err.to_string());
+    }
+    else {
+        assert!(false);
+    }
+}
