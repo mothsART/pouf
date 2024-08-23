@@ -2,11 +2,6 @@ name: CI
 
 on: [push, pull_request]
 
-env:
-  RUST_MINVERSION: 1.65.0
-  CARGO_INCREMENTAL: 0
-  CARGO_NET_RETRY: 10
-
 jobs:
   test:
     name: Test
@@ -72,7 +67,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: tarpaulin
-          args: --output-dir coverage --out xml
+          args: -- --test-threads 1
 
       - name: Publish to Coveralls
         uses: coverallsapp/github-action@master
