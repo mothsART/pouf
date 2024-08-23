@@ -40,28 +40,21 @@ jobs:
           args: --verbose ${{ matrix.features }}
 
   coverage:
+    name: Coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Rust (nightly)
-        uses: actions-rust-lang/setup-rust-toolchain@v1.9.0
-        with:
-          toolchain: nightly
-          components: llvm-tools
-
-      - name: Install just, cargo-llvm-cov, cargo-nextest
-        uses: taiki-e/install-action@v2.42.26
-        with:
-          tool: just,cargo-llvm-cov,cargo-nextest
-
-      - name: Generate code coverage
-        run: just test-coverage-codecov
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4.5.0
-        with:
-          files: codecov.json
-          fail_ci_if_error: true
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        toolchain: stable
+    - uses: Swatinem/rust-cache@v2
+    - name: Install cargo-tarpaulin
+      run: cargo install cargo-tarpaulin
+    - name: Gather coverage
+      run: cargo tarpaulin --output-dir coverage --out lcov
+    - name: Publish to Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
