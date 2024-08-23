@@ -18,25 +18,6 @@ jobs:
           - stable
           - nightly
 
-        features:
-          - ''
-
-        include:
-          - rust: stable
-            features: ''
-          - rust: stable
-            features: '--features "std"'
-          - rust: stable
-            features: '--no-default-features'
-          - rust: stable
-            features: '--no-default-features --features "alloc"'
-          - rust: nightly
-            features: ''
-          - rust: nightly
-            features: '--no-default-features'
-          - rust: nightly
-            features: '--no-default-features --features "alloc"'
-
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
