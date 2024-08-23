@@ -27,18 +27,19 @@ fn main() {
 
     if let Some(template_m) = matches.subcommand_matches("template") {
         if let Some(input) = template_m.get_one::<PathBuf>("input") {
-            let contents =
-                fs::read_to_string(input).expect("Should have been able to read the file");
+            if let Ok(contents) = fs::read_to_string(input) {
+                let ast = Ast::from_str(&contents, &Syntax::default()).unwrap();
 
-            let ast = Ast::from_str(&contents, &Syntax::default()).unwrap();
-
-            let mut g = Generator::new(template_m);
-
-            if let Err(err) = g.handle(ast.nodes(), AstLevel::Top) {
-                eprint!("{}", err);
-                return;
+                let mut g = Generator::new(template_m);
+    
+                if let Err(err) = g.handle(ast.nodes(), AstLevel::Top) {
+                    eprint!("{}", err);
+                    return;
+                }
+                println!("{}", g.render());
+            } else {
+                eprint!("Should have been able to read the file \"{}\"", input.as_path().display());
             }
-            println!("{}", g.render());
         }
         return;
     }
