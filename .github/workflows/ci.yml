@@ -2,6 +2,11 @@ name: CI
 
 on: [push, pull_request]
 
+env:
+  RUST_MINVERSION: 1.65.0
+  CARGO_INCREMENTAL: 0
+  CARGO_NET_RETRY: 10
+
 jobs:
   test:
     name: Test
@@ -11,7 +16,26 @@ jobs:
       matrix:
         rust:
           - stable
-          - beta
+          - nightly
+
+        features:
+          - ''
+
+        include:
+          - rust: stable
+            features: ''
+          - rust: stable
+            features: '--features "std"'
+          - rust: stable
+            features: '--no-default-features'
+          - rust: stable
+            features: '--no-default-features --features "alloc"'
+          - rust: nightly
+            features: ''
+          - rust: nightly
+            features: '--no-default-features'
+          - rust: nightly
+            features: '--no-default-features --features "alloc"'
 
     steps:
       - name: Checkout sources
@@ -38,7 +62,6 @@ jobs:
         with:
           command: test
           args: --verbose ${{ matrix.features }}
-
 
   coverage:
     name: Coverage
@@ -68,7 +91,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: tarpaulin
-          args: --output-dir coverage --out lcov
+          args: --output-dir coverage --out xml --workspace --exclude benchmarks
 
       - name: Publish to Coveralls
         uses: coverallsapp/github-action@master
