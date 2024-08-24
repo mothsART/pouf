@@ -164,6 +164,16 @@ RJCIAZV1177
 TVGOSIC1
 ```
 
+### Template
+
+You can use a template file (similar to [Jinja](https://jinja.palletsprojects.com))
+Some examples are on this [directory](examples/templates)
+
+
+```zsh
+$ pouf template file.json
+```
+
 ## Autocomplete
 
 On zsh :
