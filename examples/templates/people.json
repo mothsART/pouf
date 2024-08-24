@@ -2,6 +2,8 @@
   "results": [
     {% for people in peoples(5) %}
     {
+      "gender": "{{ people.gender }}",
+      "birthday": "{{ people.birthday }}",
       "color": {
         "hex": "{{ color.hex }}",
         "rgb": "{{ color.rgb }}",
@@ -19,13 +21,17 @@
         "name": "{{ currency.name }}",
         "symbol": "{{ currency.symbol }}"
       },
-      "semver": "{{ filesystem.semver }}",
-      "http_rfc_code": "{{ http.rfc_status_code }}",
-      "http_valid_code": "{{ http.valid_status_code }}",
-      "gender": "{{ people.gender }}",
-      "birthday": "{{ people.birthday }}",
-      "phone": "{{ people.phone.fix }}",
-      "cell": "{{ people.phone.cell }}",
+      "filesystem": {
+        "semver": "{{ filesystem.semver }}"
+      },
+      "http": {
+        "rfc_code": "{{ http.rfc_status_code }}",
+        "valid_code": "{{ http.valid_status_code }}"
+      },
+      "phone": {
+        "fix": "{{ people.phone.fix }}",
+        "cell": "{{ people.phone.cell }}"
+      },
       "name": {
         "title": "{{ people.title }}",
         "first": "{{ people.first_name }}",
@@ -58,14 +64,14 @@
         "coordinates": {
           "latitude": "{{ people.address.coordinates.latitude }}",
           "longitude": "{{ people.address.coordinates.longitude }}",
-          "geohash": "{{ people.address.coordinates.geohash }}",
+          "geohash": "{{ people.address.coordinates.geohash }}"
         },
         "timezone": {
-            "description": "{{ people.address.timezone.description }}",
+            "description": "{{ people.address.timezone.description }}"
         }
       },
       "automotive": {
-        "licenceplate": "{{ people.automotive.licence_plate }}",
+        "licenceplate": "{{ people.automotive.licence_plate }}"
       }
     }
     {% endfor %}
