@@ -83,7 +83,7 @@ impl From<WhitespaceHandling> for Whitespace {
     }
 }
 
-const LOOP_NAMES: &'static [&str] = &[
+const LOOP_NAMES: &[&str] = &[
     "autos",
     "barecodes",
     "filesystems",
@@ -201,7 +201,7 @@ impl<'a> Generator<'a> {
         &mut self,
         value: &str,
         loop_block: &'a Loop<'_>,
-        args: &Vec<Expr>,
+        args: &[Expr],
     ) -> Result<usize, ParsedError> {
         if LOOP_NAMES.contains(&value) && !args.is_empty() {
             if let askama_parser::Expr::NumLit(val) = args[0] {
