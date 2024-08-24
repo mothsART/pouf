@@ -171,7 +171,7 @@ Some examples are on this [directory](examples/templates)
 
 
 ```zsh
-$ pouf template file.json
+$ pouf template --input file.json
 ```
 
 ## Autocomplete
