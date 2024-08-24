@@ -1,7 +1,7 @@
 use random_color::RandomColor;
 
-use fake::{Fake, Faker};
 use clap::ArgMatches;
+use fake::{Fake, Faker};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]

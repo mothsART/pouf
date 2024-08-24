@@ -6,8 +6,8 @@ use fake::faker::name::raw::{FirstName, LastName, Title};
 use fake::locales::EN;
 use serde::{Deserialize, Serialize};
 
-use fake::Fake;
 use crate::template::{address::Address, automotive::Automotive, job::Job, phone::Phone};
+use fake::Fake;
 
 use crate::lang_env;
 

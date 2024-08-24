@@ -1,12 +1,12 @@
 use serde::{Deserialize, Serialize};
 
-use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::address::raw::{CityName, CountryName, StateName, ZipCode};
+use fake::Fake;
 
+use crate::lang_env;
 use crate::template::coordinates::Coordinate;
 use crate::template::timezone::Timezone;
-use crate::lang_env;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Address {

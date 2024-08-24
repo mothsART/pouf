@@ -1,6 +1,6 @@
-use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::phone_number::raw::{CellNumber, PhoneNumber};
+use fake::Fake;
 use serde::{Deserialize, Serialize};
 
 use crate::lang_env;

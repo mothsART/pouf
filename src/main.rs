@@ -31,14 +31,17 @@ fn main() {
                 let ast = Ast::from_str(&contents, &Syntax::default()).unwrap();
 
                 let mut g = Generator::new(template_m);
-    
+
                 if let Err(err) = g.handle(ast.nodes(), AstLevel::Top) {
                     eprint!("{}", err);
                     return;
                 }
                 println!("{}", g.render());
             } else {
-                eprint!("Should have been able to read the file \"{}\"", input.as_path().display());
+                eprint!(
+                    "Should have been able to read the file \"{}\"",
+                    input.as_path().display()
+                );
             }
         }
         return;

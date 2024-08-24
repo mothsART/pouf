@@ -1,7 +1,7 @@
-use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::lorem::raw::{Paragraphs, Sentences, Words};
 use fake::locales::EN;
+use fake::Fake;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]

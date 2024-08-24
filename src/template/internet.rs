@@ -1,7 +1,7 @@
-use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::internet::raw::*;
 use fake::locales::EN;
+use fake::Fake;
 use serde::{Deserialize, Serialize};
 
 use crate::lang_env;

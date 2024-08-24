@@ -1,7 +1,7 @@
-use fake::Fake;
 use clap::ArgMatches;
 use fake::faker::automotive::raw::LicencePlate;
 use fake::locales::FR_FR;
+use fake::Fake;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
