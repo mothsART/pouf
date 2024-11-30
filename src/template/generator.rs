@@ -222,7 +222,7 @@ impl<'a> Generator<'a> {
 
         if let Expr::Call(r#box, args) = &loop_block.iter {
             if let Expr::Var(value) = r#box.borrow() {
-                self.w_loop(*value, &loop_block, args)?;
+                self.w_loop(value, loop_block, args)?;
             }
         }
 
